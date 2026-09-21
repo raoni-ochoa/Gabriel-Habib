@@ -1,0 +1,16 @@
+# Dados sensíveis coletados do CRM: nunca versionar
+auditoria-*/dados/restrito/*
+!auditoria-*/dados/restrito/.gitkeep
+auditoria-*/dados/restrito/**/*.json
+auditoria-*/coleta/**/raw/
+auditoria-*/exports/*.csv
+!auditoria-*/exports/README.md
+**/*.env
+.env*
+**/secrets*
+**/*token*
+!**/*token*.md
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/

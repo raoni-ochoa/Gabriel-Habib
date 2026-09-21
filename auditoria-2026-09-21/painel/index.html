@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoria Atendimento Humano</title>
+<meta name="description" content="Painel de diagnóstico do atendimento humano no Kommo (funil Manual) — Gabriel Habib">
+<style>
+:root{color-scheme:light;--bg:#fcfcfb;--surface:#ffffff;--border:#e3e2dd;--text:#0b0b0b;--text2:#52514e;--muted:#8a8985;
+ --human:#2a78d6;--lead:#eb6834;--robot:#1baf7a;--system:#6b6a66;--accent:#2a78d6;--warn-bg:#fff4e0;--warn-fg:#7a4a00;--ok-bg:#e8f5ee;--ok-fg:#0f5a34;--info-bg:#eaf1fb;--info-fg:#1d4f8f;
+ --radius:10px;--fs:16px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1a1a19;--surface:#232322;--border:#3a3937;--text:#fff;--text2:#c3c2b7;--muted:#8f8e88;--human:#3987e5;--lead:#d95926;--robot:#199e70;--system:#a09f99;--accent:#3987e5;--warn-bg:#3a2a08;--warn-fg:#f5c96b;--ok-bg:#0f2f1f;--ok-fg:#8fd6ae;--info-bg:#142a45;--info-fg:#9cc3f0}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1a1a19;--surface:#232322;--border:#3a3937;--text:#fff;--text2:#c3c2b7;--muted:#8f8e88;--human:#3987e5;--lead:#d95926;--robot:#199e70;--system:#a09f99;--accent:#3987e5;--warn-bg:#3a2a08;--warn-fg:#f5c96b;--ok-bg:#0f2f1f;--ok-fg:#8fd6ae;--info-bg:#142a45;--info-fg:#9cc3f0}
+*{box-sizing:border-box}html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+header h1{font-size:1.05rem;margin:0 12px 0 0}
+nav{display:flex;flex-wrap:wrap;gap:4px}
+nav button,.btn{background:transparent;border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:.9rem}
+nav button[aria-current="page"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tools{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px}
+.btn[aria-pressed="true"]{background:var(--info-bg);color:var(--info-fg);border-color:var(--accent)}
+main{max-width:1400px;margin:0 auto;padding:16px}
+section[hidden]{display:none}
+h2{font-size:1.4rem;margin:8px 0 12px}h3{font-size:1.1rem;margin:18px 0 8px}h4{margin:12px 0 6px;font-size:1rem}
+.banner{padding:14px 16px;border-radius:var(--radius);margin:0 0 16px;border:1px solid var(--border)}
+.banner.warn{background:var(--warn-bg);color:var(--warn-fg)}.banner.info{background:var(--info-bg);color:var(--info-fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
+.tile .v{font-size:1.9rem;font-weight:600;line-height:1.1}.tile .l{color:var(--text2);font-size:.9rem}.tile .d{color:var(--muted);font-size:.8rem;margin-top:4px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem}th,td{padding:8px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{color:var(--text2);font-weight:600;cursor:pointer;white-space:nowrap;background:var(--surface)}
+th[aria-sort="ascending"]::after{content:" ▲"}th[aria-sort="descending"]::after{content:" ▼"}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.filters input,.filters select{font:inherit;padding:6px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.78rem;border:1px solid var(--border);color:var(--text2);white-space:nowrap}
+.pill.human{border-color:var(--human);color:var(--human)}.pill.lead{border-color:var(--lead);color:var(--lead)}.pill.robot{border-color:var(--robot);color:var(--robot)}.pill.system,.pill.undetermined{border-color:var(--system);color:var(--system)}
+.tl{list-style:none;margin:0;padding:0}.tl li{display:grid;grid-template-columns:150px 110px 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed var(--border);font-size:.92rem}
+.tl li .t{color:var(--text2);white-space:nowrap}.tl li.human{border-left:3px solid var(--human);padding-left:8px}.tl li.lead{border-left:3px solid var(--lead);padding-left:8px}.tl li.robot{border-left:3px solid var(--robot);padding-left:8px}.tl li.system,.tl li.undetermined{border-left:3px solid var(--system);padding-left:8px}
+.ref{color:var(--muted);font-size:.78rem;word-break:break-all}
+.bar{height:10px;border-radius:4px;background:var(--human);display:inline-block;vertical-align:middle}
+.small{color:var(--text2);font-size:.85rem}.muted{color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:800px){.two{grid-template-columns:1fr}.tl li{grid-template-columns:1fr}}
+.ovs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}@media(max-width:900px){.ovs{grid-template-columns:1fr}}
+.ovs>div{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px}
+a{color:var(--accent)}a.ext::after{content:" ↗";font-size:.8em}
+details summary{cursor:pointer;font-weight:600}
+.pii{transition:filter .2s}body.present .pii{filter:blur(6px);user-select:none}body.present .pii-hide{display:none!important}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.85rem;color:var(--text2);margin:6px 0 10px}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:4px}
+.kpi-def{font-size:.8rem;color:var(--muted)}
+@media print{header,nav,.tools,.filters,.noprint{display:none!important}body{background:#fff;color:#000;font-size:11pt}section[hidden]{display:block!important}main{max-width:none}.card,.tile,.tablewrap{break-inside:avoid;border-color:#bbb}a{color:#000;text-decoration:none}.tl li{grid-template-columns:130px 90px 1fr}}
+</style>
+</head>
+<body>
+<header>
+ <h1>Auditoria · Atendimento humano · Gabriel Habib · Kommo</h1>
+ <nav id="nav" aria-label="Seções">
+  <button data-sec="exec" aria-current="page">Visão executiva</button>
+  <button data-sec="comp">Comparativo</button>
+  <button data-sec="det">Análise detalhada</button>
+  <button data-sec="diag">Diagnóstico e treinamento</button>
+  <button data-sec="met">Metodologia e cobertura</button>
+ </nav>
+ <div class="tools">
+  <button class="btn" id="btnCsv" title="Exporta os indicadores por lead dos casos filtrados">Exportar CSV</button>
+  <button class="btn" id="btnPrint">Imprimir</button>
+  <button class="btn" id="btnPresent" aria-pressed="false" title="Oculta nomes, telefones, links e textos na tela (não anonimiza arquivos)">Modo apresentação</button>
+  <button class="btn" id="btnFont" title="Aumentar/diminuir fonte">A±</button>
+  <button class="btn" id="btnTheme" title="Tema claro/escuro">☾</button>
+ </div>
+</header>
+<main>
+ <div id="banner"></div>
+ <section id="sec-exec"><h2>Visão executiva</h2><div id="exec"></div></section>
+ <section id="sec-comp" hidden><h2>Comparativo dos casos</h2><div id="comp"></div></section>
+ <section id="sec-det" hidden><h2>Análise detalhada</h2><div id="det"></div></section>
+ <section id="sec-diag" hidden><h2>Diagnóstico e treinamento</h2><div id="diag"></div></section>
+ <section id="sec-met" hidden><h2>Metodologia e cobertura</h2><div id="met"></div></section>
+</main>
+<script src="data.js"></script>
+<script>
+(function(){
+const D = window.AUDIT_DATA || {status:'sem_dados'};
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtDt = s => { if(!s) return '—'; const d=new Date(s); return isNaN(d)?esc(s):d.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}); };
+const fmtH = v => (v==null||v==='NA'||v==='DI')?({NA:'n/a',DI:'indisp.'}[v]||'—'):(v>=48?(v/24).toFixed(1)+' d':v+' h');
+const val = (c,k) => { const i=c.indicadores&&c.indicadores[k]; return i?i.valor:null; };
+const num = v => (typeof v==='number')?v:null;
+const ACT = {human:'Humano',lead:'Lead',robot:'Robô',system:'Sistema',undetermined:'Indeterminado'};
+const ACTION = {message:'mensagem',call_attempt:'ligação de saída (não atendida)',call_answered:'ligação de saída atendida',call_incoming:'ligação recebida',call_incoming_missed:'ligação recebida perdida',note:'nota',task_created:'tarefa criada',task_completed:'tarefa concluída',stage_change:'mudança de etapa',responsible_change:'mudança de responsável',tag_added:'tag adicionada',transfer:'transferência para humano',document_sent:'documento enviado',document_signed:'documento assinado',meeting_offered:'reunião oferecida',meeting_accepted:'reunião aceita',meeting_scheduled:'reunião agendada',meeting_confirmed:'reunião confirmada',meeting_done:'reunião realizada',meeting_noshow:'ausência confirmada',meeting_reschedule:'tentativa de reagendamento',proposal_presented:'proposta/condições apresentadas',legal_handoff:'passagem ao jurídico',other:'outro'};
+const WAIT = {aguardando_equipe:'Aguardando a equipe',aguardando_lead:'Aguardando o lead',retorno_combinado:'Retorno combinado',encerrado:'Encerrado',nao_determinavel:'Não determinável'};
+const MSTONE = ['meeting_offered','meeting_accepted','meeting_scheduled','meeting_confirmed','meeting_done','meeting_noshow','meeting_reschedule','proposal_presented','document_sent','document_signed','legal_handoff'];
+const casos = D.casos||[]; const cons = D.consolidado||{}; const cov = D.cobertura||{};
+const empty = D.status!=='ok' || !casos.length;
+const state = {q:'',atend:'',serv:'',etapa:'',res:'',grav:'',sort:'nome',dir:1};
+
+// ---------- banner ----------
+(function(){
+ const m=D.meta||{};
+ let html='';
+ if(empty){
+  html+=`<div class="banner warn"><strong>Sem dados coletados do CRM.</strong> Este painel está em estado vazio: nenhum caso foi analisado ainda. Nenhum número abaixo é real; os controles ficam desativados até a coleta.
+  ${D.bloqueios&&D.bloqueios.length?'<ul>'+D.bloqueios.map(b=>'<li>'+esc(b)+'</li>').join('')+'</ul>':''}
+  <div class="small">Para popular: siga <code>coleta/navegador/README.md</code> ou <code>coleta/kommo_api/collect.py</code> e rode <code>python3 src/build.py</code>. Detalhes em <code>docs/ACESSO_E_BLOQUEIOS.md</code>.</div></div>`;
+ }
+ if(D.anonimizado){ html+=`<div class="banner info">Pacote anonimizado: nomes, telefones, links e textos foram removidos do arquivo de dados.</div>`; }
+ html+=`<div class="small">Cliente: <strong>${esc(m.cliente||'Gabriel Habib')}</strong> · CRM: Kommo · Funil: <strong>${esc(m.funil||'Manual')}</strong> (id ${esc(m.pipeline_id||'13587595')}) · Período: ${m.window_days?esc(m.window_days)+' dias antes do corte':'não definido'} · Corte: <strong>${m.cutoff?fmtDt(m.cutoff):'coleta não realizada'}</strong> · Gerado em ${fmtDt(D.generated_at)} · Amostra intencional: ${casos.length} casos (sem extrapolação para a operação)</div>`;
+ $('#banner').innerHTML=html;
+})();
+
+// ---------- helpers ----------
+function tile(v,l,d){return `<div class="tile"><div class="v">${v}</div><div class="l">${l}</div>${d?`<div class="d">${d}</div>`:''}</div>`;}
+function consTile(key,label,unit){ const k=cons.indicadores&&cons.indicadores[key]; if(!k) return tile('—',label,'sem dados'); const v=k.mediana==null?'—':(unit==='h'?fmtH(k.mediana):k.mediana); return tile(v,label,`Mediana por lead · ${esc(k.denominador)} com dado${k.n_na?` · ${k.n_na} n/a`:''}${k.n_indisponivel?` · ${k.n_indisponivel} indisp.`:''}<br><span class="kpi-def">${esc(k.definicao)}</span>`); }
+function sumTile(key,label){ const k=cons.indicadores&&cons.indicadores[key]; if(!k) return tile('—',label,'sem dados'); return tile(k.soma==null?'—':k.soma,label,`Soma · ${esc(k.denominador)}<br><span class="kpi-def">${esc(k.definicao)}</span>`); }
+function leadLink(c){ return c.url?`<a class="ext pii" href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.nome||('lead '+c.id))}</a>`:`<span class="pii">${esc(c.nome||('lead '+c.id))}</span>`; }
+function mstones(c){ const m=c.marcos||{}; const on=MSTONE.filter(k=>m[k]&&m[k].ocorreu).map(k=>ACTION[k]); const docs=[]; if(m.contrato_enviado)docs.push('contrato enviado'); if(m.contrato_assinado_confirmado)docs.push('contrato assinado ✔'); if(m.procuracao_enviado)docs.push('procuração enviada'); if(m.procuracao_assinado_confirmado)docs.push('procuração assinada ✔'); return {reuniao:on.filter(x=>x.startsWith('reunião')||x.startsWith('ausência')||x.startsWith('tentativa')).join(', ')||'—', docs:docs.join(', ')||'—'}; }
+
+// ---------- visão executiva ----------
+(function(){
+ if(empty){ $('#exec').innerHTML=`<div class="grid">${tile('0','Casos analisados','nenhuma coleta')}${tile('0','Chamadas localizadas','')}${tile('0','Gravações acessíveis','')}${tile('—','Mediana transferência → 1ª tentativa humana','sem dados')}</div>
+ <div class="card"><h3>Principais indicadores, acertos e prioridades</h3><p class="muted">Serão preenchidos com dados reais após a coleta. Nenhum conteúdo fictício é exibido.</p></div>`; return; }
+ const abertos = casos.filter(c=>c.status_espera==='aguardando_equipe');
+ const comLig = casos.filter(c=>num(val(c,'tentativas_ligacao_saida'))>0);
+ const reun = casos.filter(c=>{const m=c.marcos||{};return ['meeting_offered','meeting_scheduled','meeting_done'].some(k=>m[k]&&m[k].ocorreu);});
+ const docs = casos.filter(c=>{const m=c.marcos||{};return m.contrato_enviado||m.procuracao_enviado;});
+ const assin = casos.filter(c=>{const m=c.marcos||{};return m.contrato_assinado_confirmado||m.procuracao_assinado_confirmado;});
+ let h=`<div class="grid">
+  ${tile(casos.length,'Casos analisados',`Cobertura: ${cov.conversas_com_conteudo||0} com conteúdo de conversa acessível`)}
+  ${tile(`${cov.chamadas_localizadas||0}`,'Chamadas localizadas',`${cov.chamadas_atendidas||0} atendidas · ${cov.gravacoes_com_link||0} com link · ${cov.gravacoes_acessiveis||0} acessíveis · ${cov.transcritas||0} transcritas · ${cov.ligacoes_analisadas||0} analisadas`)}
+  ${consTile('h_transf_primeira_tentativa','Transferência → 1ª tentativa humana','h')}
+  ${consTile('h_transf_primeira_conversa','Transferência → 1ª conversa efetiva','h')}
+  ${consTile('mediana_resposta_h','Tempo de resposta ao lead (episódios concluídos)','h')}
+  ${tile(`${abertos.length} de ${casos.length}`,'Esperas pendentes no corte (aguardando a equipe)', abertos.length?abertos.map(c=>`${leadLink(c)}: ${fmtH(val(c,'espera_aberta_h'))}`).join(' · '):'nenhuma')}
+  ${tile(`${comLig.length} de ${casos.length}`,'Casos com ≥1 tentativa de ligação humana',`${sumOf('tentativas_ligacao_saida')} tentativas · ${sumOf('ligacoes_saida_atendidas')} atendidas`)}
+  ${tile(`${reun.length} de ${casos.length}`,'Casos com reunião oferecida/agendada/realizada','contratação por texto não conta como falha')}
+  ${tile(`${docs.length} de ${casos.length}`,'Casos com contrato ou procuração enviados',`${assin.length} com assinatura comprovada`)}
+  ${tile(avgNote(),'Nota média da rubrica (0–100)',`cobertura média ${avgCov()} critérios`)}
+ </div>`;
+ h+=`<div class="two"><div class="card"><h3>Acertos observados</h3>${list(D.acertos_gerais,'Nenhum acerto registrado ainda.')}</div>
+ <div class="card"><h3>Prioridades (até 5)</h3>${list((D.prioridades||[]).slice(0,5).map(p=>typeof p==='string'?p:`<strong>${esc(p.titulo||'')}</strong> — ${esc(p.descricao||'')} <span class="small">(${esc(p.frequencia||'')})</span>`),'Nenhuma prioridade registrada ainda.',true)}</div></div>`;
+ h+=`<div class="card"><h3>Situação das esperas</h3><table><tr><th>Status</th><th>Casos</th></tr>${Object.entries(cons.status_espera||{}).map(([k,v])=>`<tr><td>${WAIT[k]||k}</td><td>${v} de ${casos.length}</td></tr>`).join('')}</table>
+ <p class="small">Transferência: ${Object.entries(cons.transferencia||{}).map(([k,v])=>`${k}: ${v}`).join(' · ')}</p></div>`;
+ $('#exec').innerHTML=h;
+ function sumOf(k){const x=cons.indicadores&&cons.indicadores[k];return x&&x.soma!=null?x.soma:0;}
+ function avgNote(){const n=casos.map(c=>c.rubrica&&c.rubrica.nota_normalizada).filter(x=>typeof x==='number');return n.length?(n.reduce((a,b)=>a+b,0)/n.length).toFixed(0):'—';}
+ function avgCov(){const n=casos.map(c=>c.rubrica&&c.rubrica.criterios_avaliados).filter(x=>typeof x==='number');return n.length?(n.reduce((a,b)=>a+b,0)/n.length).toFixed(1):'—';}
+})();
+function list(arr,emptyMsg,raw){ if(!arr||!arr.length) return `<p class="muted">${emptyMsg}</p>`; return '<ul>'+arr.map(x=>`<li>${raw?x:esc(typeof x==='string'?x:JSON.stringify(x))}</li>`).join('')+'</ul>'; }
+
+// ---------- comparativo ----------
+const COLS=[['nome','Lead',c=>leadLink(c)],['servico','Serviço',c=>esc(c.servico||'—')],['atendentes','Atendentes',c=>`<span class="pii">${esc((c.atendentes||[]).join(', ')||'—')}</span>`],['etapa_atual','Etapa atual',c=>esc(c.etapa_atual||'—')],['etapa_max','Maior etapa',c=>esc(c.etapa_max||'—')],['status','Resultado',c=>esc({won:'ganho',lost:'perdido',open:'em aberto'}[c.status]||c.status||'—')],
+ ['h_transf_primeira_tentativa','Transf.→1º contato humano',c=>fmtH(val(c,'h_transf_primeira_tentativa'))],['msgs_humanas','Msgs humanas',c=>val(c,'msgs_humanas')??'—'],['msgs_lead','Msgs lead',c=>val(c,'msgs_lead')??'—'],['tentativas_ligacao_saida','Tent. ligação',c=>`${val(c,'tentativas_ligacao_saida')??'—'} (${val(c,'ligacoes_saida_atendidas')??0} atend.)`],['abordagens_followup','Follow-ups',c=>val(c,'abordagens_followup')??'—'],['reuniao','Reunião',c=>esc(mstones(c).reuniao)],['docs','Documentos',c=>esc(mstones(c).docs)],['espera','Espera',c=>c.status_espera==='aguardando_equipe'?`<strong>${WAIT[c.status_espera]} · ${fmtH(val(c,'espera_aberta_h'))}</strong>`:esc(WAIT[c.status_espera]||'—')],['proxima_acao','Próxima ação',c=>esc(c.proxima_acao||'—')],['nota','Nota / cobertura',c=>c.rubrica&&c.rubrica.nota_normalizada!=null?`${c.rubrica.nota_normalizada} <span class="small">(${esc(c.rubrica.cobertura)})</span>`:'—'],['det','',c=>`<button class="btn" data-open="${esc(c.id)}">Dossiê</button>`]];
+function sortKey(c,k){ if(k==='nota') return c.rubrica?c.rubrica.nota_normalizada:null; if(k==='espera') return val(c,'espera_aberta_h'); if(k==='reuniao'||k==='docs') return mstones(c)[k]; if(c.indicadores&&c.indicadores[k]) return num(val(c,k)); const v=c[k]; return Array.isArray(v)?v.join(','):v; }
+function filtered(){ return casos.filter(c=>{ const t=JSON.stringify([c.nome,c.id,c.servico,c.atendentes,c.etapa_atual,c.proxima_acao]).toLowerCase(); if(state.q&&!t.includes(state.q.toLowerCase()))return false; if(state.atend&&!(c.atendentes||[]).includes(state.atend))return false; if(state.serv&&c.servico!==state.serv)return false; if(state.etapa&&c.etapa_atual!==state.etapa)return false; if(state.res&&c.status!==state.res)return false; if(state.grav==='sim'&&!(c.chamadas&&c.chamadas.gravacao_acessivel>0))return false; if(state.grav==='nao'&&(c.chamadas&&c.chamadas.gravacao_acessivel>0))return false; return true; }).sort((a,b)=>{ const x=sortKey(a,state.sort),y=sortKey(b,state.sort); if(x==null&&y==null)return 0; if(x==null)return 1; if(y==null)return -1; return (x<y?-1:x>y?1:0)*state.dir; }); }
+function renderComp(){
+ if(empty){ $('#comp').innerHTML=`<p class="muted">Tabela comparativa vazia: nenhum caso coletado. Filtros e ordenação ficam disponíveis após a coleta.</p>`; return; }
+ const uniq=k=>[...new Set(casos.flatMap(c=>k==='atendentes'?(c.atendentes||[]):[c[k]]).filter(Boolean))];
+ const opt=(arr,sel)=>arr.map(v=>`<option ${sel===v?'selected':''}>${esc(v)}</option>`).join('');
+ const rows=filtered();
+ $('#comp').innerHTML=`<div class="filters noprint">
+  <input id="fq" placeholder="Pesquisar lead, serviço, atendente…" value="${esc(state.q)}">
+  <select id="fa"><option value="">Atendente (todos)</option>${opt(uniq('atendentes'),state.atend)}</select>
+  <select id="fs"><option value="">Serviço (todos)</option>${opt(uniq('servico'),state.serv)}</select>
+  <select id="fe"><option value="">Etapa (todas)</option>${opt(uniq('etapa_atual'),state.etapa)}</select>
+  <select id="fr"><option value="">Resultado (todos)</option><option value="open" ${state.res==='open'?'selected':''}>em aberto</option><option value="won" ${state.res==='won'?'selected':''}>ganho</option><option value="lost" ${state.res==='lost'?'selected':''}>perdido</option></select>
+  <select id="fg"><option value="">Gravação (todas)</option><option value="sim" ${state.grav==='sim'?'selected':''}>com gravação acessível</option><option value="nao" ${state.grav==='nao'?'selected':''}>sem gravação acessível</option></select>
+  <span class="small" style="align-self:center">${rows.length} de ${casos.length} casos</span></div>
+  <div class="tablewrap"><table id="tbl"><thead><tr>${COLS.map(([k,l])=>`<th data-k="${k}" aria-sort="${state.sort===k?(state.dir>0?'ascending':'descending'):'none'}">${l}</th>`).join('')}</tr></thead>
+  <tbody>${rows.map(c=>`<tr>${COLS.map(([k,l,f])=>`<td>${f(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+  <p class="small">Tempos em horas corridas (≥48 h exibidos em dias). "n/a" = não ocorreu; "indisp." = dado indisponível. Definições completas na seção Metodologia. Casos com coberturas muito diferentes não devem ser comparados pela nota.</p>`;
+ $('#fq').oninput=e=>{state.q=e.target.value;renderComp();}; $('#fa').onchange=e=>{state.atend=e.target.value;renderComp();}; $('#fs').onchange=e=>{state.serv=e.target.value;renderComp();}; $('#fe').onchange=e=>{state.etapa=e.target.value;renderComp();}; $('#fr').onchange=e=>{state.res=e.target.value;renderComp();}; $('#fg').onchange=e=>{state.grav=e.target.value;renderComp();};
+ document.querySelectorAll('#tbl th').forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(!k||k==='det')return; if(state.sort===k)state.dir*=-1; else {state.sort=k;state.dir=1;} renderComp();});
+ document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{show('det'); $('#selCase').value=b.dataset.open; renderCase(b.dataset.open);});
+}
+
+// ---------- detalhe ----------
+function renderDet(){
+ if(empty){ $('#det').innerHTML=`<p class="muted">Nenhum caso para detalhar. A linha do tempo (humano / robô / lead / sistema), indicadores, evidências, chamadas e "observado versus sugerido" aparecem aqui após a coleta.</p>`; return; }
+ $('#det').innerHTML=`<div class="filters noprint"><label>Caso: <select id="selCase">${casos.map(c=>`<option value="${esc(c.id)}">${esc(c.nome||c.id)} · ${esc(c.servico||'')}</option>`).join('')}</select></label>
+ <label><input type="checkbox" id="onlyHuman"> ocultar mensagens do robô</label></div><div id="caseBody"></div>`;
+ $('#selCase').onchange=e=>renderCase(e.target.value); $('#onlyHuman').onchange=()=>renderCase($('#selCase').value);
+ renderCase(casos[0].id);
+}
+function renderCase(id){
+ const c=casos.find(x=>String(x.id)===String(id)); if(!c) return;
+ const hideRobot=$('#onlyHuman')&&$('#onlyHuman').checked;
+ const I=c.indicadores||{}; const tr=c.transfer||{};
+ let h=`<div class="card"><h3>${leadLink(c)} <span class="small">· ${esc(c.servico||'serviço não informado')} · origem: ${esc(c.origem||'—')} · criado em ${fmtDt(c.criado_em)}${c.legacy?' · <span class="pill">lead antigo com atendimento recente</span>':''}</span></h3>
+  <p><strong>Motivo da seleção:</strong> ${esc(c.motivo_selecao||'—')}<br><strong>Contexto recebido do robô:</strong> <span class="pii">${esc(c.contexto_robo||'—')}</span><br>
+  <strong>Transferência para humano:</strong> ${fmtDt(tr.ts)} · <span class="pill">${esc(tr.confidence||'não identificável')}</span> ${tr.rule?`<span class="small">(${esc(tr.rule)})</span>`:''}<br>
+  <strong>Atendentes:</strong> <span class="pii">${esc((c.atendentes||[]).join(', ')||'—')}</span> · <strong>Etapa atual:</strong> ${esc(c.etapa_atual||'—')} · <strong>Maior etapa:</strong> ${esc(c.etapa_max||'—')} · <strong>Resultado:</strong> ${esc(c.status||'—')}${c.motivo_perda?` · <strong>Motivo de perda registrado:</strong> ${esc(c.motivo_perda)} <span class="small">(registrado ≠ comprovado)</span>`:''}<br>
+  <strong>Situação da espera:</strong> ${esc(WAIT[c.status_espera]||c.status_espera)}${c.status_espera==='aguardando_equipe'?` · <strong>${fmtH(val(c,'espera_aberta_h'))} acumuladas até o corte</strong>`:''} · último evento ${fmtDt(c.ultimo_evento)}</p></div>`;
+ // indicadores
+ h+=`<div class="card"><h3>Indicadores</h3><div class="tablewrap"><table><tr><th>Indicador</th><th>Valor</th><th>Definição</th><th>Base</th><th>Cobertura</th></tr>${Object.entries(I).map(([k,v])=>`<tr><td>${esc(k)}</td><td><strong>${typeof v.valor==='number'&&k.startsWith('h_')?fmtH(v.valor):typeof v.valor==='number'&&k.includes('_h')?fmtH(v.valor):(v.valor==='NA'?'n/a':v.valor==='DI'?'indisp.':esc(v.valor))}</strong></td><td class="small">${esc(v.definicao)}</td><td class="small">${esc(v.base)}</td><td class="small">${esc(v.cobertura)}</td></tr>`).join('')}</table></div>
+  ${(c.episodios||[]).length?`<h4>Episódios de espera</h4><table><tr><th>Última msg do lead</th><th>Respondido em</th><th>Espera</th><th>Status</th><th>Referência</th></tr>${c.episodios.map(e=>`<tr><td>${fmtDt(e.last_lead_msg)}</td><td>${e.open?'<strong>pendente</strong>':fmtDt(e.answered_at)}</td><td>${e.open?`<strong>${fmtH(+(e.elapsed_to_cutoff_seconds/3600).toFixed(2))} até o corte</strong>`:fmtH(+(e.wait_seconds/3600).toFixed(2))}</td><td>${esc(WAIT[e.status]||e.status)}</td><td class="ref pii">${esc((e.refs||[]).slice(-1)[0]||'')}</td></tr>`).join('')}</table>`:''}
+  </div>`;
+ // marcos
+ const m=c.marcos||{};
+ h+=`<div class="card"><h3>Marcos comerciais observados</h3><table><tr><th>Marco</th><th>Ocorreu</th><th>Primeira ocorrência</th><th>Evidência</th></tr>${MSTONE.map(k=>`<tr><td>${ACTION[k]}</td><td>${m[k]&&m[k].ocorreu?'sim':'não observado'}</td><td>${m[k]&&m[k].primeira?fmtDt(m[k].primeira):'—'}</td><td class="ref pii">${esc(((m[k]||{}).evidencias||[]).map(e=>(e.doc?e.doc+': ':'')+e.ref+(e.confirmado?' (confirmado)':'')).join(' · '))}</td></tr>`).join('')}</table>
+ <p class="small">Contrato enviado: ${m.contrato_enviado?'sim':'não'} · Contrato assinado (comprovado): ${m.contrato_assinado_confirmado?'sim':'não'} · Procuração enviada: ${m.procuracao_enviado?'sim':'não'} · Procuração assinada (comprovada): ${m.procuracao_assinado_confirmado?'sim':'não'}. Etapa "ganho" no CRM não é tratada como assinatura comprovada.</p></div>`;
+ // chamadas
+ const ch=c.chamadas||{lista:[]};
+ h+=`<div class="card"><h3>Ligações e gravações</h3><p class="small">${ch.chamadas_localizadas||0} localizadas · ${ch.tentativas_saida||0} tentativas de saída · ${ch.saida_atendidas||0} atendidas · ${ch.entrada||0} recebidas · ${ch.com_gravacao_link||0} com link · ${ch.gravacao_acessivel||0} acessíveis · ${ch.transcritas||0} transcritas</p>
+ ${ch.lista.length?`<div class="tablewrap"><table><tr><th>Data/hora</th><th>Direção</th><th>Status</th><th>Atendente</th><th>Duração</th><th>ID</th><th>Gravação</th></tr>${ch.lista.map(l=>`<tr><td>${fmtDt(l.ts)}</td><td>${l.direction==='out'?'saída':'entrada'}</td><td>${ACTION[l.action]||l.action}${l.status?` (${esc(l.status)})`:''}</td><td class="pii">${esc(l.actor||'—')}</td><td>${l.duration!=null?l.duration+' s':'—'}</td><td class="small">${esc(l.id)}</td><td>${l.recording_access==='acessivel'&&l.link?`<button class="btn pii-hide" data-rec="${esc(findLink(c,l))}">Abrir gravação (nova aba, sem reprodução automática)</button>`:esc(l.recording_access||(l.link?'link não testado':'sem link'))}</td></tr>`).join('')}</table></div>`:'<p class="muted">Nenhuma chamada localizada para este caso.</p>'}
+ ${(c.calls_analysis||[]).map(a=>`<details open><summary>Análise da ligação ${esc(a.call_id||'')} ${a.transcript_source?`· fonte: ${esc(a.transcript_source)}`:''}</summary><p class="pii">${esc(a.resumo||'')}</p>${(a.trechos||[]).length?`<div class="ovs">${a.trechos.map(t=>`<div><div class="small">Trecho real ${t.timestamp?'['+esc(t.timestamp)+']':''}</div><p class="pii">“${esc(t.trecho)}”</p></div><div><div class="small">Interpretação sustentada</div><p>${esc(t.interpretacao)}</p></div><div><div class="small">Alternativa sugerida (fala reescrita)</div><p>${esc(t.alternativa)}</p></div>`).join('')}</div>`:''}${a.limites?`<p class="small">Limites: ${esc(a.limites)}</p>`:''}</details>`).join('')}</div>`;
+ // rubrica
+ const r=c.rubrica||{detalhe:{}};
+ h+=`<div class="card"><h3>Avaliação por critério — nota ${r.nota_normalizada??'—'} (cobertura ${esc(r.cobertura||'0/10')})</h3><table><tr><th>Critério</th><th>Nota</th><th>Justificativa</th><th>Causa</th><th>Evidências</th></tr>${Object.values(r.detalhe||{}).map(d=>`<tr><td>${esc(d.criterio)}</td><td><strong>${d.nota==='NA'?'n/a':d.nota==='DI'?'dados insuf.':d.nota}</strong></td><td>${esc(d.justificativa||'')}</td><td class="small">${esc(d.categoria_causa||'')}</td><td class="ref pii">${esc((d.evidencias||[]).join(' · '))}</td></tr>`).join('')}</table></div>`;
+ // observado vs sugerido
+ if((c.observado_vs_sugerido||[]).length){ h+=`<div class="card"><h3>Observado versus sugerido</h3><div class="ovs">${c.observado_vs_sugerido.map(o=>`<div><div class="small">Observado ${o.ts?fmtDt(o.ts):''}</div><p class="pii">${esc(o.trecho)}</p><div class="ref pii">${esc(o.ref||'')}</div></div><div><div class="small">Interpretação</div><p>${esc(o.interpretacao)}</p></div><div><div class="small">Sugestão (reescrita)</div><p>${esc(o.alternativa)}</p></div>`).join('')}</div></div>`; }
+ h+=`<div class="two">${['acertos','melhorias','conduzir_melhor','evidencias','limitacoes'].map(k=>`<div class="card"><h3>${({acertos:'Acertos replicáveis',melhorias:'Melhorias prioritárias',conduzir_melhor:'Como conduzir melhor (exemplos reescritos)',evidencias:'Evidências',limitacoes:'Limitações e grau de confiança'})[k]}</h3>${list(c[k],'—')}${k==='limitacoes'&&c.confianca?`<p><strong>Confiança:</strong> ${esc(c.confianca)}</p>`:''}</div>`).join('')}
+ <div class="card"><h3>Próxima ação recomendada (não executada)</h3><p>${esc(c.proxima_acao||'—')}</p></div></div>`;
+ // timeline
+ const tl=(c.timeline||[]).filter(e=>!(hideRobot&&e.actor_type==='robot'));
+ h+=`<div class="card"><h3>Linha do tempo (${tl.length} eventos)</h3><div class="legend"><span><i style="background:var(--human)"></i>Humano</span><span><i style="background:var(--lead)"></i>Lead</span><span><i style="background:var(--robot)"></i>Robô</span><span><i style="background:var(--system)"></i>Sistema / indeterminado</span></div>
+ <ul class="tl">${tl.map(e=>`<li class="${esc(e.actor_type)}"><span class="t">${fmtDt(e.ts)}${e.ts_precision==='min'?'':e.ts_precision==='day'?' (dia)':''}</span><span><span class="pill ${esc(e.actor_type)}">${ACT[e.actor_type]||e.actor_type}</span></span><span><strong>${ACTION[e.action]||esc(e.action)}</strong>${e.actor_name?` · <span class="pii">${esc(e.actor_name)}</span>`:''}${e.channel!=='whatsapp'&&e.channel!=='system'?` · ${esc(e.channel)}`:''}${e.requires_reply?' · <em>exige retorno</em>':''}${e.agreed_return_at?` · retorno combinado ${fmtDt(e.agreed_return_at)}`:''}<br><span class="pii">${esc(e.content||'')}</span><div class="ref pii">${esc(e.ref||'')}</div></span></li>`).join('')}</ul></div>`;
+ $('#caseBody').innerHTML=h;
+ document.querySelectorAll('[data-rec]').forEach(b=>b.onclick=()=>{ if(document.body.classList.contains('present')) return; window.open(b.dataset.rec,'_blank','noopener'); });
+}
+function findLink(c,l){ const e=(c.timeline||[]).find(x=>x.channel==='call'&&((x.meta&&(x.meta.uniq||x.meta.call_id))===l.id||x.id===l.id)); return e&&e.meta&&e.meta.link?e.meta.link:''; }
+
+// ---------- diagnóstico ----------
+function renderDiag(){
+ if(empty){ $('#diag').innerHTML=`<p class="muted">Padrões, frequências ("X de Y casos avaliáveis"), boas práticas, casos para discussão, roteiro do treinamento de 60 minutos e plano de melhoria serão gerados a partir dos casos reais. Estrutura em <code>docs/TREINAMENTO_MODELO.md</code>.</p>`; return; }
+ let h=`<div class="card"><h3>Padrões recorrentes</h3>${(D.padroes||[]).length?`<div class="tablewrap"><table><tr><th>Comportamento</th><th>Frequência</th><th>Evidências</th><th>Possível impacto</th><th>Mudança recomendada</th><th>Acompanhamento</th><th>Causa</th></tr>${D.padroes.map(p=>`<tr><td>${esc(p.comportamento)}</td><td><strong>${esc(p.frequencia)}</strong></td><td class="ref pii">${esc((p.evidencias||[]).join(' · '))}</td><td>${esc(p.impacto||'')}</td><td>${esc(p.mudanca||'')}</td><td>${esc(p.acompanhamento||'')}</td><td class="small">${esc(p.causa||'')}</td></tr>`).join('')}</table></div>`:'<p class="muted">Nenhum padrão registrado.</p>'}</div>
+ <div class="two"><div class="card"><h3>Boas práticas observadas</h3>${list(D.boas_praticas,'—')}</div><div class="card"><h3>Casos para discussão</h3>${list((D.casos_discussao||[]).map(x=>typeof x==='string'?x:`<strong>${esc(x.caso)}</strong>: ${esc(x.motivo)}`),'—',true)}</div></div>`;
+ const t=D.treinamento||{};
+ h+=`<div class="card"><h3>Treinamento de 60 minutos — pauta</h3>${(t.blocos||[]).length?t.blocos.map(b=>`<details open><summary>${esc(b.titulo)} · ${esc(b.tempo)}</summary><p><strong>Objetivo:</strong> ${esc(b.objetivo)}</p><p><strong>Casos/trechos no painel:</strong> ${esc((b.casos||[]).join('; '))}</p><p><strong>Perguntas para a equipe:</strong></p>${list(b.perguntas,'—')}<p><strong>Exercício:</strong> ${esc(b.exercicio||'')}</p><p><strong>Comportamento esperado:</strong> ${esc(b.esperado||'')}</p>${(b.exemplos||[]).length?`<p><strong>Exemplos reescritos (sugestões):</strong></p>${list(b.exemplos,'')}`:''}</details>`).join(''):'<p class="muted">Pauta ainda não preenchida.</p>'}</div>`;
+ h+=`<div class="card"><h3>Plano de melhoria</h3><h4>Prioridades (até 5)</h4>${list((D.prioridades||[]).slice(0,5).map(p=>typeof p==='string'?p:`<strong>${esc(p.titulo)}</strong> — ${esc(p.descricao)}`),'—',true)}<h4>Ações para 7 dias</h4>${list(D.plano_7d,'—')}<h4>Indicadores para revisão em 30 dias</h4>${(D.indicadores_30d||[]).length?`<table><tr><th>Indicador</th><th>Linha de base</th><th>Responsável (função)</th><th>Critério de evolução (proposta)</th></tr>${D.indicadores_30d.map(i=>`<tr><td>${esc(i.indicador)}</td><td>${esc(i.linha_base)}</td><td>${esc(i.responsavel)}</td><td>${esc(i.criterio)} <span class="pill">proposta para validação</span></td></tr>`).join('')}</table>`:'<p class="muted">—</p>'}</div>`;
+ $('#diag').innerHTML=h;
+}
+
+// ---------- metodologia ----------
+function renderMet(){
+ const m=D.meta||{}; const s=D.selecao||{};
+ let h=`<div class="card"><h3>Cobertura</h3><div class="grid">${tile(cov.casos||0,'Casos analisados')}${tile(cov.conversas_com_conteudo||0,'Conversas com conteúdo acessível')}${tile(cov.chamadas_localizadas||0,'Chamadas localizadas')}${tile(cov.chamadas_atendidas||0,'Chamadas atendidas')}${tile(cov.gravacoes_com_link||0,'Gravações com link')}${tile(cov.gravacoes_acessiveis||0,'Gravações acessíveis')}${tile(cov.transcritas||0,'Transcrições')}${tile(cov.ligacoes_analisadas||0,'Ligações analisadas')}</div></div>
+ <div class="card"><h3>Seleção da amostra</h3>${Object.keys(s).length?`<p><strong>Filtros:</strong> ${esc(s.filtros||'')}<br><strong>Período:</strong> ${esc(s.periodo||'')}<br><strong>Candidatos localizados:</strong> ${esc(s.candidatos_localizados??'—')} · <strong>Elegíveis:</strong> ${esc(s.elegiveis??'—')} · <strong>Selecionados:</strong> ${esc(s.selecionados??'—')} <span class="small">("localizados" = o que a consulta retornou, não o total da operação)</span></p>${(s.motivos||[]).length?`<h4>Motivo de inclusão</h4>${list(s.motivos,'')}`:''}${(D.alertas_sem_atuacao||[]).length?`<h4>Alerta: transferências sem atuação humana (não analisadas como atendimento)</h4>${list(D.alertas_sem_atuacao.map(a=>typeof a==='string'?a:`${a.lead_id} · transferido ${fmtDt(a.transfer_ts)} · ${a.obs||''}`),'')}`:''}`:'<p class="muted">Seleção não realizada (sem coleta).</p>'}</div>
+ <div class="card"><h3>Etapas reais do funil</h3>${(D.pipeline||[]).length?`<ol>${D.pipeline.map(p=>`<li>${esc(p.name)}${p.is_won?' (ganho)':''}${p.is_lost?' (perdido)':''}</li>`).join('')}</ol>`:'<p class="muted">Não mapeadas (sem coleta).</p>'}</div>
+ <div class="card"><h3>Definições dos indicadores</h3>${cons.indicadores?`<div class="tablewrap"><table><tr><th>Indicador</th><th>Definição</th><th>n com dado</th><th>n/a</th><th>indisp.</th><th>Mediana</th><th>Mín</th><th>Máx</th></tr>${Object.entries(cons.indicadores).map(([k,v])=>`<tr><td>${esc(k)}</td><td class="small">${esc(v.definicao)}</td><td>${v.n_com_dado}</td><td>${v.n_na}</td><td>${v.n_indisponivel}</td><td>${v.mediana??'—'}</td><td>${v.min??'—'}</td><td>${v.max??'—'}</td></tr>`).join('')}</table></div>`:`<ul class="small"><li>Transferência → 1ª tentativa humana: horas corridas da transferência (confirmada/inferida) até a 1ª mensagem humana ou tentativa de ligação.</li><li>Episódio de espera: mensagens consecutivas do lead que exigem retorno, agrupadas até a próxima ação humana; tempo medido da última mensagem do grupo. Pendências abertas mostram tempo até o corte e não entram nas medianas.</li><li>Tentativa de ligação: ligação de saída registrada (atendida ou não), deduplicada entre Kommo e API4com. Atendida ≠ conversa comercial.</li><li>Follow-up: ação humana de saída após ≥4 h sem resposta do lead; fragmentos ≤10 min contam uma vez.</li><li>Marcos: registrados separadamente (reunião oferecida/aceita/agendada/confirmada/realizada; contrato e procuração enviados/assinados; "ganho" ≠ assinatura comprovada).</li><li>Nota da rubrica: 100 × Σ notas / (4 × critérios avaliados); n/a e dados insuficientes não pontuam.</li></ul>`}</div>
+ <div class="card"><h3>Metas de referência (propostas, não regras do cliente)</h3>${list(D.propostas_meta,'Nenhuma meta do cliente foi confirmada. As referências do roteiro (5 min na investigação; 5/15/30 min após envio de procuração; lembrete 24 h) e do Playbook (1ª tentativa < 10 min) são orientações de material e aparecem apenas como propostas para validação.')}<p class="small">Tempos exibidos em tempo corrido. Tempo útil só será calculado após confirmação do expediente: ${esc(m.expediente_confirmado||'não confirmado')}.</p></div>
+ <div class="card"><h3>Fontes e limitações</h3><ul class="small"><li>Kommo, funil Manual (13587595), somente leitura.</li><li>Notas de chamada Kommo/API4com; links de gravação testados individualmente.</li><li>Referência: Doc "Trabalhista - Reconhecimento de Vínculo" e Playbook FlowSales (orientação de material).</li><li>Horários da interface com precisão de minuto; API com segundos.</li><li>Amostra intencional de treinamento; percentuais não extrapolam para a operação.</li></ul></div>`;
+ $('#met').innerHTML=h;
+}
+
+// ---------- navegação e ferramentas ----------
+function show(sec){ document.querySelectorAll('main section').forEach(s=>s.hidden=(s.id!=='sec-'+sec)); document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.sec===sec?'page':'false')); try{localStorage.setItem('audit.sec',sec);}catch(e){} window.scrollTo(0,0); }
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.sec));
+$('#btnPrint').onclick=()=>window.print();
+$('#btnPresent').onclick=()=>{ const on=!document.body.classList.contains('present'); document.body.classList.toggle('present',on); $('#btnPresent').setAttribute('aria-pressed',String(on)); };
+$('#btnFont').onclick=()=>{ const cur=parseFloat(getComputedStyle(document.documentElement).fontSize); const next=cur>=20?16:cur+2; document.documentElement.style.setProperty('--fs',next+'px'); };
+$('#btnTheme').onclick=()=>{ const cur=document.documentElement.getAttribute('data-theme'); const next=cur==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',next); try{localStorage.setItem('audit.theme',next);}catch(e){} };
+$('#btnCsv').onclick=()=>{
+ const rows=empty?[]:filtered(); if(!rows.length){ alert('Sem casos para exportar.'); return; }
+ const present=document.body.classList.contains('present');
+ const keys=[...new Set(rows.flatMap(c=>Object.keys(c.indicadores||{})))];
+ const head=['lead_id','lead','servico','atendentes','etapa_atual','etapa_max','resultado','status_espera','transferencia','nota','cobertura','proxima_acao',...keys];
+ const line=a=>a.map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(';');
+ const body=rows.map((c,i)=>line([c.id,present?'Caso '+(i+1):(c.nome||''),c.servico||'',present?'':(c.atendentes||[]).join('|'),c.etapa_atual||'',c.etapa_max||'',c.status||'',c.status_espera||'',(c.transfer||{}).confidence||'',c.rubrica?c.rubrica.nota_normalizada:'',c.rubrica?c.rubrica.cobertura:'',c.proxima_acao||'',...keys.map(k=>val(c,k))]));
+ const blob=new Blob(['﻿'+[line(head),...body].join('\n')],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`indicadores_${present?'sem_identificacao_':''}${new Date().toISOString().slice(0,10)}.csv`; a.click(); URL.revokeObjectURL(a.href);
+};
+if(empty){ ['btnCsv'].forEach(id=>{$('#'+id).disabled=true; $('#'+id).title='Sem dados para exportar';}); }
+try{ const th=localStorage.getItem('audit.theme'); if(th) document.documentElement.setAttribute('data-theme',th); }catch(e){}
+renderComp(); renderDet(); renderDiag(); renderMet();
+try{ const s=localStorage.getItem('audit.sec'); if(s&&document.getElementById('sec-'+s)) show(s); }catch(e){}
+})();
+</script>
+</body>
+</html>
