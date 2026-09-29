@@ -22,7 +22,10 @@ TZ = ZoneInfo("America/Sao_Paulo")
 
 def get(base: str, path: str, token: str, params: dict | None = None, retries: int = 3):
     url = base + path + ("?" + urllib.parse.urlencode(params, doseq=True) if params else "")
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}", "Accept": "application/hal+json"}, method="GET")
+    headers = {"Accept": "application/hal+json"}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(url, headers=headers, method="GET")
     for i in range(retries):
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
@@ -65,7 +68,9 @@ def main():
     a = ap.parse_args()
     token = os.environ.get("KOMMO_TOKEN")
     if not token:
-        sys.exit("Defina KOMMO_TOKEN no ambiente (não grave em arquivo).")
+        # Modo credencial de API do ambiente em nuvem: o proxy anexa o Authorization ao sair da VM.
+        print("KOMMO_TOKEN ausente: usando credencial do ambiente (proxy). Se a API responder 401, o token não foi configurado.")
+        token = None
     base = f"https://{a.subdomain}.kommo.com"
     os.makedirs(a.out, exist_ok=True)
     cutoff = datetime.now(TZ)
