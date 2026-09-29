@@ -4,16 +4,12 @@ Base: 10 casos auditados · corte 2026-09-28T22:42:23-03:00 · frequências semp
 ## Padrões recorrentes
 - **Lead fica sem resposta humana por dias após escrever (pendência aberta no corte ou lacuna > 3 dias)** — 4 de 10 casos com pendência aberta no corte (86 h a 103 h); 8 de 10 com ao menos uma lacuna > 3 dias entre mensagem do lead e ação humana. Impacto: Leads em Negociação/Análise esfriam; documentos enviados não são conferidos; clientes ativados percebem abandono. Mudança: Rotina diária de 'fila de leads com última mensagem do lead sem resposta humana' (incluindo pós-ativação e pós-desqualificação) com meta proposta a validar; cadência do Playbook aplicada em Negociação. Acompanhamento: Indicador: nº de leads com última mensagem do lead sem ação humana > 24 h (base: 4 de 10 na amostra). Responsável: gestor comercial. (causa: processo/distribuição)
   - Evidências: https://gabrielhabibadv.kommo.com/leads/detail/80064014 · 25/09 08:32 → corte (86 h, Negociação); https://gabrielhabibadv.kommo.com/leads/detail/80012252 · 24/09 15:19 → corte (103 h); https://gabrielhabibadv.kommo.com/leads/detail/79490552 · 24/09 17:35 → corte (101 h, pós-ativação); https://gabrielhabibadv.kommo.com/leads/detail/79358770 · 04/09 14:26 → 25/09 (21 dias); https://gabrielhabibadv.kommo.com/leads/detail/79533290 · 04/09 → 17/09 (13 dias)
-- **Robô continua respondendo ao lead depois da atuação humana** — 6 de 10 casos (79358770, 79490552, 79533290, 80012252, 80064014, 80105650). Impacto: Mensagens contraditórias, lead responde ao robô e o humano não vê; a lacuna de resposta parece 'coberta'. Mudança: Na integração Evolve Agentes × Kommo, desligar o agente quando a tag 'humano' é aplicada ou quando um usuário humano envia mensagem; remover tag 'agente' ao assumir. Acompanhamento: Indicador: mensagens do robô após a 1ª mensagem humana por lead (base: 31 mensagens em 6 casos). (causa: integração)
-  - Evidências: https://gabrielhabibadv.kommo.com/leads/detail/80012252 · 23/09 11:02–13:19 robô após ligação humana; https://gabrielhabibadv.kommo.com/leads/detail/80064014 · 25/09 08:31 robô ×3 em lead em Negociação; https://gabrielhabibadv.kommo.com/leads/detail/79358770 · 27/08 11:19–11:24 robô e humano no mesmo minuto
 - **Próximo passo sem prazo/horário ou sem tarefa após ligação ou reunião** — 3 de 5 ligações/reuniões avaliáveis (79877820, 80038784, 79533290 reunião OK com tarefa; 77456896 prazos sem tarefa; 80012252 docs sem acolhimento). Impacto: Bola fica com o lead; 1ª cobrança vem dias depois (4 dias em 79877820; nunca em 80038784). Mudança: Fechar toda ligação com data/hora do próximo contato e criar tarefa no CRM antes de desligar. Acompanhamento: Indicador: % de ligações atendidas > 60 s seguidas de tarefa com prazo em até 1 h (base: 1 de 5). (causa: habilidade comercial)
   - Evidências: https://gabrielhabibadv.kommo.com/leads/detail/79877820 · 17/09 12:33–12:52 transcrição; https://gabrielhabibadv.kommo.com/leads/detail/80038784 · 25/09 10:25 transcrição 02:20–02:39; https://gabrielhabibadv.kommo.com/leads/detail/77456896 · 25/09 11:52 resumo: 'até amanhã' e 'segunda' sem tarefa
 - **Retomada de contexto: humano reinicia a investigação sem usar o que o robô/formulário colheu** — 1 de 2 ligações avaliáveis com abertura audível (80038784 negativa; 79877820 positiva). Impacto: Lead repete a história; percepção de desorganização. Mudança: Abertura padrão de 3 linhas citando serviço, situação e o que já foi dito ao assistente; checar se o resumo do agente aparece no lead (integração). Acompanhamento: Amostra mensal de 5 ligações: abertura cita contexto? (base: 1 de 2). (causa: habilidade comercial)
   - Evidências: https://gabrielhabibadv.kommo.com/leads/detail/80038784 · 25/09 transcrição 00:29–02:11 'não aparece esse relatório'; https://gabrielhabibadv.kommo.com/leads/detail/79877820 · 17/09 transcrição 00:13–00:28
-- **Registro incompleto no CRM: sem motivo de perda, tarefas vencidas, etapas que não refletem a realidade, serviço vazio, ligação no usuário de integração** — Motivo de perda ausente: 2 de 2 desqualificados; tarefas vencidas: 3 de 10; serviço não informado: 4 de 10; ligações na conta 'Marketing Evolve': 2 de 10 casos (7 de 83 na base de 30 d); etapa avançada sem contato comprovado: 2 de 10 (77456896, 80064014). Impacto: Sem motivo de perda não há aprendizado; sem tarefa não há cadência; a gestão não enxerga o esforço real (ligações da Juliana aparecem como integração). Mudança: Motivo de perda obrigatório na etapa Desqualificado; mapear ramal da Juliana no API4com; preencher 'Serviço' na triagem; concluir/limpar tarefas automáticas. Acompanhamento: Indicadores: % desqualificados com motivo (base 0 de 2); tarefas vencidas > 2 dias (base 3 de 10); % ligações atribuídas a usuário real (base 76 de 83). (causa: registro)
+- **Registro incompleto no CRM: sem motivo de perda, tarefas vencidas, etapas que não refletem a realidade, serviço vazio, ligação no usuário de integração** — Motivo de perda ausente: 2 de 2 desqualificados; tarefas vencidas: 3 de 10; serviço não informado: 4 de 10; etapa avançada sem contato comprovado: 2 de 10 (77456896, 80064014). Impacto: Sem motivo de perda não há aprendizado; sem tarefa não há cadência; a etapa não reflete a realidade. Mudança: Motivo de perda obrigatório na etapa Desqualificado; nota curta após cada ligação; preencher 'Serviço' na triagem; concluir/limpar tarefas automáticas. Acompanhamento: Indicadores: % desqualificados com motivo (base 0 de 2); tarefas vencidas > 2 dias (base 3 de 10). (causa: registro)
   - Evidências: https://gabrielhabibadv.kommo.com/leads/detail/80012252 · 24/09 15:17; https://gabrielhabibadv.kommo.com/leads/detail/80105650 · 28/09 15:00; https://gabrielhabibadv.kommo.com/leads/detail/79763954 · 15/09 15:45 chamada created_by 10348307; https://gabrielhabibadv.kommo.com/leads/detail/77456896 · 08/06 10:49–12:07
-- **Pedido de login/senha do INSS ao lead por telefone (para consultar CNIS/tempo de contribuição)** — 1 de 2 ligações previdenciárias com transcrição (80012252 sim; 77456896 não — pediu PPPs por foto). Impacto: Risco de segurança/LGPD e de perda de confiança; não é falha comercial, é ponto de política do escritório. Mudança: Validar com o responsável técnico: pedir extrato CNIS exportado pelo próprio lead (Meu INSS) em vez de senha. Acompanhamento: Checar em amostra de ligações previdenciárias (base: 1 de 2 transcritas). (causa: para validação do responsável técnico)
-  - Evidências: https://gabrielhabibadv.kommo.com/leads/detail/80012252 · 23/09 10:24 transcrição 22:48–23:12 e 27:22–27:28
 - **Transferência fora do expediente gera tarefa de 5 min impossível e 1ª ação só no dia seguinte** — 2 de 10 (80012252 às 18:54 → 15,5 h; 80038784 às 07:33 → 3,8 h). Impacto: Lead que acabou de falar com o robô fica sem expectativa; a tarefa vencida vira ruído. Mudança: Mensagem automática de expectativa fora do expediente ('nossa equipe fala com você a partir das 9h') e prazo da tarefa calculado no horário útil. Proposta para validação, expediente não confirmado. Acompanhamento: Tempo transferência → 1ª ação humana em horário útil (base: mediana 1,7 h; extremos 15,5 h e 700 h por registro). (causa: processo/distribuição)
   - Evidências: https://gabrielhabibadv.kommo.com/leads/detail/80012252 · 22/09 18:54 tarefa due 18:59 → concluída 23/09 10:15; https://gabrielhabibadv.kommo.com/leads/detail/80038784 · 24/09 07:33 → 11:19
 
@@ -61,10 +57,10 @@ Base: 10 casos auditados · corte 2026-09-28T22:42:23-03:00 · frequências semp
 
 ### 4. Checklist e compromissos operacionais · 10 min
 - Objetivo: Fechar um checklist mínimo por atendimento e os ajustes de integração/registro.
-- Casos/trechos no painel: Diagnóstico → padrões 2, 5 e 6
-- Perguntas: Quem responde ao cliente depois da ativação? | O que fazemos quando a transferência chega às 18:54?
+- Casos/trechos no painel: Diagnóstico → padrões de continuidade e de registro
+- Perguntas: Quem responde ao cliente depois da ativação? | Quem confirma o recebimento de documentos e em quanto tempo?
 - Exercício: Escrever juntos o checklist: (1) abrir com contexto; (2) ligar no 1º contato em horário útil; (3) próximo passo com data/hora + tarefa; (4) confirmar recebimento de documentos; (5) motivo de perda + mensagem de saída; (6) nota curta após ligação.
-- Comportamento esperado: Acordo sobre o checklist e sobre desligar o robô após o humano assumir.
+- Comportamento esperado: Acordo sobre o checklist e sobre quem responde a cada fila.
 
 ### 5. Plano de ação e revisão · 5 min
 - Objetivo: Confirmar prioridades, ações de 7 dias e indicadores de 30 dias com responsáveis por função.
@@ -75,17 +71,15 @@ Base: 10 casos auditados · corte 2026-09-28T22:42:23-03:00 · frequências semp
 
 ## Prioridades (até 5)
 1. **Zerar a fila de leads sem resposta humana** — Rotina diária (manhã e tarde) sobre leads cuja última mensagem é do lead, incluindo pós-ativação e pós-desqualificação. (4 de 10 pendentes no corte; 8 de 10 com lacuna > 3 dias)
-2. **Desligar o robô após a atuação humana** — Ajuste na integração Evolve Agentes × Kommo (tag 'humano' ou 1ª mensagem humana encerra o agente). (6 de 10)
-3. **Toda ligação/reunião termina com data, hora e tarefa** — Script de fechamento + tarefa antes de desligar; cobrança em D+1 se o combinado não chegar. (3 de 5 avaliáveis sem prazo/tarefa)
-4. **Registro mínimo: motivo de perda, serviço, ramal mapeado** — Motivo obrigatório ao desqualificar; campo Serviço na triagem; ramal da Juliana no API4com. (0 de 2 desqualificados com motivo; 4 de 10 sem serviço; 7 ligações em conta de integração)
-5. **Abertura com contexto do robô** — 3 linhas padrão citando serviço e situação já informados; checar exibição do resumo do agente. (1 de 2 ligações avaliáveis)
+2. **Toda ligação/reunião termina com data, hora e tarefa** — Script de fechamento + tarefa antes de desligar; cobrança em D+1 se o combinado não chegar. (3 de 5 avaliáveis sem prazo/tarefa)
+3. **Registro mínimo: motivo de perda, serviço, nota após ligação** — Motivo obrigatório ao desqualificar; campo Serviço na triagem; nota curta com o combinado após cada ligação. (0 de 2 desqualificados com motivo; 4 de 10 sem serviço)
+4. **Abertura com contexto do robô** — 3 linhas padrão citando serviço e situação já informados; checar exibição do resumo do agente. (1 de 2 ligações avaliáveis)
 
 ## Ações para 7 dias
 - Dia 1: listar todos os leads do funil Manual com última mensagem do lead sem ação humana; responder ou registrar motivo (gestor comercial + SDRs).
-- Dia 1–2: Evolve ajusta a regra do agente (parar ao aplicar tag 'humano' / 1ª mensagem humana) e valida em 3 leads (responsável CRM/integração).
-- Dia 2: mapear ramal da Juliana no API4com; conferir que as ligações passam a cair no usuário correto (responsável CRM).
+- Dia 2: definir quem responde às filas de pós-ativação e de documentos recebidos, e em que prazo (gestor comercial).
 - Dia 3: adotar o script de fechamento de ligação (data + hora + tarefa) e o script de abertura com contexto; simular em dupla (SDRs).
-- Dia 3: tornar motivo de perda obrigatório na etapa Desqualificado e revisar as tarefas automáticas de 5 min (responsável CRM; proposta para validação).
+- Dia 3: motivo de perda obrigatório ao desqualificar e nota curta após cada ligação (atendentes + responsável CRM).
 - Dia 5: revisar os 10 casos do painel e executar as 'próximas ações recomendadas' que ainda fizerem sentido (SDRs).
 - Dia 7: check-in de 20 min com os indicadores abaixo (gestor comercial).
 
@@ -93,11 +87,10 @@ Base: 10 casos auditados · corte 2026-09-28T22:42:23-03:00 · frequências semp
 | Indicador | Linha de base | Responsável (função) | Critério de evolução (proposta) |
 |---|---|---|---|
 | Leads com última mensagem do lead sem ação humana > 24 h (contagem no funil) | 4 de 10 na amostra (86–103 h) | Gestor comercial | 0 pendências > 24 h em dias úteis (proposta para validação) |
-| Mensagens do robô após a 1ª mensagem humana (por lead) | 6 de 10 casos; 31 mensagens | Responsável integração (Evolve) | 0 após ajuste |
 | Ligações atendidas > 60 s seguidas de tarefa com prazo em ≤ 1 h | 1 de 5 | SDRs | ≥ 4 de 5 (proposta) |
 | Desqualificados com motivo de perda registrado | 0 de 2 | SDRs / responsável CRM | 100% |
 | Tempo transferência → 1ª ação humana em horário útil (mediana) | ≈ 1,7 h (n = 7 com transferência identificável e registro confiável) | SDRs | manter ≤ 1 h como proposta (Playbook sugere 10 min para 1ª tentativa); expediente a confirmar |
-| Ligações atribuídas a usuário real no API4com | 76 de 83 (30 dias) | Responsável CRM | 100% |
+| Ligações cuja abertura cita o contexto já informado (amostra mensal de 5 gravações) | 2 de 3 aberturas audíveis | Gestor comercial | 5 de 5 |
 
 ## Metas propostas (para validação, não regras retroativas)
 - Proposta: 1ª ação humana em até 1 h após a transferência em horário útil (Playbook FlowSales cita 10 min para 1ª tentativa; não confirmado como regra do cliente).

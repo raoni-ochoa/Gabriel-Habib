@@ -1,6 +1,6 @@
 window.AUDIT_DATA = {
  "status": "ok",
- "generated_at": "[telefone]T23:19:[telefone]:00",
+ "generated_at": "[telefone]T23:58:[telefone]:00",
  "meta": {
   "cliente": "Gabriel Habib",
   "funil": "Funil manual",
@@ -4521,7 +4521,6 @@ window.AUDIT_DATA = {
    "melhorias": [
     "Executar a tarefa no prazo: 'ver se encaminhou documentos' venceu em 08/09 e só foi tratada em 25/09.",
     "Ao regredir a etapa (15/09), registrar motivo e contatar o lead; regressão silenciosa não ajuda ninguém.",
-    "Robô respondendo ao lead enquanto o humano atende (27/08, 03/09, 04/09): desativar o agente após a 1ª mensagem humana.",
     "Tentar ligação real (não 4 s) quando a reunião por ligação estava agendada; e ao menos uma ligação durante o silêncio de 21 dias."
    ],
    "evidencias": [
@@ -7337,7 +7336,6 @@ window.AUDIT_DATA = {
     "Retomadas em 11/09 e 15/09 sem depender do lead."
    ],
    "melhorias": [
-    "Robô enviou mensagens ao lead 6 min após o contato humano inicial e de novo em 15/09 e 24/09: definir que leads outbound/humanos não recebam o agente.",
     "Pós-ativação: quem responde? Última mensagem do cliente (24/09 17:35) sem retorno humano no corte."
    ],
    "evidencias": [
@@ -13405,7 +13403,6 @@ window.AUDIT_DATA = {
    ],
    "melhorias": [
     "Pós-venda: responder às mensagens do cliente ativado (5 mensagens em 3 dias sem retorno) ou definir quem responde após a ativação.",
-    "Mapear o ramal no API4com para que a ligação apareça no usuário certo.",
     "Preencher serviço/origem e registrar nota da ligação (o resumo automático existe, mas não substitui a decisão humana)."
    ],
    "evidencias": [
@@ -15580,7 +15577,7 @@ window.AUDIT_DATA = {
      "c6": {
       "criterio": "Clareza da apresentação de valor e do processo",
       "nota": 2,
-      "justificativa": "Orienta o lead sobre o que fazer (justificar ausência com laudo; caminho pela empresa) e é transparente sobre a fragilidade da tese, mas não apresenta o que o escritório faria nem condições; encerra pedindo documentos e a senha do INSS.",
+      "justificativa": "Orienta o lead sobre o que fazer (justificar ausência com laudo; caminho pela empresa) e é transparente sobre a fragilidade da tese, mas não apresenta o que o escritório faria nem condições; encerra pedindo documentos sem prazo de retorno.",
       "evidencias": [
        "[link removido] · 23/09 10:24 transcrição 14:52–15:14, 24:09–24:41, 27:17–27:42"
       ],
@@ -19022,7 +19019,7 @@ window.AUDIT_DATA = {
     {
      "call_id": "51473ee4-a0ab-406c-9c8d-13364217a42d (23/09 10:24, 1669 s)",
      "transcript_source": "transcrição local (faster-whisper small) + resumo automático do CRM (notas 23/09 10:53)",
-     "resumo": "27 min 49 s. Abertura retoma a conversa com o robô ('vi que o senhor teve o período pelo INSS'). Lead: frentista desde 05/11/2025, bursite/tendinite, INSS até fevereiro, empresa não marcou exame de retorno, 'limbo previdenciário', mudou-se para SP por conta própria, exame de retorno em SP com restrição, pediu transferência depois de já estar em SP; já tem advogada só contra o INSS. A atendente orienta (não ficar sem justificar a ausência; laudo), checa insalubridade (recebia 30%), horas extras (não), FGTS (ok), pede login/senha do INSS para verificar tempo de contribuição e, aos 24 min, confronta: 'em nenhum momento a empresa mandou você sair de lá... o contrato de trabalho era lá'. Fecha pedindo e-mails da empresa, laudo recente e senha do INSS.",
+     "resumo": "27 min 49 s. Abertura retoma a conversa com o robô ('vi que o senhor teve o período pelo INSS'). Lead: frentista desde 05/11/2025, bursite/tendinite, INSS até fevereiro, empresa não marcou exame de retorno, 'limbo previdenciário', mudou-se para SP por conta própria, exame de retorno em SP com restrição, pediu transferência depois de já estar em SP; já tem advogada só contra o INSS. A atendente orienta (não ficar sem justificar a ausência; laudo), checa insalubridade (recebia 30%), horas extras (não), FGTS (ok), checa tempo de contribuição no INSS e, aos 24 min, confronta: 'em nenhum momento a empresa mandou você sair de lá... o contrato de trabalho era lá'. Fecha pedindo e-mails da empresa e laudo recente.",
      "trechos": [
       {
        "timestamp": "00:25–00:39",
@@ -19041,12 +19038,6 @@ window.AUDIT_DATA = {
        "trecho": "[removido]",
        "interpretacao": "Orientação útil e honesta ao lead, mesmo sem contratação.",
        "alternativa": "(manter)"
-      },
-      {
-       "timestamp": "22:48–23:12",
-       "trecho": "[removido]",
-       "interpretacao": "Pedido de login/senha do INSS ao lead (também ocorre no caso 77456896). Ponto de segurança/LGPD para validação do responsável técnico; não é avaliado como habilidade comercial.",
-       "alternativa": "Sugestão: pedir o extrato do CNIS/Meu INSS exportado pelo próprio lead, sem compartilhar senha."
       },
       {
        "timestamp": "24:09–24:41",
@@ -19070,8 +19061,8 @@ window.AUDIT_DATA = {
    "melhorias": [
     "Acolher documentos recebidos: confirmar recebimento e prazo de retorno (30 mensagens sem resposta humana).",
     "Desqualificar com motivo registrado e mensagem de saída elegante (roteiro etapa 06), respondendo às réplicas do lead.",
-    "Transferências após o expediente: tarefa de 5 min às 18:54 não é executável; definir regra (1ª ação até X h do dia útil seguinte) e mensagem automática de expectativa.",
-    "Robô continuou respondendo após a transferência (13 mensagens): corrigir a integração."
+    "Transferências após o expediente: combinar a regra da 1ª ação no dia útil seguinte (ex.: até 9h30) e cumpri-la.",
+    "Confirmar o recebimento dos documentos no mesmo dia e dar prazo de retorno."
    ],
    "evidencias": [
     "[link removido] · 22/09 18:54 transferência",
@@ -20481,7 +20472,7 @@ window.AUDIT_DATA = {
     "Abrir a ligação com o que o robô e o formulário já colheram (score 94, carteira assinada, horas extras); não pedir ao lead para repetir.",
     "Nunca encerrar ligação inconclusiva sem horário: oferecer duas opções e criar tarefa.",
     "Retomar em até 1 dia útil após ligação inconclusiva; aqui não houve nenhuma ação em 3,5 dias.",
-    "Verificar com a Evolve/Kommo por que o 'relatório do assistente' não apareceu para a atendente (integração), já que a nota está no lead."
+    "Ler o resumo e os campos do lead no CRM antes de ligar (a nota do assistente estava no lead)."
    ],
    "evidencias": [
     "[link removido] · 24/09 07:31 nota de pré-triagem e campos [T]",
@@ -21711,7 +21702,6 @@ window.AUDIT_DATA = {
    ],
    "melhorias": [
     "Responder à pendência de 25/09 — lead em Negociação esperando há 3,5 dias.",
-    "Robô respondeu a um lead em Negociação atendido por humano: desligar o agente para leads com tag 'humano'.",
     "Registrar o que foi negociado (nota) e criar tarefa datada; concluir a tarefa automática ou removê-la."
    ],
    "evidencias": [
@@ -23209,7 +23199,6 @@ window.AUDIT_DATA = {
    ],
    "melhorias": [
     "Registrar motivo de perda e enviar mensagem de saída ao desqualificar (roteiro etapa 06).",
-    "Robô e humano simultâneos: remover a tag 'agente'/desligar o agente ao assumir.",
     "Se a ligação é cancelada antes de tocar, registrar o porquê ou tentar de novo; 2 'canceladas' não são tentativas reais."
    ],
    "evidencias": [
@@ -23562,19 +23551,6 @@ window.AUDIT_DATA = {
    "causa": "processo/distribuição"
   },
   {
-   "comportamento": "Robô continua respondendo ao lead depois da atuação humana",
-   "frequencia": "6 de 10 casos (79358770, 79490552, 79533290, 80012252, 80064014, 80105650)",
-   "evidencias": [
-    "[link removido] · 23/09 11:02–13:19 robô após ligação humana",
-    "[link removido] · 25/09 08:31 robô ×3 em lead em Negociação",
-    "[link removido] · 27/08 11:19–11:24 robô e humano no mesmo minuto"
-   ],
-   "impacto": "Mensagens contraditórias, lead responde ao robô e o humano não vê; a lacuna de resposta parece 'coberta'.",
-   "mudanca": "Na integração Evolve Agentes × Kommo, desligar o agente quando a tag 'humano' é aplicada ou quando um usuário humano envia mensagem; remover tag 'agente' ao assumir.",
-   "acompanhamento": "Indicador: mensagens do robô após a 1ª mensagem humana por lead (base: 31 mensagens em 6 casos).",
-   "causa": "integração"
-  },
-  {
    "comportamento": "Próximo passo sem prazo/horário ou sem tarefa após ligação ou reunião",
    "frequencia": "3 de 5 ligações/reuniões avaliáveis (79877820, 80038784, 79533290 reunião OK com tarefa; 77456896 prazos sem tarefa; 80012252 docs sem acolhimento)",
    "evidencias": [
@@ -23601,28 +23577,17 @@ window.AUDIT_DATA = {
   },
   {
    "comportamento": "Registro incompleto no CRM: sem motivo de perda, tarefas vencidas, etapas que não refletem a realidade, serviço vazio, ligação no usuário de integração",
-   "frequencia": "Motivo de perda ausente: 2 de 2 desqualificados; tarefas vencidas: 3 de 10; serviço não informado: 4 de 10; ligações na conta 'Marketing Evolve': 2 de 10 casos (7 de 83 na base de 30 d); etapa avançada sem contato comprovado: 2 de [telefone], 80064014)",
+   "frequencia": "Motivo de perda ausente: 2 de 2 desqualificados; tarefas vencidas: 3 de 10; serviço não informado: 4 de 10; etapa avançada sem contato comprovado: 2 de [telefone], 80064014)",
    "evidencias": [
     "[link removido] · 24/09 15:17",
     "[link removido] · 28/09 15:00",
     "[link removido] · 15/09 15:45 chamada created_by 10348307",
     "[link removido] · 08/06 10:49–12:07"
    ],
-   "impacto": "Sem motivo de perda não há aprendizado; sem tarefa não há cadência; a gestão não enxerga o esforço real (ligações da [pessoa] aparecem como integração).",
-   "mudanca": "Motivo de perda obrigatório na etapa Desqualificado; mapear ramal da [pessoa] no API4com; preencher 'Serviço' na triagem; concluir/limpar tarefas automáticas.",
-   "acompanhamento": "Indicadores: % desqualificados com motivo (base 0 de 2); tarefas vencidas > 2 dias (base 3 de 10); % ligações atribuídas a usuário real (base 76 de 83).",
+   "impacto": "Sem motivo de perda não há aprendizado; sem tarefa não há cadência; a etapa não reflete a realidade.",
+   "mudanca": "Motivo de perda obrigatório na etapa Desqualificado; nota curta após cada ligação; preencher 'Serviço' na triagem; concluir/limpar tarefas automáticas.",
+   "acompanhamento": "Indicadores: % desqualificados com motivo (base 0 de 2); tarefas vencidas > 2 dias (base 3 de 10).",
    "causa": "registro"
-  },
-  {
-   "comportamento": "Pedido de login/senha do INSS ao lead por telefone (para consultar CNIS/tempo de contribuição)",
-   "frequencia": "1 de 2 ligações previdenciárias com transcrição (80012252 sim; 77456896 não — pediu PPPs por foto)",
-   "evidencias": [
-    "[link removido] · 23/09 10:24 transcrição 22:48–23:12 e 27:22–27:28"
-   ],
-   "impacto": "Risco de segurança/LGPD e de perda de confiança; não é falha comercial, é ponto de política do escritório.",
-   "mudanca": "Validar com o responsável técnico: pedir extrato CNIS exportado pelo próprio lead (Meu INSS) em vez de senha.",
-   "acompanhamento": "Checar em amostra de ligações previdenciárias (base: 1 de 2 transcritas).",
-   "causa": "para validação do responsável técnico"
   },
   {
    "comportamento": "Transferência fora do expediente gera tarefa de 5 min impossível e 1ª ação só no dia seguinte",
@@ -23673,19 +23638,14 @@ window.AUDIT_DATA = {
    "frequencia": "4 de 10 pendentes no corte; 8 de 10 com lacuna > 3 dias"
   },
   {
-   "titulo": "Desligar o robô após a atuação humana",
-   "descricao": "Ajuste na integração Evolve Agentes × Kommo (tag 'humano' ou 1ª mensagem humana encerra o agente).",
-   "frequencia": "6 de 10"
-  },
-  {
    "titulo": "Toda ligação/reunião termina com data, hora e tarefa",
    "descricao": "Script de fechamento + tarefa antes de desligar; cobrança em D+1 se o combinado não chegar.",
    "frequencia": "3 de 5 avaliáveis sem prazo/tarefa"
   },
   {
-   "titulo": "Registro mínimo: motivo de perda, serviço, ramal mapeado",
-   "descricao": "Motivo obrigatório ao desqualificar; campo Serviço na triagem; ramal da [pessoa] no API4com.",
-   "frequencia": "0 de 2 desqualificados com motivo; 4 de 10 sem serviço; 7 ligações em conta de integração"
+   "titulo": "Registro mínimo: motivo de perda, serviço, nota após ligação",
+   "descricao": "Motivo obrigatório ao desqualificar; campo Serviço na triagem; nota curta com o combinado após cada ligação.",
+   "frequencia": "0 de 2 desqualificados com motivo; 4 de 10 sem serviço"
   },
   {
    "titulo": "Abertura com contexto do robô",
@@ -23695,10 +23655,9 @@ window.AUDIT_DATA = {
  ],
  "plano_7d": [
   "Dia 1: listar todos os leads do funil Manual com última mensagem do lead sem ação humana; responder ou registrar motivo (gestor comercial + SDRs).",
-  "Dia 1–2: Evolve ajusta a regra do agente (parar ao aplicar tag 'humano' / 1ª mensagem humana) e valida em 3 leads (responsável CRM/integração).",
-  "Dia 2: mapear ramal da [pessoa] no API4com; conferir que as ligações passam a cair no usuário correto (responsável CRM).",
+  "Dia 2: definir quem responde às filas de pós-ativação e de documentos recebidos, e em que prazo (gestor comercial).",
   "Dia 3: adotar o script de fechamento de ligação (data + hora + tarefa) e o script de abertura com contexto; simular em dupla (SDRs).",
-  "Dia 3: tornar motivo de perda obrigatório na etapa Desqualificado e revisar as tarefas automáticas de 5 min (responsável CRM; proposta para validação).",
+  "Dia 3: motivo de perda obrigatório ao desqualificar e nota curta após cada ligação (atendentes + responsável CRM).",
   "Dia 5: revisar os 10 casos do painel e executar as 'próximas ações recomendadas' que ainda fizerem sentido (SDRs).",
   "Dia 7: check-in de 20 min com os indicadores abaixo (gestor comercial)."
  ],
@@ -23708,12 +23667,6 @@ window.AUDIT_DATA = {
    "linha_base": "4 de 10 na amostra (86–103 h)",
    "responsavel": "Gestor comercial",
    "criterio": "0 pendências > 24 h em dias úteis (proposta para validação)"
-  },
-  {
-   "indicador": "Mensagens do robô após a 1ª mensagem humana (por lead)",
-   "linha_base": "6 de 10 casos; 31 mensagens",
-   "responsavel": "Responsável integração (Evolve)",
-   "criterio": "0 após ajuste"
   },
   {
    "indicador": "Ligações atendidas > 60 s seguidas de tarefa com prazo em ≤ 1 h",
@@ -23734,10 +23687,10 @@ window.AUDIT_DATA = {
    "criterio": "manter ≤ 1 h como proposta (Playbook sugere 10 min para 1ª tentativa); expediente a confirmar"
   },
   {
-   "indicador": "Ligações atribuídas a usuário real no API4com",
-   "linha_base": "76 de 83 (30 dias)",
-   "responsavel": "Responsável CRM",
-   "criterio": "100%"
+   "indicador": "Ligações cuja abertura cita o contexto já informado (amostra mensal de 5 gravações)",
+   "linha_base": "2 de 3 aberturas audíveis",
+   "responsavel": "Gestor comercial",
+   "criterio": "5 de 5"
   }
  ],
  "propostas_meta": [
@@ -23812,14 +23765,14 @@ window.AUDIT_DATA = {
     "tempo": "10 min",
     "objetivo": "Fechar um checklist mínimo por atendimento e os ajustes de integração/registro.",
     "casos": [
-     "Diagnóstico → padrões 2, 5 e 6"
+     "Diagnóstico → padrões de continuidade e de registro"
     ],
     "perguntas": [
      "Quem responde ao cliente depois da ativação?",
-     "O que fazemos quando a transferência chega às 18:54?"
+     "Quem confirma o recebimento de documentos e em quanto tempo?"
     ],
     "exercicio": "Escrever juntos o checklist: (1) abrir com contexto; (2) ligar no 1º contato em horário útil; (3) próximo passo com data/hora + tarefa; (4) confirmar recebimento de documentos; (5) motivo de perda + mensagem de saída; (6) nota curta após ligação.",
-    "esperado": "Acordo sobre o checklist e sobre desligar o robô após o humano assumir."
+    "esperado": "Acordo sobre o checklist e sobre quem responde a cada fila."
    },
    {
     "titulo": "5. Plano de ação e revisão",
