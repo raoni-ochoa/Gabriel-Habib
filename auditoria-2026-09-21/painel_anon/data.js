@@ -1,6 +1,6 @@
 window.AUDIT_DATA = {
  "status": "ok",
- "generated_at": "[telefone]T23:09:[telefone]:00",
+ "generated_at": "[telefone]T23:10:[telefone]:00",
  "meta": {
   "cliente": "Gabriel Habib",
   "funil": "Funil manual",
@@ -13345,7 +13345,7 @@ window.AUDIT_DATA = {
        "timestamp": "00:18–00:46",
        "trecho": "[removido]",
        "interpretacao": "Retomada de contexto por indicação: usa o caso do colega para gerar confiança. Cuidado: 'em breve já está recebendo' é promessa sobre caso de terceiro — evitar.",
-       "alternativa": "Sugestão reescrita: 'Seu colega Joab está com o caso conosco e o processo segue bem. Cada caso tem seu tempo, mas vamos usar a mesma base para o seu.'"
+       "alternativa": "Sugestão reescrita: 'Seu colega [pessoa] está com o caso conosco e o processo segue bem. Cada caso tem seu tempo, mas vamos usar a mesma base para o seu.'"
       },
       {
        "timestamp": "02:54–03:26",
@@ -13395,6 +13395,8 @@ window.AUDIT_DATA = {
    "confianca": "alta para linha do tempo; média para condução.",
    "observado_vs_sugerido": [],
    "nomes_citados": [
+    "[pessoa]",
+    "[pessoa]",
     "[pessoa]",
     "[pessoa]",
     "[pessoa]",

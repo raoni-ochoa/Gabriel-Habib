@@ -325,7 +325,7 @@ DIAG = {
   {"titulo": "5. Plano de ação e revisão", "tempo": "5 min", "objetivo": "Confirmar prioridades, ações de 7 dias e indicadores de 30 dias com responsáveis por função.", "casos": ["Diagnóstico → plano de melhoria"], "perguntas": ["Qual indicador cada um acompanha?"], "exercicio": "—", "esperado": "Linha de base e critério de evolução aceitos como proposta para validação."}]}
 }
 
-NOMES = {"79877820": ["Liana", "Eliana", "Oriana", "Cibene", "Cinelli", "Anne"], "80012252": ["Milton"], "77456896": ["Rômulo", "Romulo", "Sibeli"], "79763954": ["Wellington", "Rabilli"],
+NOMES = {"79877820": ["Liana", "Eliana", "Oriana", "Cibene", "Cinelli", "Anne"], "80012252": ["Milton"], "77456896": ["Rômulo", "Romulo", "Sibeli"], "79763954": ["Wellington", "Rabilli", "Joab", "Elisson"],
          "80038784": ["Bruna", "Bruno", "Sibeli", "Sibela", "Brin"], "79358770": [], "79490552": [], "79533290": [], "80064014": [], "80105650": []}
 GERAIS = ["Cybele", "Cibele", "Juliana", "Sibela", "Sibeli", "Cibene"]
 
