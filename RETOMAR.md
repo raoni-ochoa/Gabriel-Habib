@@ -1,5 +1,8 @@
 # Como retomar a auditoria no seu computador (2 passos)
 
+> Objetivo desta retomada: ler o **texto das conversas de WhatsApp** dos 10 leads selecionados. Tudo o mais já foi coletado pela API (28/09/2026). Descompacte o pacote zip da auditoria dentro da pasta do repositório antes de começar, para que `auditoria-2026-09-21/dados/restrito/` exista.
+
+
 ## Passo 1 — abrir a pasta no app Claude Code (desktop)
 - Aba **Code** → **Project folder**. Se a pasta `Gabriel-Habib` ainda não existe, abra o terminal integrado (`Ctrl+\`` no Windows/Linux, `Cmd+\`` no Mac) e cole:
 
