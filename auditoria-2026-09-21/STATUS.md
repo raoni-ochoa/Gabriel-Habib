@@ -1,33 +1,26 @@
 # STATUS — Auditoria de atendimento humano · Gabriel Habib · Kommo (funil Manual 13587595)
 
-Última atualização: 2026-09-21 (America/Sao_Paulo). Sessão remota Claude Code, branch `claude/kommo-human-service-audit-7ljggg`.
+Última atualização: 2026-09-29 (America/Sao_Paulo). Sessão remota Claude Code, branch `claude/kommo-human-service-audit-7ljggg`.
+Corte da coleta: **2026-09-28 22:42 -03**. Fonte: API Kommo v4 (credencial do ambiente, somente GET) + gravações API4com transcritas localmente.
 
 ## Concluído
-- [x] Etapa 1 — Validação de acesso, escopo, histórico opcional e referência → `docs/ACESSO_E_BLOQUEIOS.md`, `docs/REFERENCIA_ROTEIRO.md`.
-- [x] Metodologia, regras de cálculo, esquema de eventos → `docs/METODOLOGIA.md`, `src/schema.py`.
-- [x] Rubrica com sinais observáveis definidos antes da pontuação → `docs/RUBRICA.md`, `src/rubric.py`.
-- [x] Coletor API v4 somente GET → `coleta/kommo_api/collect.py`; roteiro de coleta por navegador → `coleta/navegador/README.md`.
-- [x] Normalizador (autoria, deduplicação de chamadas, agrupamento de fragmentos) → `src/normalize.py`.
-- [x] Motor de métricas (esperas, episódios, follow-ups, chamadas, marcos, consolidado) → `src/metrics.py`; 11 testes com fixtures sintéticas → `tests/` (`python3 -m pytest tests`).
-- [x] Gerador de painel/dossiê/CSV/pacote anonimizado → `src/build.py`.
-- [x] Painel portátil pt-BR com estado vazio honesto → `painel/index.html` (abrir localmente; ver `README.md`).
-- [x] Modelos do dossiê e do treinamento → gerados por `src/build.py` a partir de dados reais; estrutura em `docs/TREINAMENTO_MODELO.md`.
+- [x] Etapa 1 — Acesso, escopo, referência (`docs/ACESSO_E_BLOQUEIOS.md`, `docs/REFERENCIA_ROTEIRO.md`).
+- [x] Etapa 2 — Funil mapeado (`dados/publico/pipeline.json`, 11 etapas; Ativação = ganho, Resgate = perdido); coleta testada e executada.
+- [x] Etapa 3 — Triagem de 210 candidatos (`dados/publico/triagem_resumo.json`), seleção de 10 jornadas (`dados/publico/selecao.json`: 7 avançadas + 3 travadas/desqualificadas; 6 criadas em 15 d, 3 em 30 d, 1 lead antigo com atuação recente), alerta de 12 transferências sem atuação humana em 15 d.
+- [x] Etapa 4 — Eventos normalizados por caso (`dados/restrito/leads/*.json`), métricas (`src/metrics.py`), 24 chamadas localizadas, 10 com link, 7 acessíveis, 6 transcritas localmente (`dados/restrito/gravacoes/`), resumos automáticos do CRM incorporados.
+- [x] Etapa 5 — Dossiês (`DOSSIE.md`), diagnóstico e treinamento (`TREINAMENTO.md`, `dados/restrito/analise.json`) com frequências "X de Y".
+- [x] Etapa 6 — Painel com dados reais (`painel/index.html` + `data.js`), pacote anonimizado (`painel_anon/`), CSVs (`exports/`), testes de navegador (filtros, dossiê, CSV, impressão, modo apresentação) e testes de fórmulas (`tests/`, 11 passando).
 
-## Pendente (bloqueado por acesso ao CRM)
-- [ ] Etapa 2 — Mapear funil e testar coleta em 2 casos.
-- [ ] Etapa 3 — Selecionar e coletar 10 atendimentos (+ alerta de transferências sem atuação).
-- [ ] Etapa 4 — Normalizar, calcular, analisar evidências, chamadas e gravações.
-- [ ] Etapa 5 — Dossiês, diagnóstico e treinamento com casos reais.
-- [ ] Etapa 6 — Popular e testar o painel com dados reais (filtros, links, exportação, impressão, modo apresentação já testados em estado vazio e com fixture de teste).
-
-**Bloqueio:** nenhuma via de acesso ao Kommo nesta sessão (sem navegador conectado, sem token, PDF não anexado). Detalhes e opções em `docs/ACESSO_E_BLOQUEIOS.md`.
+## Pendente / refinamentos possíveis
+- [ ] Leitura do **texto** das conversas de WhatsApp (só por navegador autenticado): refinar `requires_reply`, avaliar critérios 2–4, 6–7 nos casos marcados "DI".
+- [ ] Transcrição da ligação de 28 min do caso 80012252 (em processamento no corte) e revisão dos trechos de 79763954 (transcrita após a análise).
+- [ ] Confirmar com o cliente: expediente (para tempo útil), regra do robô após transferência, mapeamento do ramal no API4com.
 
 ## Como retomar sem repetir a coleta
-1. Abrir este repositório/branch em sessão local com Chrome conectado e Kommo autenticado (Opção A), ou definir `KOMMO_TOKEN` (Opção B).
-2. Seguir `coleta/navegador/README.md` (ou rodar `coleta/kommo_api/collect.py`). Salvar cada lead em `dados/restrito/leads/{id}.json` assim que concluído (progresso por caso).
-3. Preencher `dados/publico/meta.json` (corte real), `pipeline.json`, `selecao.json`; anotar `ratings` e `analysis` por lead; curadoria em `dados/restrito/analise.json`.
-4. `python3 src/build.py` → painel, dossiê, CSV. `python3 -m pytest tests` para validar.
-5. Atualizar este STATUS.md após cada caso.
+1. Dados brutos em `dados/restrito/raw_api/` (ignorado pelo git) e casos em `dados/restrito/leads/`. Para atualizar: `python3 coleta/kommo_api/collect.py --subdomain gabrielhabibadv --pipeline 13587595 --days 30 --out dados/restrito/raw_api` (credencial do ambiente ou `KOMMO_TOKEN`).
+2. `python3 src/triagem.py` → `python3 src/montar_casos.py` → `python3 src/transcrever.py <ids>` → `python3 src/analise_casos.py` → `python3 src/build.py`.
+3. `python3 -m pytest tests`. Abrir `painel/index.html`.
+4. Numa sessão local com Chrome: seguir `coleta/navegador/README.md` para complementar os textos e reexecutar `build.py`.
 
-## Cobertura atual
-Casos analisados: 0 · Chamadas localizadas: 0 · Gravações acessíveis: 0 · Transcrições: 0. Nenhum dado do CRM foi coletado.
+## Cobertura
+Casos analisados: 10 · Conversas com texto: 0 (API não expõe) · Chamadas localizadas: 24 · Atendidas: 8 · Gravações com link: 10 · Acessíveis: 7 · Transcritas: 6 · Ligações analisadas: 10 (5 com conteúdo: transcrição e/ou resumo automático).

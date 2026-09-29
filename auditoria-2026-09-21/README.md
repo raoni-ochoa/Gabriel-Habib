@@ -7,6 +7,13 @@ Pasta datada: `auditoria-2026-09-21/`. Não sobrescreve auditorias anteriores.
 2. `painel_anon/index.html` é o pacote sem dados pessoais (nomes, telefones, links e textos removidos do arquivo, não apenas ocultos).
 3. Botões no topo: **Exportar CSV**, **Imprimir** (folha de estilo própria), **Modo apresentação** (oculta dados pessoais na tela).
 
+## Entregas desta rodada (corte 28/09/2026 22:42)
+- `painel/index.html` — painel navegável com os 10 casos reais (abrir localmente).
+- `painel_anon/` — versão sem dados pessoais para compartilhar.
+- `DOSSIE.md` — dossiê consolidado dos 10 casos; `TREINAMENTO.md` — roteiro de 60 min e plano de ação.
+- `exports/*.csv` — indicadores por lead e consolidado (não versionados).
+- `dados/publico/` — funil, triagem (sem nomes), seleção, corte; `dados/restrito/` — eventos, evidências, gravações e transcrições (não versionados).
+
 ## Estrutura
 - `STATUS.md` — concluído, pendências, como retomar.
 - `docs/` — acesso e bloqueios, referência classificada, metodologia, rubrica, modelo de treinamento.

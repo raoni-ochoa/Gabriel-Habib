@@ -1,0 +1,702 @@
+[
+ [
+  3659310,
+  "utm_content",
+  "tracking_data"
+ ],
+ [
+  3659312,
+  "utm_medium",
+  "tracking_data"
+ ],
+ [
+  3659314,
+  "utm_campaign",
+  "tracking_data"
+ ],
+ [
+  3659316,
+  "utm_source",
+  "tracking_data"
+ ],
+ [
+  3659318,
+  "utm_term",
+  "tracking_data"
+ ],
+ [
+  3659320,
+  "utm_referrer",
+  "tracking_data"
+ ],
+ [
+  3659322,
+  "referrer",
+  "tracking_data"
+ ],
+ [
+  3659324,
+  "gclientid",
+  "tracking_data"
+ ],
+ [
+  3659326,
+  "gclid",
+  "tracking_data"
+ ],
+ [
+  3659328,
+  "fbclid",
+  "tracking_data"
+ ],
+ [
+  3659350,
+  "ttad_id",
+  "tracking_data"
+ ],
+ [
+  3659352,
+  "ttad_name",
+  "tracking_data"
+ ],
+ [
+  3693340,
+  "Valor de honorários",
+  "monetary"
+ ],
+ [
+  3693396,
+  "Origem",
+  "select"
+ ],
+ [
+  3693454,
+  "Sub Origem",
+  "select"
+ ],
+ [
+  3693474,
+  "*Triagem Geral*",
+  "text"
+ ],
+ [
+  3693478,
+  "Requerente",
+  "select"
+ ],
+ [
+  3693480,
+  "Status de Qualificação",
+  "select"
+ ],
+ [
+  3693482,
+  "Motivo Desqualificação",
+  "textarea"
+ ],
+ [
+  3693484,
+  "Resumo do Caso",
+  "textarea"
+ ],
+ [
+  3693486,
+  "Observações da Triagem",
+  "textarea"
+ ],
+ [
+  3693542,
+  "*Trabalhista*",
+  "text"
+ ],
+ [
+  3693544,
+  "[T] Função / Cargo",
+  "text"
+ ],
+ [
+  3693548,
+  "[T] Início do período trabalhado",
+  "date"
+ ],
+ [
+  3693604,
+  "[T] Fim do período trabalhado",
+  "date"
+ ],
+ [
+  3693608,
+  "[T] Forma de pagamento",
+  "select"
+ ],
+ [
+  3693610,
+  "[T] Salário médio (R$)",
+  "monetary"
+ ],
+ [
+  3693612,
+  "[T] Recebeu rescisão",
+  "select"
+ ],
+ [
+  3693668,
+  "##Período trabalhado",
+  "text"
+ ],
+ [
+  3693724,
+  "[T] Situação",
+  "select"
+ ],
+ [
+  3693768,
+  "[T] Irregularidades",
+  "textarea"
+ ],
+ [
+  3693772,
+  "*Reconhecimento de Vínculo*",
+  "text"
+ ],
+ [
+  3693774,
+  "[TR] Horário de trabalho",
+  "text"
+ ],
+ [
+  3693776,
+  "*Horas Extras*",
+  "text"
+ ],
+ [
+  3693782,
+  "*Auxílio acidente*",
+  "text"
+ ],
+ [
+  3693784,
+  "[AA] Data do acidente",
+  "date"
+ ],
+ [
+  3693804,
+  "[AA] Tipo de acidente",
+  "select"
+ ],
+ [
+  3693806,
+  "[AA] Sequela declarada",
+  "textarea"
+ ],
+ [
+  3693808,
+  "[AA] Comunicação de Acidente de Trabalho (CTA)",
+  "select"
+ ],
+ [
+  3693812,
+  "[AA] Qualidade de segurado",
+  "select"
+ ],
+ [
+  3693816,
+  "*BPC/LOAS*",
+  "text"
+ ],
+ [
+  3693818,
+  "[BL] Deficiência",
+  "textarea"
+ ],
+ [
+  3693822,
+  "[BL] Renda per capita (R$)",
+  "monetary"
+ ],
+ [
+  3693824,
+  "[BL] Nº pessoas na familiar",
+  "numeric"
+ ],
+ [
+  3693826,
+  "[BL] Renda total família (R$)",
+  "monetary"
+ ],
+ [
+  3693828,
+  "[BL] Status CadÚnico",
+  "select"
+ ],
+ [
+  3693830,
+  "*Negocição*",
+  "text"
+ ],
+ [
+  3693832,
+  "Tipo de contato para negociação",
+  "select"
+ ],
+ [
+  3693834,
+  "Valor estimado (R$)",
+  "monetary"
+ ],
+ [
+  3693836,
+  "Percentual de honorários (%)",
+  "numeric"
+ ],
+ [
+  3693838,
+  "Objeções registradas",
+  "textarea"
+ ],
+ [
+  3693840,
+  "*Contrato*",
+  "text"
+ ],
+ [
+  3693842,
+  "Link do contrato",
+  "url"
+ ],
+ [
+  3693844,
+  "Data de envio",
+  "date"
+ ],
+ [
+  3693846,
+  "Contrato enviado",
+  "checkbox"
+ ],
+ [
+  3693848,
+  "Contrato assinado",
+  "checkbox"
+ ],
+ [
+  3693850,
+  "Data de assinatura",
+  "date"
+ ],
+ [
+  3693852,
+  "Mensagem de confirmação enviada",
+  "checkbox"
+ ],
+ [
+  3693854,
+  "Observações do Closer",
+  "textarea"
+ ],
+ [
+  3693858,
+  "*Acompanhamento*",
+  "text"
+ ],
+ [
+  3693860,
+  "Link drive",
+  "url"
+ ],
+ [
+  3693862,
+  "Objeções de documentação",
+  "textarea"
+ ],
+ [
+  3693864,
+  "Documentação completa",
+  "checkbox"
+ ],
+ [
+  3693866,
+  "Data/hr reunião",
+  "date"
+ ],
+ [
+  3693868,
+  "*Documentos Básicos*",
+  "text"
+ ],
+ [
+  3693870,
+  "Frente",
+  "file"
+ ],
+ [
+  3693872,
+  "##RG ou CNH",
+  "text"
+ ],
+ [
+  3693874,
+  "Verso",
+  "file"
+ ],
+ [
+  3693876,
+  "Comprovante de residência",
+  "file"
+ ],
+ [
+  3693880,
+  "*Trabalhista*",
+  "text"
+ ],
+ [
+  3693882,
+  "CTPS (Carteira de Trabalho)",
+  "file"
+ ],
+ [
+  3693884,
+  "Contracheques do período",
+  "file"
+ ],
+ [
+  3693886,
+  "Extrato FGTS",
+  "file"
+ ],
+ [
+  3693888,
+  "*Reconhecimento de Vínculo*",
+  "text"
+ ],
+ [
+  3693890,
+  "Recibos de pagamento (qualquer tipo)",
+  "file"
+ ],
+ [
+  3693892,
+  "Fotos do local de trabalho (se possível)",
+  "file"
+ ],
+ [
+  3693894,
+  "Qualquer documento da empresa (nota fiscal com CPF, escala, etc.)",
+  "file"
+ ],
+ [
+  3693896,
+  "*Horas Extras*",
+  "text"
+ ],
+ [
+  3693898,
+  "Registros de ponto (se disponível)",
+  "file"
+ ],
+ [
+  3693904,
+  "*BPC/LOAS*",
+  "text"
+ ],
+ [
+  3693906,
+  "Laudo médico com CRM e assinatura",
+  "file"
+ ],
+ [
+  3693908,
+  "Receitas médicas recentes",
+  "file"
+ ],
+ [
+  3693910,
+  "Comprovante CadÚnico atualizado",
+  "file"
+ ],
+ [
+  3693912,
+  "Cartão do Bolsa Família (se tiver)",
+  "file"
+ ],
+ [
+  3693914,
+  "Declaração de renda dos moradores",
+  "file"
+ ],
+ [
+  3693916,
+  "Motivo da perda",
+  "select"
+ ],
+ [
+  3693918,
+  "*[TR] Form Reconhecimento*",
+  "text"
+ ],
+ [
+  3693922,
+  "[TR] Qual situação mais se aproxima da sua?",
+  "text"
+ ],
+ [
+  3693924,
+  "*Trakeamento*",
+  "text"
+ ],
+ [
+  3693926,
+  "ID Campanha",
+  "numeric"
+ ],
+ [
+  3693928,
+  "ID Conjunto",
+  "numeric"
+ ],
+ [
+  3693930,
+  "ID Anúncio",
+  "numeric"
+ ],
+ [
+  3693932,
+  "Link Criativo",
+  "url"
+ ],
+ [
+  3693934,
+  "Msg whatsapp",
+  "textarea"
+ ],
+ [
+  3693936,
+  "Nome indicador",
+  "text"
+ ],
+ [
+  3693938,
+  "*Localização*",
+  "text"
+ ],
+ [
+  3693940,
+  "Cidade",
+  "text"
+ ],
+ [
+  3693942,
+  "Estado",
+  "text"
+ ],
+ [
+  3693944,
+  "IP",
+  "text"
+ ],
+ [
+  3829432,
+  "Serviço",
+  "select"
+ ],
+ [
+  3830500,
+  "[TR] Qual é a sua situação hoje?",
+  "text"
+ ],
+ [
+  3830502,
+  "[TR] Quais direitos você deixou de receber?",
+  "text"
+ ],
+ [
+  3830504,
+  "[TR] Você tem alguma prova da sua situação de trabalho?",
+  "text"
+ ],
+ [
+  3830506,
+  "[TR] Quem está preenchendo este formulário?",
+  "text"
+ ],
+ [
+  3830508,
+  "*[TH] Form Horas Extras*",
+  "text"
+ ],
+ [
+  3830512,
+  "[TH] Qual é a sua função ou área de trabalho?",
+  "text"
+ ],
+ [
+  3830514,
+  "[TH]  Qual situação mais se aproxima da sua?",
+  "text"
+ ],
+ [
+  3830516,
+  "[TH] Como são registradas as suas horas de trabalho?",
+  "text"
+ ],
+ [
+  3830518,
+  "[TH] Qual é a sua situação com a empresa hoje?",
+  "text"
+ ],
+ [
+  3830520,
+  "[TH] Você tem algum comprovante da sua jornada ou das irregularidades?",
+  "text"
+ ],
+ [
+  3830544,
+  "*[AA] Form Auxílio Acidente*",
+  "text"
+ ],
+ [
+  3830548,
+  "[AA] Onde você sofreu o acidente?",
+  "text"
+ ],
+ [
+  3830550,
+  "[AA] O que aconteceu com você?",
+  "text"
+ ],
+ [
+  3830556,
+  "[AA] Após o acidente ou doença, ficou com alguma sequela permanente?",
+  "text"
+ ],
+ [
+  3830562,
+  "[AA] O acidente foi registrado pela empresa? (Comunicação de Acidente de Trabalho — CAT)",
+  "text"
+ ],
+ [
+  3830564,
+  "[AA] Qual é a situação do seu benefício no INSS?",
+  "text"
+ ],
+ [
+  3830566,
+  "[AA]  Quem está preenchendo este formulário?",
+  "text"
+ ],
+ [
+  3830572,
+  "Score",
+  "numeric"
+ ],
+ [
+  3830574,
+  "UTM Source",
+  "text"
+ ],
+ [
+  3830576,
+  "UTM Medium",
+  "text"
+ ],
+ [
+  3830578,
+  "UTM Campaign",
+  "text"
+ ],
+ [
+  3830580,
+  "UTM Content",
+  "text"
+ ],
+ [
+  3830582,
+  "UTM Term",
+  "text"
+ ],
+ [
+  3830600,
+  "[T] Vínculo",
+  "select"
+ ],
+ [
+  3831130,
+  "[T] Tem testemunhas",
+  "select"
+ ],
+ [
+  3831132,
+  "[T] Quer entrar com processo",
+  "select"
+ ],
+ [
+  3831134,
+  "[TH] Fez horas extras",
+  "select"
+ ],
+ [
+  3831136,
+  "[TH] HE foram pagas",
+  "select"
+ ],
+ [
+  3831138,
+  "[AA] Tinha carteira na data",
+  "select"
+ ],
+ [
+  3831140,
+  "[AA] Recebe aposentadoria",
+  "select"
+ ],
+ [
+  3831142,
+  "[BL] Tem laudo médico",
+  "select"
+ ],
+ [
+  3832194,
+  "[T] Tem Provas",
+  "select"
+ ],
+ [
+  3832662,
+  "Fonte",
+  "select"
+ ],
+ [
+  3837810,
+  "[TG] Qual é ou foi o seu vínculo de trabalho?",
+  "text"
+ ],
+ [
+  3837812,
+  "[TG] Há quanto tempo você trabalha ou trabalhou nessa empresa?",
+  "text"
+ ],
+ [
+  3837814,
+  "[TG] Qual é a sua situação atual?",
+  "text"
+ ],
+ [
+  3837816,
+  "[TG] Qual direito você acredita que foi desrespeitado?",
+  "text"
+ ],
+ [
+  3837928,
+  "*Trabalhista Genérica*",
+  "text"
+ ],
+ [
+  3839038,
+  "Próximo agendamento",
+  "date_time"
+ ],
+ [
+  3839870,
+  "Temperatura",
+  "select"
+ ]
+]

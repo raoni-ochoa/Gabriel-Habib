@@ -1,0 +1,12 @@
+{
+  "cutoff": "2026-09-28T22:42:23-03:00",
+  "window_days": 15,
+  "window_days_max": 30,
+  "cliente": "Gabriel Habib",
+  "funil": "Funil manual",
+  "pipeline_id": 13587595,
+  "account_url": "https://gabrielhabibadv.kommo.com",
+  "account_name": "Gabriel Habib Adv.",
+  "fonte": "kommo_api (credencial do ambiente, somente GET)",
+  "expediente_confirmado": "não confirmado"
+}

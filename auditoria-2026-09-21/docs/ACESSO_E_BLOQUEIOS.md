@@ -34,3 +34,12 @@ Limitação conhecida da API v4 (documentação oficial, consultada em 21/09/202
 ## 3. O que foi construído sem acesso ao CRM
 
 Tudo que não depende de dados reais: metodologia, rubrica com sinais observáveis, esquema de eventos, coletor (API) e roteiro de coleta por navegador, normalizador, motor de métricas com testes, painel portátil com estado vazio honesto, modelos do dossiê e do treinamento. Veja `STATUS.md`.
+
+
+## 4. Atualização de 28/09/2026 — acesso obtido pela API (credencial do ambiente)
+
+- O usuário criou uma integração privada no Kommo ("Auditoria Evolve") e gerou um token de longa duração (validade curta), armazenado como **credencial de API do ambiente em nuvem** (Anthropic agent proxy anexa o `Authorization` às requisições para `gabrielhabibadv.kommo.com`). O token nunca foi visto pelo agente nem gravado em arquivo. Testado com `GET /api/v4/account` → 200 (conta "Gabriel Habib Adv.", subdomínio `gabrielhabibadv`).
+- Coleta executada em **28/09/2026 22:42 (America/Sao_Paulo)** — corte real da auditoria. Só métodos GET.
+- **Limitação confirmada:** eventos `incoming_chat_message`/`outgoing_chat_message` não trazem texto; trazem horário, direção, `talk_id` e `created_by` (0 = robô/sistema; id de usuário = humano). Conteúdo das conversas de WhatsApp continua indisponível; a análise de conteúdo apoiou-se em ligações (gravações API4com baixadas e transcritas **localmente** com faster-whisper), em resumos automáticos já existentes no CRM e em notas humanas.
+- Eventos de chat não são retornados pelo filtro por lead (`filter[entity]=lead&filter[entity_id]`); foram obtidos pela listagem da conta por tipo (`filter[type]`, 45 dias) e agrupados por lead.
+- Navegador (Chrome/desktop) continuou indisponível nesta sessão; a leitura de textos permanece possível numa sessão local (ver `coleta/navegador/README.md`) para refinar `requires_reply` e os critérios de conteúdo.

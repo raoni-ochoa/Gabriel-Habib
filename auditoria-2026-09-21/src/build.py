@@ -32,14 +32,15 @@ def anonymize(obj, names: list[str]):
     def scrub(s: str) -> str:
         for i, n in enumerate(names):
             if n and len(n) > 2:
-                s = re.sub(re.escape(n), f"[pessoa {i+1}]", s, flags=re.I)
+                s = re.sub(r"\b" + re.escape(n) + r"\b", "[pessoa]", s, flags=re.I)
+        s = re.sub(r"\b(Dra?\.?|doutora|doutor|seu|senhor|senhora)\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záéíóúâêôãõç]+", "[pessoa]", s)
         s = pat.sub("[telefone]", s)
         s = re.sub(r"https?://\S+", "[link removido]", s)
         return s
     if isinstance(obj, dict):
         out = {}
         for k, v in obj.items():
-            if k in ("url", "link", "ref", "phone", "nome", "actor_name", "atendentes", "content", "conteudo", "trecho", "transcript"):
+            if k in ("url", "link", "ref", "phone", "nome", "actor_name", "atendentes", "content", "conteudo", "trecho", "transcript", "transcript_segments", "call_result", "phone_masked", "nome_restrito"):
                 out[k] = ("[removido]" if isinstance(v, str) else ["[removido]"] * len(v) if isinstance(v, list) else v) if k != "atendentes" else [f"Atendente {i+1}" for i in range(len(v))]
             else:
                 out[k] = anonymize(v, names)
@@ -67,7 +68,8 @@ def main():
         m = lead_metrics(lead, evs, cutoff)
         r = score(d.get("ratings", {}))
         per_lead.append(m)
-        names += [lead.get("nome", "")] + [e.actor_name for e in evs if e.actor_name] + lead.get("atendentes", [])
+        names += [lead.get("nome", "")] + [e.actor_name for e in evs if e.actor_name] + lead.get("atendentes", []) + (d.get("analysis", {}).get("nomes_citados") or [])
+        names += [tok for n in ([lead.get("nome", "")] + lead.get("atendentes", [])) for tok in str(n).split() if len(tok) >= 4]
         casos.append({**lead, "transfer": lead["transfer"], "indicadores": m["indicadores"], "episodios": m["episodios"], "followups": m["followups"],
                       "chamadas": m["chamadas"], "marcos": m["marcos"], "status_espera": m["status_espera"], "ultimo_evento": m["ultimo_evento"],
                       "rubrica": r, "timeline": [e.to_dict() for e in evs], "calls_analysis": d.get("calls_analysis", []), **d.get("analysis", {})})
@@ -90,7 +92,7 @@ def main():
         fh.write("window.AUDIT_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
     # pacote anonimizado (dados pessoais removidos do conteúdo, não só ocultos)
     os.makedirs(P("painel_anon"), exist_ok=True)
-    anon = anonymize(data, sorted(set(n for n in names if n), key=len, reverse=True))
+    anon = anonymize(data, sorted(set(n for n in names if n and n.lower() not in ("gomes", "andrade")), key=len, reverse=True))
     anon["anonimizado"] = True
     for i, c in enumerate(anon["casos"]):
         c["nome"] = f"Caso {i+1}"; c["url"] = ""
@@ -116,7 +118,28 @@ def main():
         json.dump([{k: c[k] for k in ("id", "servico", "atendentes", "etapa_atual", "etapa_max", "status", "status_espera")} | {"nota": c["rubrica"]["nota_normalizada"]} for c in casos],
                   open(P("dados/publico/casos_resumo.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=2)
         write_dossie(data)
+        write_treinamento(data)
     print(f"status={data['status']} casos={len(casos)} → painel/data.js, painel_anon/data.js, exports/, DOSSIE.md")
+
+
+def write_treinamento(data):
+    t = data.get("treinamento") or {}
+    L = ["# Roteiro de treinamento (60 min) e plano de ação — Gabriel Habib · atendimento humano no Kommo\n",
+         f"Base: {len(data['casos'])} casos auditados · corte {data['meta'].get('cutoff')} · frequências sempre com denominador (casos avaliáveis).\n",
+         "\n## Padrões recorrentes\n"]
+    for p in data.get("padroes", []):
+        L.append(f"- **{p['comportamento']}** — {p['frequencia']}. Impacto: {p.get('impacto','')} Mudança: {p.get('mudanca','')} Acompanhamento: {p.get('acompanhamento','')} (causa: {p.get('causa','')})\n  - Evidências: " + "; ".join(p.get("evidencias", [])) + "\n")
+    L.append("\n## Boas práticas observadas\n" + "".join(f"- {x}\n" for x in data.get("boas_praticas", [])))
+    L.append("\n## Casos para discussão\n" + "".join(f"- {c['caso']}: {c['motivo']}\n" for c in data.get("casos_discussao", [])))
+    L.append("\n## Pauta\n")
+    for b in t.get("blocos", []):
+        L.append(f"\n### {b['titulo']} · {b['tempo']}\n- Objetivo: {b['objetivo']}\n- Casos/trechos no painel: {'; '.join(b.get('casos', []))}\n- Perguntas: " + " | ".join(b.get("perguntas", [])) + f"\n- Exercício: {b.get('exercicio','')}\n- Comportamento esperado: {b.get('esperado','')}\n")
+        if b.get("exemplos"): L.append("- Exemplos (sugestões reescritas):\n" + "".join(f"  - {x}\n" for x in b["exemplos"]))
+    L.append("\n## Prioridades (até 5)\n" + "".join(f"{i+1}. **{p['titulo']}** — {p['descricao']} ({p.get('frequencia','')})\n" for i, p in enumerate(data.get("prioridades", [])[:5])))
+    L.append("\n## Ações para 7 dias\n" + "".join(f"- {x}\n" for x in data.get("plano_7d", [])))
+    L.append("\n## Indicadores para revisão em 30 dias\n| Indicador | Linha de base | Responsável (função) | Critério de evolução (proposta) |\n|---|---|---|---|\n" + "".join(f"| {i['indicador']} | {i['linha_base']} | {i['responsavel']} | {i['criterio']} |\n" for i in data.get("indicadores_30d", [])))
+    L.append("\n## Metas propostas (para validação, não regras retroativas)\n" + "".join(f"- {x}\n" for x in data.get("propostas_meta", [])))
+    open(os.path.join(ROOT, "TREINAMENTO.md"), "w", encoding="utf-8").write("".join(L))
 
 
 def write_dossie(data):

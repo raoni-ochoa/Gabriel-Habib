@@ -1,0 +1,126 @@
+[
+  {
+    "id": "77456896",
+    "servico": "[PREVIDENCIÁRIO] Auxílio acidente",
+    "atendentes": [
+      "Cybele Gomes"
+    ],
+    "etapa_atual": "Negociação",
+    "etapa_max": "Negociação",
+    "status": "open",
+    "status_espera": "aguardando_lead",
+    "nota": 72.2
+  },
+  {
+    "id": "79358770",
+    "servico": "[TRABALHISTA] Reconhecimento de vínculo",
+    "atendentes": [
+      "Cybele Gomes",
+      "Juliana Andrade"
+    ],
+    "etapa_atual": "Análise de viabilidade",
+    "etapa_max": "Negociação",
+    "status": "open",
+    "status_espera": "nao_determinavel",
+    "nota": 45.8
+  },
+  {
+    "id": "79490552",
+    "servico": "não informado no CRM",
+    "atendentes": [
+      "Cybele Gomes",
+      "Juliana Andrade"
+    ],
+    "etapa_atual": "Ativação",
+    "etapa_max": "Validação de documentação",
+    "status": "won",
+    "status_espera": "aguardando_equipe",
+    "nota": 68.8
+  },
+  {
+    "id": "79533290",
+    "servico": "[TRABALHISTA] Reconhecimento de vínculo",
+    "atendentes": [
+      "Cybele Gomes",
+      "Juliana Andrade"
+    ],
+    "etapa_atual": "Negociação",
+    "etapa_max": "Negociação",
+    "status": "open",
+    "status_espera": "aguardando_lead",
+    "nota": 60.0
+  },
+  {
+    "id": "79763954",
+    "servico": "não informado no CRM",
+    "atendentes": [
+      "Cybele Gomes",
+      "Juliana Andrade"
+    ],
+    "etapa_atual": "Ativação",
+    "etapa_max": "Assinatura",
+    "status": "won",
+    "status_espera": "encerrado",
+    "nota": 75.0
+  },
+  {
+    "id": "79877820",
+    "servico": "[TRABALHISTA] Reconhecimento de vínculo",
+    "atendentes": [
+      "Cybele Gomes"
+    ],
+    "etapa_atual": "atendimento humano",
+    "etapa_max": "atendimento humano",
+    "status": "open",
+    "status_espera": "aguardando_lead",
+    "nota": 75.0
+  },
+  {
+    "id": "80012252",
+    "servico": "[TRABALHISTA] Reconhecimento de vínculo",
+    "atendentes": [
+      "Cybele Gomes"
+    ],
+    "etapa_atual": "Desqualificado",
+    "etapa_max": "Desqualificado",
+    "status": "open",
+    "status_espera": "aguardando_equipe",
+    "nota": 45.8
+  },
+  {
+    "id": "80038784",
+    "servico": "[TRABALHISTA] Reconhecimento de vínculo",
+    "atendentes": [
+      "Cybele Gomes"
+    ],
+    "etapa_atual": "atendimento humano",
+    "etapa_max": "atendimento humano",
+    "status": "open",
+    "status_espera": "nao_determinavel",
+    "nota": 41.7
+  },
+  {
+    "id": "80064014",
+    "servico": "não informado no CRM",
+    "atendentes": [
+      "Juliana Andrade"
+    ],
+    "etapa_atual": "Negociação",
+    "etapa_max": "Negociação",
+    "status": "open",
+    "status_espera": "aguardando_equipe",
+    "nota": 37.5
+  },
+  {
+    "id": "80105650",
+    "servico": "[TRABALHISTA] Reconhecimento de vínculo",
+    "atendentes": [
+      "Cybele Gomes"
+    ],
+    "etapa_atual": "Desqualificado",
+    "etapa_max": "Desqualificado",
+    "status": "open",
+    "status_espera": "aguardando_equipe",
+    "nota": 50.0
+  }
+]

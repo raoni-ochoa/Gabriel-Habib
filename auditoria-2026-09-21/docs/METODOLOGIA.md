@@ -57,3 +57,15 @@ Responsável atual ≠ responsável no momento ≠ executor. O executor vem do a
 1. Repetir a coleta com novo corte em nova pasta datada (`auditoria-AAAA-MM-DD`), sem sobrescrever.
 2. `python3 src/build.py` regenera `dados/publico/*.json`, `painel/data.json`, `exports/*.csv`.
 3. `python3 -m pytest tests` valida fórmulas.
+
+
+## Regras efetivamente aplicadas na coleta de 28/09/2026 (complemento)
+
+- **Fonte:** API Kommo v4 via credencial do ambiente; 210 leads do funil Manual com `created_at` ou `updated_at` nos 30 dias anteriores ao corte; eventos, notas, tarefas e conversas por lead; eventos de chat da conta (45 d) agrupados por lead; usuários e etapas.
+- **Autoria de mensagens de saída:** `created_by` = id de usuário humano → humano; `created_by` = 0 → robô (Agente Evolve via canal WhatsApp `com.amocrm.amocrmwa`). Mensagens recebidas → lead. Usuário `Marketing Evolve` (id 10348307) é conta de integração/compartilhada: ligações registradas nele ficam como "autoria indeterminada (conta de integração)"; pelo contexto, correspondem a atendimentos da Juliana (ramal não mapeado).
+- **Transferência para humano:** 1º evento entre tag `humano` adicionada, entrada na etapa "atendimento humano" (confirmado) ou 1ª tarefa atribuída a pessoa (inferido). Tags `humano` aplicadas em lote em 17/09/2026 09:29–09:31 (36 leads) foram desconsideradas. Leads criados sem robô e atendidos por humano desde o início: transferência = criação (inferido).
+- **`requires_reply` sem texto:** toda mensagem recebida do lead foi tratada como exigindo retorno (regra conservadora, `meta.assumido=true`). Isso pode superestimar esperas quando a última mensagem é um agradecimento; os dossiês sinalizam essa limitação.
+- **Lotes de mensagens humanas:** minutos com mensagens humanas para ≥4 leads (04/09 15:49 e 16:32; 18/09 15:21 e 16:49) marcados como "possível envio em lote".
+- **Chamadas:** notas `call_out`/`call_in` da integração API4com (`source=api4com-integration`), com `uniq`, `duration`, `call_status` (6 = não atendida: caixa postal/cancelada; 4 = atendida), `link` (redireciona para MP3). Links testados por download; áudio transcrito localmente (faster-whisper small, CPU) e nunca enviado a serviço externo. Resumos automáticos "Resumo Gerencial"/"Avaliação SPIN" existentes no CRM foram usados como resumo, não como transcrição literal.
+- **Elegibilidade:** ≥1 ação humana (mensagem humana, ligação, nota ou tarefa criada por humano) na janela. Resultado: 210 localizados, 49 criados em 15 d, 93 em 30 d, 51 elegíveis em 15 d, 119 em 30 d; 12 transferências em 15 d sem atuação humana (alerta separado).
+- **Tempo útil:** não calculado (expediente não confirmado). Todos os tempos em tempo corrido.

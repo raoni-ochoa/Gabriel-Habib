@@ -1,0 +1,95 @@
+{
+  "pipeline_id": 13587595,
+  "name": "Funil manual",
+  "is_main": false,
+  "statuses": [
+    {
+      "order": 10,
+      "status_id": 104845347,
+      "name": "Etapa de leads de entrada",
+      "is_won": false,
+      "is_lost": false,
+      "type": 1
+    },
+    {
+      "order": 20,
+      "status_id": 104845351,
+      "name": "Novo Lead",
+      "is_won": false,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 30,
+      "status_id": 104845355,
+      "name": "Em atendimento",
+      "is_won": false,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 40,
+      "status_id": 104845359,
+      "name": "Análise de viabilidade",
+      "is_won": false,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 50,
+      "status_id": 108794987,
+      "name": "atendimento humano",
+      "is_won": false,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 60,
+      "status_id": 104845499,
+      "name": "Negociação",
+      "is_won": false,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 70,
+      "status_id": 104845503,
+      "name": "Assinatura",
+      "is_won": false,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 80,
+      "status_id": 104845507,
+      "name": "Validação de documentação",
+      "is_won": false,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 90,
+      "status_id": 111874647,
+      "name": "Desqualificado",
+      "is_won": false,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 10000,
+      "status_id": 142,
+      "name": "Ativação",
+      "is_won": true,
+      "is_lost": false,
+      "type": 0
+    },
+    {
+      "order": 11000,
+      "status_id": 143,
+      "name": "Resgate",
+      "is_won": false,
+      "is_lost": true,
+      "type": 0
+    }
+  ]
+}
