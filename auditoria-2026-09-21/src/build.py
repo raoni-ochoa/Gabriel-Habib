@@ -81,7 +81,7 @@ def main():
              "gravacoes_acessiveis": sum(c["chamadas"]["gravacao_acessivel"] for c in casos),
              "transcritas": sum(c["chamadas"]["transcritas"] for c in casos),
              "ligacoes_analisadas": sum(len(c.get("calls_analysis", [])) for c in casos),
-             "conversas_com_conteudo": sum(1 for c in casos if any(e["action"] == "message" and e["content"] and not e["content"].startswith("[texto") for e in c["timeline"]))}
+             "conversas_com_conteudo": sum(1 for c in casos if any(e["action"] == "message" and e["content"] and not e["content"].startswith("[") for e in c["timeline"]))}
     data = {"status": "ok" if casos else "sem_coleta", "generated_at": now.isoformat(), "meta": {"cliente": "Gabriel Habib", "funil": "Manual", "pipeline_id": 13587595,
             "account_url": "https://gabrielhabibadv.kommo.com", **meta}, "pipeline": pipeline, "selecao": selecao,
             "alertas_sem_atuacao": selecao.get("alertas_sem_atuacao", []), "cobertura": cover, "casos": casos, "consolidado": cons,

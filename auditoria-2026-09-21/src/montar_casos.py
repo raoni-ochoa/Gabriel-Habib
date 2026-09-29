@@ -94,6 +94,20 @@ def montar(lid, motivo, legacy):
         evs.append(Event(id=f"t{t['id']}", channel="task", direction="internal", actor_type=at, actor_id=str(t.get("created_by")), actor_name=an, action="task_created", content=(t.get("text") or "").strip() or "(sem texto)", meta={"due": due, "completed": bool(t.get("is_completed")), "responsible": users.get(str(t.get("responsible_user_id"))), "result": (t.get("result") or {}).get("text") if isinstance(t.get("result"), dict) else None}, **base))
         if t.get("is_completed") and t.get("updated_at"):
             evs.append(Event(id=f"tc{t['id']}", channel="task", direction="internal", actor_type="human" if t.get("responsible_user_id") and str(t["responsible_user_id"]) in HUMAN_IDS else "undetermined", actor_name=users.get(str(t.get("responsible_user_id"))), action="task_completed", content=(t.get("text") or "").strip() or "(sem texto)", meta={"result": (t.get("result") or {}).get("text") if isinstance(t.get("result"), dict) else None}, lead_id=str(lid), ts=iso(t["updated_at"]), ts_precision="s", source="kommo_api", ref=f"{ref} · {iso(t['updated_at'])} · tarefa {t['id']} (concluída; horário = última atualização)"))
+    # marcos comerciais derivados de evidências do CRM (etapa, tarefa, ligação longa); assinatura nunca inferida
+    STAGE_ASSIN, STAGE_ATIV, STAGE_VALID = 104845503, 142, 104845507
+    extra = []
+    for e in list(evs):
+        if e.action == "stage_change" and e.meta.get("to") == STAGE_ASSIN:
+            extra.append(Event(id=f"m-{e.id}", channel="system", direction="internal", actor_type=e.actor_type, actor_id=e.actor_id, actor_name=e.actor_name, action="document_sent", content="contrato/procuração enviados (inferido pela etapa 'Assinatura'; envio não comprovado por texto)", meta={"doc_type": "contrato", "confirmed": False, "inferido": True}, lead_id=e.lead_id, ts=e.ts, ts_precision="s", source="kommo_api", ref=e.ref))
+        if e.action == "stage_change" and e.meta.get("to") == STAGE_ATIV:
+            extra.append(Event(id=f"m-{e.id}", channel="system", direction="internal", actor_type=e.actor_type, actor_id=e.actor_id, actor_name=e.actor_name, action="legal_handoff", content="Ativação no CRM (ganho); assinatura documental NÃO comprovada nesta auditoria", meta={"confirmed": False}, lead_id=e.lead_id, ts=e.ts, ts_precision="s", source="kommo_api", ref=e.ref))
+        if e.action == "task_created" and "reuni" in (e.content or "").lower():
+            kind = "meeting_done" if "realizada" in e.content.lower() else "meeting_scheduled"
+            extra.append(Event(id=f"m-{e.id}", channel="system", direction="internal", actor_type=e.actor_type, actor_id=e.actor_id, actor_name=e.actor_name, action=kind, content=f"{'reunião realizada' if kind == 'meeting_done' else 'reunião/ligação agendada'} (texto da tarefa: '{e.content[:60]}')", meta={"confirmed": kind == "meeting_done", "doc_type": "tarefa"}, lead_id=e.lead_id, ts=e.ts, ts_precision="s", source="kommo_api", ref=e.ref))
+        if e.channel == "call" and e.action == "call_answered" and (e.meta.get("duration") or 0) >= 600:
+            extra.append(Event(id=f"m-{e.id}", channel="system", direction="internal", actor_type=e.actor_type, actor_id=e.actor_id, actor_name=e.actor_name, action="meeting_done", content=f"conversa comercial efetiva por ligação ({e.meta.get('duration')} s)", meta={"confirmed": True, "doc_type": "ligação"}, lead_id=e.lead_id, ts=e.ts, ts_precision="s", source="kommo_api", ref=e.ref))
+    evs += extra
     evs.sort(key=lambda e: e.ts)
     # transferência (com correção de lote)
     r = tri[lid]; tr_ts, conf, rule = r["transfer_ts"], r["transfer_confidence"], r["transfer_rule"]
