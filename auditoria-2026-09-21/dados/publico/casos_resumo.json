@@ -9,7 +9,7 @@
     "etapa_max": "Negociação",
     "status": "open",
     "status_espera": "aguardando_lead",
-    "nota": 72.2
+    "nota": 75.0
   },
   {
     "id": "79358770",
@@ -85,7 +85,7 @@
     "etapa_max": "Desqualificado",
     "status": "open",
     "status_espera": "aguardando_equipe",
-    "nota": 47.2
+    "nota": 55.0
   },
   {
     "id": "80038784",

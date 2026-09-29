@@ -1,6 +1,6 @@
 window.AUDIT_DATA = {
  "status": "ok",
- "generated_at": "[telefone]T23:10:[telefone]:00",
+ "generated_at": "[telefone]T23:19:[telefone]:00",
  "meta": {
   "cliente": "Gabriel Habib",
   "funil": "Funil manual",
@@ -674,7 +674,7 @@ window.AUDIT_DATA = {
    "status_espera": "aguardando_lead",
    "ultimo_evento": "[telefone]T17:21:55-03:00",
    "rubrica": {
-    "nota_normalizada": 72.2,
+    "nota_normalizada": 75.0,
     "criterios_avaliados": 9,
     "cobertura": "9/10",
     "detalhe": {
@@ -698,10 +698,10 @@ window.AUDIT_DATA = {
      },
      "c3": {
       "criterio": "Investigação da necessidade e uso pertinente do SPIN",
-      "nota": 3,
-      "justificativa": "Resumo automático da ligação de 629 s (25/09): data do acidente, fratura lombar, hérnias pré-existentes, idade, tempo embarcado, PPP — situação e problema cobertos; implicação não relatada.",
+      "nota": 4,
+      "justificativa": "Transcrição de 25/09: perguntas de situação (onde mora, desde quando, idade, embarcado, adicionais, PPPs) levam à descoberta de uma segunda oportunidade (aposentadoria especial). Situação e problema bem cobertos; implicação tratada de forma breve ('não vamos perder tempo').",
       "evidencias": [
-       "[link removido] · 25/09 11:52 nota (resumo automático)"
+       "[link removido] · 25/09 11:39 transcrição 05:32–09:38"
       ],
       "categoria_causa": "habilidade comercial"
      },
@@ -726,9 +726,9 @@ window.AUDIT_DATA = {
      "c6": {
       "criterio": "Clareza da apresentação de valor e do processo",
       "nota": 3,
-      "justificativa": "Resumo automático: honorários (30% dos atrasados + 30% dos 12 primeiros meses) e prazo estimado 3–4 meses explicados; o lead achou 'rápido demais' (sugestão do próprio resumo). Condições para validação do responsável técnico.",
+      "justificativa": "Transcrição: honorários (30% dos atrasados + 30% dos 12 primeiros meses), prazo 3–4 meses e pagamento só se o INSS pagar explicados; o lead pede para falar mais devagar (04:31). Condições para validação do responsável técnico.",
       "evidencias": [
-       "[link removido] · 25/09 11:52 nota (resumo automático)"
+       "[link removido] · 25/09 11:39 transcrição 01:29–02:05 e 04:31"
       ],
       "categoria_causa": "habilidade comercial"
      },
@@ -2031,18 +2031,36 @@ window.AUDIT_DATA = {
    ],
    "calls_analysis": [
     {
-     "call_id": "resumo automático 25/09 (nota 25/09 11:52) — gravação: link não reutilizável na nota",
-     "transcript_source": "resumo automático do CRM (não é transcrição literal); transcrição local não disponível para esta chamada no corte",
-     "resumo": "629 s. Verificação de documentos para contrato de auxílio-acidente; honorários e prazo explicados; acidente em 26/03/2026 com fratura lombar; lead de 62 anos, embarcado desde 2000 (possível aposentadoria especial); compromissos: dados e PPPs até amanhã; contrato e vídeo na segunda.",
+     "call_id": "ligação 25/09 11:39 (629 s) — transcrição local disponível",
+     "transcript_source": "transcrição local (faster-whisper small) + resumo automático do CRM (nota 25/09 11:52)",
+     "resumo": "10 min 29 s. Abertura direta ('só faltam os seus dados para montar o contrato'); o lead está embarcado e sem documentos à mão; a atendente aceita nome, CPF e endereço por mensagem. Explica honorários (30% dos atrasados + 30% dos 12 primeiros meses) e prazo de 3–4 meses; o lead pede que fale mais devagar. Coleta nome e endereço, investiga zona rural, idade (62), 25 anos embarcado, insalubridade/periculosidade e 56 PPPs, e identifica possível aposentadoria especial (decisão recente do STF). Fecha: PPPs por foto amanhã; contrato do auxílio-acidente e vídeo na segunda.",
      "trechos": [
       {
-       "timestamp": "n/d",
+       "timestamp": "00:19–01:08",
        "trecho": "[removido]",
-       "interpretacao": "Sinal de que a explicação de honorários/prazos precisou de ritmo mais lento; não verificável sem áudio.",
-       "alternativa": "Sugestão reescrita: 'Vou te explicar em duas partes e depois te mando por escrito: primeiro como funciona o pedido no INSS, depois como funciona o nosso contrato. Pode me interromper à vontade.'"
+       "interpretacao": "Remove atrito: aceita os dados por mensagem quando o lead não tem documentos à mão. Boa prática de fechamento.",
+       "alternativa": "(manter)"
+      },
+      {
+       "timestamp": "01:29–02:05 e 04:31",
+       "trecho": "[removido]",
+       "interpretacao": "Condições apresentadas com clareza de conteúdo, mas rápido demais para o lead (ele pede para desacelerar). Condições comerciais ficam para validação do responsável técnico.",
+       "alternativa": "Sugestão reescrita: 'Vou explicar em duas partes e depois te mando por escrito. Primeiro: só pagamos se o INSS pagar. Segundo: quanto. Pode me interromper.'"
+      },
+      {
+       "timestamp": "05:32–09:38",
+       "trecho": "[removido]",
+       "interpretacao": "Investigação ativa que descobre uma segunda oportunidade (aposentadoria especial) a partir de perguntas de situação. Exemplo de SPIN bem aplicado a serviço previdenciário.",
+       "alternativa": "(manter) Registrar a nova oportunidade como nota e etapa própria no CRM."
+      },
+      {
+       "timestamp": "09:38–10:19",
+       "trecho": "[removido]",
+       "interpretacao": "Próximos passos datados dos dois lados (bom); nenhuma tarefa criada no CRM e não há evidência de envio do contrato/vídeo (texto indisponível).",
+       "alternativa": "Sugestão: tarefa 'enviar contrato + vídeo' para 28/09 09:00 e mensagem de confirmação logo após a ligação."
       }
      ],
-     "limites": "sem transcrição literal; avaliação de tom não realizada"
+     "limites": "Trecho 08:19–09:02 é artefato da transcrição (repetição de 'Entendo'); nomes com erros; tom não avaliado. Notas de junho indicam ligações não registradas no CRM."
     }
    ],
    "acertos": [
@@ -13354,6 +13372,18 @@ window.AUDIT_DATA = {
        "alternativa": "(manter)"
       },
       {
+       "timestamp": "06:04–06:40",
+       "trecho": "[removido]",
+       "interpretacao": "Pergunta de problema bem feita: revela trabalho em fins de semana sem registro e pago por fora — fato central para o pedido.",
+       "alternativa": "(manter)"
+      },
+      {
+       "timestamp": "10:25–12:23",
+       "trecho": "[removido]",
+       "interpretacao": "Reformula quando o lead não entende (boa escuta). O trecho sobre o que dizer no processo toca em orientação de depoimento: ponto para o responsável técnico validar a forma de explicar (não é avaliação jurídica desta auditoria).",
+       "alternativa": "Sugestão: 'Preciso entender exatamente como era, porque o cálculo do processo parte do que de fato acontecia.'"
+      },
+      {
        "timestamp": "23:53–24:17",
        "trecho": "[removido]",
        "interpretacao": "Explicação clara do processo, mas só aos 24 min; o lead ficou 20 min sem saber para onde a conversa ia.",
@@ -15496,9 +15526,9 @@ window.AUDIT_DATA = {
    "status_espera": "aguardando_equipe",
    "ultimo_evento": "[telefone]T15:19:32-03:00",
    "rubrica": {
-    "nota_normalizada": 47.2,
-    "criterios_avaliados": 9,
-    "cobertura": "9/10",
+    "nota_normalizada": 55.0,
+    "criterios_avaliados": 10,
+    "cobertura": "10/10",
     "detalhe": {
      "c1": {
       "criterio": "Agilidade e continuidade da resposta",
@@ -15531,12 +15561,10 @@ window.AUDIT_DATA = {
      },
      "c4": {
       "criterio": "Qualificação adequada ao serviço",
-      "nota": 2,
-      "justificativa": "Aos 3 min o lead diz que seu pedido é 'só contra o INSS'; o resumo do robô já apontava caso previdenciário 'parcialmente aderente'. A ligação seguiu 24 min sem decidir o enquadramento e a desqualificação veio no dia seguinte sem motivo — qualificação lenta e sem registro do critério.",
+      "nota": 3,
+      "justificativa": "A ligação qualifica de fato: identifica que o INSS já tem advogada (03:29), checa insalubridade, horas extras e FGTS (20:13–21:15) e conclui que a tese trabalhista é frágil porque a mudança de estado foi decisão do lead (24:09–24:41). O critério, porém, não foi registrado no CRM e a decisão levou 28 min para emergir.",
       "evidencias": [
-       "[link removido] · 23/09 10:24 transcrição 03:30–03:36",
-       "[link removido] · 22/09 18:51 nota 'Resumo do atendimento (IA)'",
-       "[link removido] · 24/09 15:17 etapa Desqualificado"
+       "[link removido] · 23/09 10:24 transcrição 03:29–03:38, 20:13–21:15, 24:09–24:41"
       ],
       "categoria_causa": "habilidade comercial"
      },
@@ -15551,19 +15579,21 @@ window.AUDIT_DATA = {
      },
      "c6": {
       "criterio": "Clareza da apresentação de valor e do processo",
-      "nota": 1,
-      "justificativa": "Em 28 min não há apresentação do que o escritório faz, etapas ou condições; encerra pedindo documentos e a senha do INSS (ponto de segurança a validar).",
+      "nota": 2,
+      "justificativa": "Orienta o lead sobre o que fazer (justificar ausência com laudo; caminho pela empresa) e é transparente sobre a fragilidade da tese, mas não apresenta o que o escritório faria nem condições; encerra pedindo documentos e a senha do INSS.",
       "evidencias": [
-       "[link removido] · 23/09 10:24 transcrição 27:22–27:42"
+       "[link removido] · 23/09 10:24 transcrição 14:52–15:14, 24:09–24:41, 27:17–27:42"
       ],
       "categoria_causa": "habilidade comercial"
      },
      "c7": {
       "criterio": "Tratamento das dúvidas e objeções",
-      "nota": "DI",
-      "justificativa": "Sem transcrição.",
-      "evidencias": [],
-      "categoria_causa": null
+      "nota": 3,
+      "justificativa": "Acolhe a indignação ('estou entendendo sua indignação') e devolve o fato objetivo (contrato era na Paraíba; transferência pedida depois da mudança) sem prometer.",
+      "evidencias": [
+       "[link removido] · 23/09 10:24 transcrição 24:09–24:41"
+      ],
+      "categoria_causa": "habilidade comercial"
      },
      "c8": {
       "criterio": "Condução para reunião ou próximo passo concreto",
@@ -18992,28 +19022,46 @@ window.AUDIT_DATA = {
     {
      "call_id": "51473ee4-a0ab-406c-9c8d-13364217a42d (23/09 10:24, 1669 s)",
      "transcript_source": "transcrição local (faster-whisper small) + resumo automático do CRM (notas 23/09 10:53)",
-     "resumo": "28 min. Abertura retoma a conversa com o robô ('vi que o senhor teve o período pelo INSS'). Lead narra: frentista desde 05/11/2025, bursite/tendinite, INSS aprovado até fevereiro, empresa não marcou exame de retorno, nova entrada no INSS, mudança para SP, pedido de transferência sem resposta; ele mesmo diz que sua ação é 'só contra o INSS'. Longa troca sobre documentos e e-mails. Encerra pedindo laudo recente e a senha do INSS para análise; lead diz que vai mandar tudo (e manda ~30 mensagens em 20 min).",
+     "resumo": "27 min 49 s. Abertura retoma a conversa com o robô ('vi que o senhor teve o período pelo INSS'). Lead: frentista desde 05/11/2025, bursite/tendinite, INSS até fevereiro, empresa não marcou exame de retorno, 'limbo previdenciário', mudou-se para SP por conta própria, exame de retorno em SP com restrição, pediu transferência depois de já estar em SP; já tem advogada só contra o INSS. A atendente orienta (não ficar sem justificar a ausência; laudo), checa insalubridade (recebia 30%), horas extras (não), FGTS (ok), pede login/senha do INSS para verificar tempo de contribuição e, aos 24 min, confronta: 'em nenhum momento a empresa mandou você sair de lá... o contrato de trabalho era lá'. Fecha pedindo e-mails da empresa, laudo recente e senha do INSS.",
      "trechos": [
       {
        "timestamp": "00:25–00:39",
        "trecho": "[removido]",
-       "interpretacao": "Boa retomada de contexto: explica por que ligou, mostra que leu a conversa com o robô e abre com pergunta aberta.",
+       "interpretacao": "Boa retomada de contexto e pergunta aberta.",
        "alternativa": "(manter)"
       },
       {
-       "timestamp": "03:30–03:36",
+       "timestamp": "03:29–03:38",
        "trecho": "[removido]",
-       "interpretacao": "Aos 3 min o próprio lead sinaliza que o pedido é previdenciário. A ligação seguiu por mais 24 min sem decidir o enquadramento; a desqualificação veio no dia seguinte, sem motivo registrado.",
-       "alternativa": "Sugestão reescrita: 'Entendi: hoje sua briga é com o INSS. A gente atua em duas frentes — INSS e trabalhista. Deixa eu te fazer 3 perguntas para ver em qual delas conseguimos te ajudar.'"
+       "interpretacao": "Aos 3 min o lead informa que já tem advogada para o INSS; o possível objeto do escritório seria só a parte trabalhista.",
+       "alternativa": "Sugestão reescrita: 'Então o INSS já está com a sua advogada. Vamos focar na empresa: o que exatamente o senhor quer que a empresa faça ou pague?'"
       },
       {
-       "timestamp": "27:22–27:42",
+       "timestamp": "14:52–15:14",
        "trecho": "[removido]",
-       "interpretacao": "Próximo passo definido (lead envia documentos), sem prazo de retorno do escritório. Pedir a senha do INSS por WhatsApp é ponto de segurança/LGPD a validar pelo responsável técnico. O lead enviou ~30 mensagens em seguida e não houve acolhimento humano.",
-       "alternativa": "Sugestão reescrita: 'Me manda o laudo e os e-mails. Eu analiso com o Dr. e te retorno até amanhã 12h dizendo se conseguimos assumir e por qual caminho.' (sem pedir senha por mensagem)"
+       "interpretacao": "Orientação útil e honesta ao lead, mesmo sem contratação.",
+       "alternativa": "(manter)"
+      },
+      {
+       "timestamp": "22:48–23:12",
+       "trecho": "[removido]",
+       "interpretacao": "Pedido de login/senha do INSS ao lead (também ocorre no caso 77456896). Ponto de segurança/LGPD para validação do responsável técnico; não é avaliado como habilidade comercial.",
+       "alternativa": "Sugestão: pedir o extrato do CNIS/Meu INSS exportado pelo próprio lead, sem compartilhar senha."
+      },
+      {
+       "timestamp": "24:09–24:41",
+       "trecho": "[removido]",
+       "interpretacao": "Qualificação feita na ligação: a tese trabalhista é frágil porque a mudança foi decisão do lead. Isso explicaria a desqualificação do dia seguinte — que, porém, não foi registrada como motivo nem comunicada com fechamento.",
+       "alternativa": "Sugestão reescrita: 'Seu [pessoa], vou ser transparente: como a mudança foi decisão sua, a empresa não tem obrigação de transferir. Se ela demitir ou não responder, aí muda. Vou registrar seu caso e te aviso amanhã se conseguimos ajudar em algo além do INSS.'"
+      },
+      {
+       "timestamp": "27:17–27:42",
+       "trecho": "[removido]",
+       "interpretacao": "Próximo passo definido para o lead, sem prazo de retorno do escritório. Ele enviou ~30 mensagens em 20 min e não houve acolhimento humano; no dia seguinte foi desqualificado com 1 mensagem.",
+       "alternativa": "Sugestão reescrita: 'Me manda o e-mail e o laudo. Eu analiso com o Dr. e te retorno até amanhã ao meio-dia dizendo se conseguimos assumir algo contra a empresa.'"
       }
      ],
-     "limites": "Transcrição automática com trechos de baixa confiança; nomes incertos."
+     "limites": "Transcrição automática com trechos de baixa confiança e repetições; nomes incertos."
     }
    ],
    "acertos": [
@@ -23564,6 +23612,17 @@ window.AUDIT_DATA = {
    "mudanca": "Motivo de perda obrigatório na etapa Desqualificado; mapear ramal da [pessoa] no API4com; preencher 'Serviço' na triagem; concluir/limpar tarefas automáticas.",
    "acompanhamento": "Indicadores: % desqualificados com motivo (base 0 de 2); tarefas vencidas > 2 dias (base 3 de 10); % ligações atribuídas a usuário real (base 76 de 83).",
    "causa": "registro"
+  },
+  {
+   "comportamento": "Pedido de login/senha do INSS ao lead por telefone (para consultar CNIS/tempo de contribuição)",
+   "frequencia": "1 de 2 ligações previdenciárias com transcrição (80012252 sim; 77456896 não — pediu PPPs por foto)",
+   "evidencias": [
+    "[link removido] · 23/09 10:24 transcrição 22:48–23:12 e 27:22–27:28"
+   ],
+   "impacto": "Risco de segurança/LGPD e de perda de confiança; não é falha comercial, é ponto de política do escritório.",
+   "mudanca": "Validar com o responsável técnico: pedir extrato CNIS exportado pelo próprio lead (Meu INSS) em vez de senha.",
+   "acompanhamento": "Checar em amostra de ligações previdenciárias (base: 1 de 2 transcritas).",
+   "causa": "para validação do responsável técnico"
   },
   {
    "comportamento": "Transferência fora do expediente gera tarefa de 5 min impossível e 1ª ação só no dia seguinte",
