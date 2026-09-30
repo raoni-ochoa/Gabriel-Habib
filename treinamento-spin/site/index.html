@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0D0A32">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%230D0A32%27/%3E%3Cpath transform=%27translate(17.96 14.44) scale(0.371)%27 fill=%27%23FFFFFF%27 d=%27M4.11,93.14h71.56v-19.43H25.32v-17.19h45.68v-18.22H25.32v-17.09h41.66V1.69H8.03v-.18H0v19.71h4.11v71.93h0Z%27/%3E%3C/svg%3E">
+<title>SPIN na prática · Evolve</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+@font-face{font-family:'Clash Display';font-weight:500;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,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) format('woff2')}
+/* Layout: uma coluna central de 1120px sobre canvas Deep Blue com grid técnico; cada bloco é um exercício, não um capítulo */
+:root{
+  --bg:#0D0A32;--bg0:#0A0826;--s2:#14123E;--s3:#1B1949;--s4:#262359;--s5:#322E6A;
+  --fg:#FFFFFF;--fg2:#C4C2E0;--fg3:#8784B0;--fg4:#4D4A7A;--acc:#6EA1F0;
+  --pri:#3070D9;--pri-h:#4A85E8;--pri-soft:#3070D924;--pri-border:#3070D94D;--glow:#3070D973;
+  --ok:#2BB673;--ok-t:#5DD89B;--ok-soft:#2BB67324;--warn:#E8A33C;--warn-t:#F2B85F;--warn-soft:#E8A33C24;--bad:#E5484D;--bad-t:#F26D71;--bad-soft:#E5484D24;
+  --b1:#1F1C50;--b2:#2A2766;--b3:#3D3A85;
+  --disp:'Clash Display','Inter',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;line-height:1.55;font-size:16px;
+  background-image:linear-gradient(rgba(48,112,217,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(48,112,217,.06) 1px,transparent 1px);background-size:56px 56px;background-attachment:fixed}
+::selection{background:var(--pri);color:#fff}
+a{color:var(--acc)}
+.wrap{max-width:1120px;margin:0 auto;padding-block:0 96px;padding-inline:20px}
+h1,h2,h3{font-family:var(--disp);font-weight:500;letter-spacing:-.02em;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(38px,6vw,64px);letter-spacing:-.025em;line-height:1.04}
+h2{font-size:clamp(28px,4vw,40px)}
+h3{font-size:22px;letter-spacing:-.012em;line-height:1.25}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pri);box-shadow:0 0 10px var(--pri)}
+.grad{background:linear-gradient(135deg,#6EA1F0,#3070D9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:18px;color:var(--fg2);max-width:62ch}
+.muted{color:var(--fg3)}
+.mono{font-family:var(--mono)}
+section{padding-block:72px 0}
+.sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:32px;max-width:760px}
+.card{background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:22px}
+.btn{font-family:var(--body);font-weight:500;font-size:14px;line-height:1;border-radius:999px;padding:10px 18px;border:1px solid var(--b2);background:var(--s3);color:var(--fg);cursor:pointer;transition:background .2s cubic-bezier(.2,.6,.2,1),border-color .2s}
+.btn:hover{background:var(--s4)}
+.btn:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+.btn.pri{background:var(--pri);border-color:transparent;box-shadow:0 8px 24px -8px var(--glow)}
+.btn.pri:hover{background:var(--pri-h)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--fg2)}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--b2);background:var(--s3);color:var(--fg2);white-space:nowrap}
+.chip.S{background:var(--pri-soft);border-color:var(--pri-border);color:var(--acc)}
+.chip.P{background:var(--warn-soft);border-color:#E8A33C4D;color:var(--warn-t)}
+.chip.I{background:var(--bad-soft);border-color:#E5484D4D;color:var(--bad-t)}
+.chip.N{background:var(--ok-soft);border-color:#2BB6734D;color:var(--ok-t)}
+.chip.X{background:var(--s4);border-color:var(--b3);color:var(--fg2)}
+
+/* header */
+header{display:flex;justify-content:space-between;align-items:center;padding-block:28px 0;gap:16px;flex-wrap:wrap}
+.logo{height:16px;width:auto;color:var(--fg)}
+header .who{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)}
+
+/* hero */
+.hero{padding-block:64px 8px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative}
+.hero::before{content:"";position:absolute;inset:-40px -20px auto;height:420px;background:radial-gradient(ellipse at 80% 0%,#3070D92E,transparent 55%);pointer-events:none;z-index:-1}
+.hero .txt{display:flex;flex-direction:column;gap:22px}
+.gauge{display:flex;flex-direction:column;gap:14px;background:var(--s2);border:1px solid var(--b1);border-radius:14px;padding:24px;min-width:0}
+.gauge .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.gauge .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)}
+.gauge .val{font-family:var(--disp);font-size:36px;font-weight:500;font-variant-numeric:tabular-nums}
+.track{height:6px;border-radius:999px;background:var(--s4);overflow:hidden}
+.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3070D9,#6EA1F0);box-shadow:0 0 12px var(--glow);transition:width .6s cubic-bezier(.16,1,.3,1)}
+.gauge .hint{font-size:13px;color:var(--fg2)}
+.gauge .toggle{display:flex;gap:8px;flex-wrap:wrap}
+.gauge .toggle .btn[aria-pressed="true"]{background:var(--pri);border-color:transparent}
+
+/* flip cards */
+.letters{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.flip{perspective:1200px;min-height:300px;cursor:pointer;border:0;background:none;padding:0;text-align:left;color:inherit;font:inherit}
+.flip .inner{position:relative;width:100%;height:100%;min-height:300px;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flip[aria-pressed="true"] .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;border:1px solid var(--b1);background:var(--s2);padding:22px;display:flex;flex-direction:column;gap:10px}
+.face.back{transform:rotateY(180deg);background:var(--s3);border-color:var(--b2);justify-content:flex-start;font-size:13.5px;color:var(--fg2);overflow:auto}
+.face.front .big{font-family:var(--disp);font-size:96px;line-height:.9;font-weight:500;letter-spacing:-.04em}
+.face.front .name{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.face.front .one{font-size:14px;color:var(--fg2);margin-top:auto}
+.face.front .tap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg4)}
+.face .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);margin-top:6px}
+.face.back q{color:var(--fg);font-style:italic}
+.S .big,.S .name{color:var(--acc)} .P .big,.P .name{color:var(--warn-t)} .I .big,.I .name{color:var(--bad-t)} .N .big,.N .name{color:var(--ok-t)}
+.flip[aria-pressed="true"] .front{visibility:hidden}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;position:relative;margin-top:12px}
+.tl::before{content:"";position:absolute;left:4%;right:4%;top:26px;height:2px;background:var(--b2);z-index:0}
+.step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:0}
+.step .dot{width:52px;height:52px;border-radius:50%;background:var(--s2);border:2px solid var(--b2);display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--fg2);transition:all .2s}
+.step .min{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--fg3)}
+.step .nm{font-size:12.5px;font-weight:500;color:var(--fg2)}
+.step[aria-selected="true"] .dot{background:var(--pri);border-color:var(--pri);color:#fff;box-shadow:0 0 0 1px #3070D959,0 0 24px #3070D959}
+.step[aria-selected="true"] .nm{color:var(--fg)}
+.tl-detail{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tl-detail .card{min-width:0}
+.tl-detail .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);margin-bottom:8px}
+.tl-detail q{display:block;font-size:17px;color:var(--fg);font-style:italic;line-height:1.45}
+.tl-detail q::before,.tl-detail q::after{color:var(--acc)}
+.tl-detail p{color:var(--fg2);font-size:14.5px}
+
+/* tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{font-family:var(--body);font-size:13.5px;font-weight:500;padding:9px 16px;border-radius:999px;border:1px solid var(--b2);background:var(--s3);color:var(--fg2);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--pri);border-color:transparent;color:#fff}
+.bank{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.qcard{display:flex;flex-direction:column;gap:10px;min-width:0}
+.qcard .hd{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.qcard ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.qcard li{font-size:14px;color:var(--fg2);padding-left:14px;position:relative;line-height:1.45}
+.qcard li::before{content:"“";position:absolute;left:0;color:var(--fg4)}
+.copy{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:999px;border:1px solid var(--b2);background:transparent;color:var(--fg3);cursor:pointer}
+.copy:hover{color:var(--fg);border-color:var(--b3)}
+.bank-note{margin-top:16px;font-size:14px;color:var(--fg3);max-width:70ch}
+
+/* quiz */
+.quiz{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+.quiz .q{font-family:var(--disp);font-size:26px;line-height:1.25;font-weight:500;letter-spacing:-.015em;min-height:3.6em}
+.quiz .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.opt{font-family:var(--disp);font-size:34px;font-weight:500;border-radius:10px;border:1px solid var(--b2);background:var(--s3);color:var(--fg);padding:14px 0;cursor:pointer;transition:all .15s}
+.opt:hover{background:var(--s4)}
+.opt.right{background:var(--ok-soft);border-color:#2BB6734D;color:var(--ok-t)}
+.opt.wrong{background:var(--bad-soft);border-color:#E5484D4D;color:var(--bad-t)}
+.opt:disabled{cursor:default}
+.fb{margin-top:16px;min-height:3.2em;font-size:14.5px;color:var(--fg2)}
+.fb b{color:var(--fg)}
+.quiz .side{display:flex;flex-direction:column;gap:14px}
+.score{display:flex;align-items:baseline;gap:10px}
+.score .n{font-family:var(--disp);font-size:56px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1}
+.score .d{font-family:var(--mono);font-size:12px;color:var(--fg3);letter-spacing:.1em}
+.quiz .nav{display:flex;gap:8px;flex-wrap:wrap}
+
+/* objections */
+.obj{display:flex;flex-direction:column;gap:12px}
+.ob{border:1px solid var(--b1);border-radius:10px;background:var(--s2);overflow:hidden}
+.ob summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px 20px}
+.ob summary::-webkit-details-marker{display:none}
+.bubble{background:var(--s4);border-radius:14px 14px 14px 4px;padding:10px 14px;font-size:15px;max-width:60ch;color:var(--fg)}
+.ob summary .arr{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--fg3);text-transform:uppercase;white-space:nowrap}
+.ob[open] summary .arr{color:var(--acc)}
+.ob .body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--b1);border-top:1px solid var(--b1)}
+.ob .cell{background:var(--s2);padding:16px 20px;min-width:0}
+.ob .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);margin-bottom:6px}
+.ob .cell p{font-size:14px;color:var(--fg2)}
+.ob .cell.ask p{color:var(--fg);font-style:italic}
+
+/* conversation */
+.convo{display:flex;flex-direction:column;gap:10px;max-width:760px}
+.msg{display:flex;flex-direction:column;gap:4px;max-width:78%}
+.msg.a{align-self:flex-start}
+.msg.l{align-self:flex-end;align-items:flex-end}
+.msg .b{padding:11px 15px;border-radius:14px;font-size:15px;line-height:1.45}
+.msg.a .b{background:var(--s3);border:1px solid var(--b2);border-bottom-left-radius:4px}
+.msg.l .b{background:var(--pri);color:#fff;border-bottom-right-radius:4px}
+.msg .tag{display:none;align-items:center;gap:6px}
+.convo.tags .msg .tag{display:flex}
+.msg .why{font-size:12.5px;color:var(--fg3);max-width:52ch}
+.msg.l .why{text-align:right}
+.convo-ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.sys{align-self:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);padding:6px 12px;border:1px dashed var(--b2);border-radius:999px}
+
+/* after */
+.after{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.after .card{display:flex;flex-direction:column;gap:10px;min-width:0}
+.note{font-family:var(--mono);font-size:13px;color:var(--fg);background:var(--bg0);border:1px solid var(--b2);border-radius:6px;padding:12px 14px;line-height:1.5}
+.note .k{color:var(--acc)}
+.after q{display:block;font-size:15px;color:var(--fg);font-style:italic;line-height:1.5}
+.after .bad-ex{color:var(--fg3);font-size:14px;text-decoration:line-through;text-decoration-color:var(--bad)}
+
+/* self check */
+.check{display:grid;grid-template-columns:1fr .7fr;gap:24px;align-items:start}
+.check ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.check label{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;cursor:pointer;font-size:15px;color:var(--fg2)}
+.check label:has(input:checked){border-color:var(--pri-border);background:var(--pri-soft);color:var(--fg)}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--pri);flex:none}
+.meter .n{font-family:var(--disp);font-size:72px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
+.meter .msg2{font-size:14.5px;color:var(--fg2);margin-top:10px;min-height:3em}
+
+footer{margin-top:96px;padding-top:28px;border-top:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer .sig{font-family:var(--disp);font-size:22px;font-weight:500}
+footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3)}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .letters{grid-template-columns:repeat(2,1fr)}
+  .bank{grid-template-columns:repeat(2,1fr)}
+  .tl{grid-template-columns:repeat(4,1fr);row-gap:22px}
+  .tl::before{display:none}
+  .tl-detail,.quiz,.after,.check{grid-template-columns:1fr}
+  .ob .body{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .letters,.bank{grid-template-columns:1fr}
+  .flip,.flip .inner{min-height:260px}
+  .quiz .opts{grid-template-columns:repeat(2,1fr)}
+  .msg{max-width:92%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+<header>
+  <svg class="logo" viewBox="0 0 748.71 94.8" role="img" aria-label="Evolve" fill="currentColor"><path d="M4.11,93.14h71.56v-19.43H25.32v-17.19h45.68v-18.22H25.32v-17.09h41.66V1.69H8.03v-.18H0v19.71h4.11v71.93h0Z"/><path d="M202.12,41.17L216.38,1.69h-23.94l-7.45,22.63,4.01,3.91-5.68,17.23c-5.59,16.86-7.82,23.84-7.92,24.31h-.39c-.09-.37-2.33-7.45-8.01-24.59L152.67,1.78h-25.24l33.06,91.36h28.31l17.42-48.06-4.1-3.91Z"/><path d="M292.24,45.62c0-15.67,10.98-25.62,26.18-25.62,6.39-.13,12.63,1.96,17.64,5.91l15.11-14.64C341.95,3.74,330.34-.26,318.42.01c-27.98,0-48.14,19.05-48.14,45.61-.24,11.91,4.33,23.41,12.67,31.91l15.3-14.83c-4.06-4.75-6.2-10.84-6.01-17.08h0Z"/><path d="M332.32,29.57c5.68,4.94,8.82,12.18,8.54,19.7,0,15.48-10.98,25.43-26.18,25.43-7.63.25-15-2.83-20.18-8.45l-15.3,14.83c9.52,9.13,22.29,14.06,35.48,13.7,27.98,0,48.14-18.96,48.14-45.61.3-13.21-5.35-25.85-15.39-34.44l-15.11,14.84h0Z"/><path d="M439.86,47.6V1.69h-21.18v66.63l-4.01,4.01v20.81h63.09v-19.41h-41.9v-22.21l4.01-3.92h-.01Z"/><path d="M604.53,41.17l14.26-39.49h-23.94l-7.45,22.63,4.01,3.91-5.68,17.23c-5.59,16.86-7.82,23.84-7.92,24.31h-.39c-.09-.37-2.33-7.45-8.01-24.59l-14.34-43.4h-25.24l33.06,91.36h28.31l17.42-48.06-4.1-3.91h.01Z"/><path d="M677.15,93.23h71.56v-19.43h-50.35v-17.19h45.68v-18.22h-45.68v-17.09h41.66V1.78h-58.94v-.18h-8.03v19.71h4.11v71.93h0Z"/></svg>
+  <span class="who">Treinamento · Atendimento Gabriel Habib · Set 2026</span>
+</header>
+
+<section class="hero">
+  <div class="txt">
+    <p class="eyebrow">01 · SPIN na prática</p>
+    <h1>Pressão de fora é fraca. <span class="grad">Urgência</span> de dentro fecha contrato.</h1>
+    <p class="lead">O lead só age quando ele mesmo diz o que a demora custa e o que muda quando o caso resolve. Este material é para praticar as perguntas que fazem isso acontecer, com os casos que vocês atendem todo dia.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn pri" href="#letras">Começar pelas quatro letras</a><a class="btn" href="#quiz">Ir direto para o jogo</a></div>
+  </div>
+  <div class="gauge" aria-live="polite">
+    <div class="row"><span class="lbl">Temperatura do lead</span><span class="val" id="gv">12°</span></div>
+    <div class="track"><i id="gbar" style="width:12%"></i></div>
+    <p class="hint" id="ghint">Um lead que só respondeu a um questionário técnico. Escolha o que a atendente faz a seguir.</p>
+    <div class="toggle" role="group" aria-label="Simular abordagem">
+      <button class="btn" data-g="press" aria-pressed="false">Cobrar: "manda os documentos"</button>
+      <button class="btn" data-g="spin" aria-pressed="false">Perguntar: "como isso pesou no seu mês?"</button>
+    </div>
+  </div>
+</section>
+
+<section id="letras">
+  <div class="sec-head">
+    <p class="eyebrow">02 · O método</p>
+    <h2>Quatro tipos de pergunta, nessa ordem</h2>
+    <p class="lead">Toque em cada letra para ver o que a pergunta faz, o erro mais comum nas ligações que ouvimos e um exemplo pronto.</p>
+  </div>
+  <div class="letters">
+    <button class="flip S" aria-pressed="false" aria-label="Situação: virar o cartão"><div class="inner">
+      <div class="face front"><span class="big">S</span><span class="name">Situação</span><p class="one">Entender os fatos e criar vínculo. Poucas perguntas, abertas.</p><span class="tap">toque para virar</span></div>
+      <div class="face back"><span class="k">O que faz</span><p>Levanta só o que o assistente ainda não colheu. Três ou quatro perguntas bastam.</p><span class="k">Erro comum</span><p>Virar interrogatório, e perguntar de novo o que o lead já contou ao assistente.</p><span class="k">Exemplo</span><q>Me conta como foi a sua saída da empresa. Quanto tempo você ficou lá?</q></div>
+    </div></button>
+    <button class="flip P" aria-pressed="false" aria-label="Problema: virar o cartão"><div class="inner">
+      <div class="face front"><span class="big">P</span><span class="name">Problema</span><p class="one">O lead nomeia, com as palavras dele, o que está errado hoje.</p><span class="tap">toque para virar</span></div>
+      <div class="face back"><span class="k">O que faz</span><p>Faz o lead dizer o problema em voz alta. O que ele diz vale mais do que o que a gente conclui.</p><span class="k">Erro comum</span><p>Nomear o problema pelo lead: "então eles não te pagaram". Deixa ele dizer.</p><span class="k">Exemplo</span><q>O que ficou sem ser pago? Você chegou a cobrar? O que responderam?</q></div>
+    </div></button>
+    <button class="flip I" aria-pressed="false" aria-label="Implicação: virar o cartão"><div class="inner">
+      <div class="face front"><span class="big">I</span><span class="name">Implicação</span><p class="one">O custo de continuar como está: dinheiro, tempo, família, saúde.</p><span class="tap">toque para virar</span></div>
+      <div class="face back"><span class="k">O que faz</span><p>Coloca o dedo na ferida. É a pergunta que quase não aparece nas gravações, e a que mais move o lead.</p><span class="k">Erro comum</span><p>Pular para a solução, ou insinuar sem perguntar: "eles vão só ganhar tempo com a senhora".</p><span class="k">Exemplo</span><q>Desde janeiro você está sem essas verbas. Como isso tem pesado no seu mês?</q></div>
+    </div></button>
+    <button class="flip N" aria-pressed="false" aria-label="Necessidade: virar o cartão"><div class="inner">
+      <div class="face front"><span class="big">N</span><span class="name">Necessidade</span><p class="one">O lead visualiza o caso resolvido e diz que quer isso.</p><span class="tap">toque para virar</span></div>
+      <div class="face back"><span class="k">O que faz</span><p>Traz o alívio depois do peso. A resposta vira o gatilho de toda retomada.</p><span class="k">Erro comum</span><p>Apresentar o serviço antes de o lead dizer o que ganha com ele.</p><span class="k">Exemplo</span><q>Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?</q></div>
+    </div></button>
+  </div>
+  <p class="bank-note">Regra de ouro: depois de uma pergunta de implicação ou de necessidade, silêncio. Deixe o lead responder inteiro. A resposta dele é o material mais valioso da conversa.</p>
+</section>
+
+<section id="mapa">
+  <div class="sec-head">
+    <p class="eyebrow">03 · O mapa da conversa</p>
+    <h2>Uma ligação boa cabe em <span class="mono" style="font-family:var(--disp)">12 a 15</span> minutos</h2>
+    <p class="lead">As ligações de 28 minutos que ouvimos não tinham conteúdo demais. Tinham falta de mapa. Toque em cada etapa.</p>
+  </div>
+  <div class="tl" role="tablist" aria-label="Etapas da ligação" id="tl"></div>
+  <div class="tl-detail" id="tld"></div>
+</section>
+
+<section id="banco">
+  <div class="sec-head">
+    <p class="eyebrow">04 · Banco de perguntas</p>
+    <h2>Uma pergunta por letra já faz a conversa andar</h2>
+    <p class="lead">Escolha o tipo de caso. As demais perguntas são reserva para quando o lead responde curto.</p>
+  </div>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="bank" id="bank"></div>
+  <p class="bank-note">Lead mais velho ou embarcado, longe de casa: as perguntas de situação costumam revelar uma segunda oportunidade, como aposentadoria especial. Perguntar onde mora, idade, tempo de embarque e adicionais foi o que encontrou 56 PPPs em um caso da amostra.</p>
+</section>
+
+<section id="quiz">
+  <div class="sec-head">
+    <p class="eyebrow">05 · O jogo</p>
+    <h2>Que letra é essa pergunta?</h2>
+    <p class="lead">Dez perguntas reais de atendimento. Diga se é Situação, Problema, Implicação ou Necessidade. Vale jogar em dupla, com a mão na campainha.</p>
+  </div>
+  <div class="quiz">
+    <div class="card">
+      <p class="mono muted" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase" id="qn">Pergunta 1 de 10</p>
+      <p class="q" id="qq"></p>
+      <div class="opts" id="qo">
+        <button class="opt" data-a="S">S</button><button class="opt" data-a="P">P</button><button class="opt" data-a="I">I</button><button class="opt" data-a="N">N</button>
+      </div>
+      <p class="fb" id="qf"></p>
+      <div class="nav"><button class="btn" id="qnext" hidden>Próxima</button><button class="btn ghost" id="qreset">Recomeçar</button></div>
+    </div>
+    <div class="side">
+      <div class="card"><span class="eyebrow" style="margin-bottom:10px">Placar</span><div class="score"><span class="n" id="qs">0</span><span class="d">/ 10</span></div><p class="muted" style="font-size:13.5px;margin-top:8px" id="qmsg">Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.</p></div>
+      <div class="card"><span class="eyebrow" style="margin-bottom:10px">Dica de leitura</span><p style="font-size:14px;color:var(--fg2)">Se a pergunta olha para trás, é Situação ou Problema. Se olha para o custo de ficar parado, é Implicação. Se olha para depois de resolver, é Necessidade.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="objecoes">
+  <div class="sec-head">
+    <p class="eyebrow">06 · O lead responde</p>
+    <h2>Quase toda objeção é uma pergunta sem resposta</h2>
+    <p class="lead">Devolva com uma pergunta antes de argumentar. Quem argumenta cedo demais discute com um fantasma. Abra cada fala para ver o que fazer.</p>
+  </div>
+  <div class="obj" id="obj"></div>
+</section>
+
+<section id="conversa">
+  <div class="sec-head">
+    <p class="eyebrow">07 · Uma conversa inteira</p>
+    <h2>Da abertura ao contrato, com duas perguntas a mais</h2>
+    <p class="lead">Inspirada em uma ligação real da amostra: dispensa em janeiro, sem verbas e sem seguro-desemprego. A original teve 13 minutos de boa investigação e terminou sem prazo. Aqui, o que mudou.</p>
+  </div>
+  <div class="convo-ctl"><button class="btn" id="tagbtn" aria-pressed="true">Ocultar etiquetas</button><span class="muted" style="font-size:13px">Cada balão da atendente leva a letra da pergunta e o motivo dela.</span></div>
+  <div class="convo tags" id="convo"></div>
+</section>
+
+<section id="depois">
+  <div class="sec-head">
+    <p class="eyebrow">08 · Depois da ligação</p>
+    <h2>A resposta do lead vira a próxima mensagem</h2>
+    <p class="lead">O que ele disse na implicação e na necessidade vai para a nota, em uma linha. Não é registro pró-forma: é o gatilho da retomada.</p>
+  </div>
+  <div class="after">
+    <div class="card"><span class="eyebrow">A nota no CRM</span><div class="note"><span class="k">gatilho:</span> aluguel atrasado 2 meses, mãe ajudando · quer quitar o aluguel primeiro<br><span class="k">combinado:</span> holerites até amanhã 12h · retorno 14h</div><p class="muted" style="font-size:13.5px">Uma linha. Quem pegar o caso amanhã sabe o que dizer.</p></div>
+    <div class="card"><span class="eyebrow">Cobrança genérica × cobrança com gatilho</span><p class="bad-ex">Conseguiu separar os documentos?</p><q>Márcia, quanto antes os holerites chegarem, antes a gente corre atrás desse aluguel. Consegue me mandar até as 18h?</q></div>
+    <div class="card"><span class="eyebrow">Prazo que é dele, não nosso</span><q>Você me disse que queria resolver logo. Consigo contar com você até amanhã ao meio-dia?</q><p class="muted" style="font-size:13.5px">Se passou: "Você tinha combinado até ontem e ainda não chegou. Fiquei preocupada, porque o que te falei que dá para buscar pode não dar mais se demorar. Precisa de ajuda com algum item?"</p></div>
+    <div class="card"><span class="eyebrow">Lead avançado que sumiu</span><q>Casos parecidos têm trazido resultados relevantes, cada um com seu curso. Como não tive seu retorno, fiquei preocupada: com o tempo passando, parte do que você tem direito pode ficar para trás. Me confirma até as 18h se seguimos?</q><p class="muted" style="font-size:13.5px">Terceiro dia: "Sem o seu retorno, vamos precisar encerrar o seu caso por aqui. Seria uma pena perder esse direito." Nunca prometer valor, prazo ou êxito.</p></div>
+  </div>
+</section>
+
+<section id="auto">
+  <div class="sec-head">
+    <p class="eyebrow">09 · Autoavaliação</p>
+    <h2>Um minuto depois de desligar</h2>
+    <p class="lead">Antes de olhar a avaliação automática do CRM, responda sozinha. Marque o que aconteceu na ligação.</p>
+  </div>
+  <div class="check">
+    <ul id="chk">
+      <li><label><input type="checkbox" id="c1"> O lead disse, com as palavras dele, o que a demora está custando?</label></li>
+      <li><label><input type="checkbox" id="c2"> O lead disse o que muda na vida dele quando o caso resolver?</label></li>
+      <li><label><input type="checkbox" id="c3"> Honorários e contrato ficaram resolvidos antes de eu pedir documentos?</label></li>
+      <li><label><input type="checkbox" id="c4"> A ligação terminou com data, hora e tarefa criada?</label></li>
+      <li><label><input type="checkbox" id="c5"> A nota do lead tem o gatilho para a próxima mensagem?</label></li>
+    </ul>
+    <div class="card meter"><span class="eyebrow">Resultado</span><div class="n" id="cn">0<span style="font-size:28px;color:var(--fg3)">/5</span></div><p class="msg2" id="cm">Dois "não" em uma ligação são normais no começo. Dois "não" nas mesmas perguntas, ligação após ligação, são o ponto para treinar em dupla.</p></div>
+  </div>
+</section>
+
+<footer>
+  <span class="sig">Let's Evolve</span>
+  <span class="fine">Material de treinamento · uso interno da equipe</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+
+  /* gauge */
+  var G={press:{v:22,h:'Subiu pouco. Cobrar funciona por um dia; a urgência é da atendente, não do lead. Amanhã ele diz "depois eu te chamo".'},
+         spin:{v:84,h:'O lead acabou de dizer que atrasou o aluguel dois meses. Agora a urgência é dele. Contrato e documentos saem na mesma ligação.'}};
+  $$('.gauge .toggle .btn').forEach(function(b){b.addEventListener('click',function(){
+    $$('.gauge .toggle .btn').forEach(function(x){x.setAttribute('aria-pressed','false')});
+    b.setAttribute('aria-pressed','true');var g=G[b.dataset.g];
+    $('#gbar').style.width=g.v+'%';$('#gv').textContent=g.v+'°';$('#ghint').textContent=g.h;
+  })});
+
+  /* flip */
+  $$('.flip').forEach(function(f){f.addEventListener('click',function(){f.setAttribute('aria-pressed',f.getAttribute('aria-pressed')==='true'?'false':'true')})});
+
+  /* timeline */
+  var STEPS=[
+   {n:'Abertura',m:'0–1 min',t:'Quem fala, o que o lead já contou ao assistente, quanto tempo leva e o que acontece no fim.',q:'Vi que você falou com nosso assistente sobre horas extras não pagas. Vou te fazer perguntas por uns 10 minutos para entender o caso. Depois te explico o que dá para pedir e como funciona aqui. Pode ser?',w:'Sem mapa, a ligação vira interrogatório sem fim. Com mapa, o lead sabe que vai ouvir uma resposta.'},
+   {n:'Situação',m:'1–4 min',t:'Três ou quatro perguntas abertas sobre o que falta. Confirmar o que já se sabe em vez de perguntar de novo.',q:'Me conta como foi a sua saída. Você pediu ou foi dispensado? Assinou alguma coisa na hora?',w:'O CRM já tinha carteira assinada, 3 anos de casa e horas extras. Perguntar de novo faz o lead sentir desorganização.'},
+   {n:'Problema',m:'4–6 min',t:'O que está errado hoje, dito pelo lead.',q:'O que ficou sem ser pago? Você deu entrada no seguro-desemprego? Conseguiu?',w:'A resposta define o enquadramento. Até o minuto 10 a atendente já sabe se o escritório assume e por qual caminho.'},
+   {n:'Implicação',m:'6–8 min',t:'O que a demora está custando. Uma ou duas perguntas e silêncio.',q:'Desde janeiro você está sem isso e sem o seguro. Como você está fechando o mês?',w:'É a pergunta que faltou em 3 das 5 ligações longas. Sem ela, o lead ouve a solução sem sentir o problema.'},
+   {n:'Necessidade',m:'8–10 min',t:'O que muda quando resolver. Anotar a resposta: ela volta nas retomadas.',q:'Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?',w:'"O aluguel, e devolver o que minha mãe emprestou." Isso é o gatilho de toda mensagem daqui para frente.'},
+   {n:'Caminho',m:'10–13 min',t:'O que dá para pedir, como o escritório trabalha, como são os honorários. Em duas partes, checando o entendimento. Dizer também o que não dá.',q:'Vou te explicar em duas partes. Primeiro, o que dá para pedir. Até aqui ficou claro? Segundo: você não paga nada agora, só pagamos se o caso pagar.',w:'Em uma ligação de 28 minutos o caminho só apareceu aos 23:53. Aqui ele chega aos 10.'},
+   {n:'Contrato',m:'13–14 min',t:'Minuta pronta, link enviado na hora, assinatura acompanhada.',q:'Então fechamos? Estou te mandando o contrato agora no seu e-mail. Abre aí que eu te explico enquanto você assina, assim já abrimos o seu caso hoje.',w:'A pessoa acabou de dizer o que quer. Para não assinar, precisaria se contradizer. Enviado depois, esfria.'},
+   {n:'Documentos',m:'14–15 min',t:'O que o lead já tem em mãos vai agora, na linha. O resto com prazo assumido por ele. Tarefa criada antes de desligar.',q:'O que você já tem aí? Me manda agora, eu espero. O resto consegue até amanhã ao meio-dia? Amanhã às 14h eu te chamo aqui.',w:'É onde os leads param. Dois leads da amostra tinham os documentos na mão durante a ligação e ninguém pediu.'}];
+  var tl=$('#tl'),tld=$('#tld');
+  STEPS.forEach(function(s,i){var b=document.createElement('button');b.className='step';b.setAttribute('role','tab');b.setAttribute('aria-selected',i===0?'true':'false');
+    b.innerHTML='<span class="dot">'+(i+1)+'</span><span class="min">'+esc(s.m)+'</span><span class="nm">'+esc(s.n)+'</span>';
+    b.addEventListener('click',function(){$$('.step',tl).forEach(function(x){x.setAttribute('aria-selected','false')});b.setAttribute('aria-selected','true');showStep(i)});tl.appendChild(b)});
+  function showStep(i){var s=STEPS[i];tld.innerHTML='<div class="card"><div class="k">'+esc(s.n)+' · '+esc(s.m)+'</div><p>'+esc(s.t)+'</p><div class="k" style="margin-top:14px">Fala</div><q>'+esc(s.q)+'</q></div><div class="card"><div class="k">Por que importa</div><p>'+esc(s.w)+'</p></div>'}
+  showStep(0);
+
+  /* bank */
+  var BANK=[
+   {n:'Verbas rescisórias',S:['Como foi a sua saída? Você pediu ou foi dispensado?','Chegou a assinar alguma coisa na hora?'],P:['O que ficou sem ser pago?','Você deu entrada no seguro-desemprego? Conseguiu?'],I:['Desde [mês] você está sem isso e sem o seguro. Como você está fechando o mês?','O que ficou para trás nesses meses?'],N:['Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?']},
+   {n:'Horas extras e jornada',S:['Que horas você entrava e saía de verdade?','Tinha ponto? Batia no horário certo ou depois?'],P:['Quantas horas por semana ficavam de fora?','Alguém mais da equipe vivia isso?'],I:['Em [tempo de casa], quanto você acha que deixou de receber?','O que essas horas tiraram de você: família, saúde, outro trabalho?'],N:['Se esse valor voltasse para o seu bolso, o que muda? O que você faria com ele?']},
+   {n:'Reconhecimento de vínculo',S:['Como você era pago? Quem definia horário e tarefas?','Você podia mandar outra pessoa no seu lugar?'],P:['O que você ficou sem por não ter carteira assinada: FGTS, férias, décimo terceiro, INSS?'],I:['São [anos] sem recolhimento. Como isso pesa quando você pensa em aposentadoria ou em ficar doente?'],N:['Se esse período fosse reconhecido, o que isso destrava para você?']},
+   {n:'Acidente e auxílio-acidente',S:['Como aconteceu? Abriram CAT?','Você ficou afastado quanto tempo? O que o INSS decidiu?'],P:['Você voltou a trabalhar por escolha ou por necessidade?','Ficou alguma sequela? O benefício foi cortado quando?'],I:['Sem o benefício, como você está se mantendo?','E se demorar mais três meses, o que acontece?'],N:['Se o benefício voltasse a entrar todo mês, o que muda na sua rotina?']}];
+  var NAMES={S:'Situação',P:'Problema',I:'Implicação',N:'Necessidade'};
+  var tabs=$('#tabs'),bank=$('#bank');
+  BANK.forEach(function(c,i){var b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.textContent=c.n;b.setAttribute('aria-selected',i===0?'true':'false');
+    b.addEventListener('click',function(){$$('.tab',tabs).forEach(function(x){x.setAttribute('aria-selected','false')});b.setAttribute('aria-selected','true');showBank(i)});tabs.appendChild(b)});
+  function showBank(i){var c=BANK[i];bank.innerHTML=['S','P','I','N'].map(function(k){return '<div class="card qcard"><div class="hd"><span class="chip '+k+'">'+k+' · '+NAMES[k]+'</span><button class="copy" data-t="'+esc(c[k].join('\n'))+'">copiar</button></div><ul>'+c[k].map(function(q){return '<li>'+esc(q)+'</li>'}).join('')+'</ul></div>'}).join('');
+    $$('.copy',bank).forEach(function(b){b.addEventListener('click',function(){var t=b.dataset.t;var done=function(){b.textContent='copiado';setTimeout(function(){b.textContent='copiar'},1400)};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){fallback(t,done)})}else{fallback(t,done)}})})}
+  function fallback(t,done){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);done()}
+  showBank(0);
+
+  /* quiz */
+  var QUIZ=[
+   {q:'Você chegou a assinar alguma coisa na hora da demissão?',a:'S',e:'Olha para trás e levanta um fato. É Situação.'},
+   {q:'Como isso tem pesado no seu mês?',a:'I',e:'Pergunta pelo custo de continuar como está. É Implicação, a mais rara nas gravações.'},
+   {q:'O que ficou sem ser pago?',a:'P',e:'Faz o lead nomear o que está errado hoje. É Problema.'},
+   {q:'Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?',a:'N',e:'Olha para depois de resolver. É Necessidade.'},
+   {q:'Quem definia o seu horário e as suas tarefas?',a:'S',e:'Fato sobre como o trabalho funcionava. Situação.'},
+   {q:'E se demorar mais três meses, o que acontece?',a:'I',e:'Projeta o custo de ficar parado. Implicação.'},
+   {q:'Você voltou a trabalhar por escolha ou por necessidade?',a:'P',e:'Revela o que está errado hoje, na voz do lead. Problema.'},
+   {q:'Se o benefício voltasse a entrar todo mês, o que muda na sua rotina?',a:'N',e:'Faz visualizar a solução. Necessidade.'},
+   {q:'O que essas horas tiraram de você: família, saúde, outro trabalho?',a:'I',e:'Custo humano da situação. Implicação.'},
+   {q:'Quantas horas por semana ficavam de fora do ponto?',a:'P',e:'Dimensiona o que está errado. Problema. Parece Situação, mas já aponta a falha.'}];
+  var qi=0,qs=0,qlock=false;
+  function qShow(){var q=QUIZ[qi];$('#qn').textContent='Pergunta '+(qi+1)+' de '+QUIZ.length;$('#qq').textContent='"'+q.q+'"';$('#qf').textContent='';$('#qnext').hidden=true;qlock=false;
+    $$('.opt').forEach(function(o){o.className='opt';o.disabled=false})}
+  $$('.opt').forEach(function(o){o.addEventListener('click',function(){if(qlock)return;qlock=true;var q=QUIZ[qi];var ok=o.dataset.a===q.a;if(ok)qs++;
+    $$('.opt').forEach(function(x){x.disabled=true;if(x.dataset.a===q.a)x.classList.add('right')});if(!ok)o.classList.add('wrong');
+    $('#qf').innerHTML=(ok?'<b>Isso.</b> ':'<b>Era '+NAMES[q.a]+'.</b> ')+esc(q.e);$('#qs').textContent=qs;
+    if(qi<QUIZ.length-1){$('#qnext').hidden=false}else{$('#qmsg').textContent=qs>=9?'Placar de quem já conduz a conversa. Agora é fazer a pergunta de implicação na próxima ligação.':qs>=6?'Bom. As que erraram costumam ser Problema × Implicação: uma olha o que está errado, a outra o que isso custa.':'Vale reler as quatro letras e jogar de novo em dupla.'}
+  })});
+  $('#qnext').addEventListener('click',function(){qi++;qShow()});
+  $('#qreset').addEventListener('click',function(){qi=0;qs=0;$('#qs').textContent='0';$('#qmsg').textContent='Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.';qShow()});
+  qShow();
+
+  /* objections */
+  var OBJ=[
+   {l:'Não tenho prova nenhuma.',b:'Acha que sem papel não há caso.',a:'O que você tem aí: mensagens, colegas que viram, holerites, fotos?',d:'Muita coisa se prova por testemunha e por documento que a empresa é obrigada a apresentar. Isso é trabalho nosso, não seu.'},
+   {l:'Quanto você vai me cobrar?  (no meio do pedido de documentos)',b:'Honorários não foram fechados; acha que há custo agora. É a objeção que trava os documentos.',a:'Você ficou com a impressão de que paga alguma coisa antes?',d:'O senhor não paga nada agora. Só pagamos se o caso pagar. Quer que eu repita como funciona? E voltar ao contrato antes dos documentos.'},
+   {l:'Depois eu te chamo. Vou pensar.',b:'Falta urgência: a conversa não chegou à implicação.',a:'Claro. Só me diz: o que você precisa saber para decidir?',d:'Se nada: "Hoje às 14h ou amanhã às 9h?" Propor dois horários, criar a tarefa na hora e lembrar de manhã com contexto.'},
+   {l:'Já tenho advogado para isso.',b:'Pode ser outro assunto (INSS) ou o mesmo.',a:'Ele está cuidando de quê exatamente?',d:'Outro assunto: enquadrar na hora o que o escritório assume. O mesmo: encerrar com a porta aberta. Decidir até o minuto 10, não aos 24.'},
+   {l:'Isso demora anos.',b:'Medo de gastar energia por nada.',a:'O que muda para você se demorar um ano? E se ficar como está?',d:'Prazo realista, sem promessa, e o que se perde a cada mês parado.'},
+   {l:'Não quero processar, só queria receber.',b:'Medo de conflito ou de retaliação.',a:'O que te preocupa em entrar com a ação?',d:'Acordo é um desfecho comum, e a empresa não pode retaliar por isso.'},
+   {l:'Vou juntar os documentos e te mando.',b:'Vai esfriar. É onde os leads param.',a:'O que você já tem aí agora? Onde está?',d:'Me manda esse agora que eu espero. O resto, consegue até amanhã ao meio-dia?'},
+   {l:'Fala mais devagar.',b:'Explicação rápida demais, sem checagem.',a:'Deixa eu ir por partes. Até aqui ficou claro?',d:'Duas partes, uma pergunta de checagem, resumo por escrito depois.'}];
+  $('#obj').innerHTML=OBJ.map(function(o){return '<details class="ob"><summary><span class="bubble">'+esc(o.l)+'</span><span class="arr">o que fazer</span></summary><div class="body"><div class="cell"><div class="k">O que está por trás</div><p>'+esc(o.b)+'</p></div><div class="cell ask"><div class="k">Devolver com</div><p>'+esc(o.a)+'</p></div><div class="cell"><div class="k">Depois, dizer</div><p>'+esc(o.d)+'</p></div></div></details>'}).join('');
+
+  /* conversation */
+  var C=[
+   ['a','Boa tarde, Márcia! Aqui é Ana, do escritório Gabriel Habib. Vi que você falou com nosso assistente sobre a dispensa em janeiro e as verbas que não foram pagas. Está podendo falar uns 10 minutos? Vou te fazer algumas perguntas e depois te explico o que dá para fazer.','X','Abertura','Contexto do assistente, tempo e mapa. O lead não repete a história.'],
+   ['l','Posso sim.'],
+   ['a','Me conta como foi a saída. Você foi dispensada ou pediu? Assinou alguma coisa na hora?','S','Situação','Só o que o assistente não colheu.'],
+   ['l','Me mandaram embora, disseram que o acerto sairia em dez dias. Assinei o aviso e só.'],
+   ['a','E o que ficou sem ser pago? Você chegou a cobrar?','P','Problema','O lead nomeia o que está errado.'],
+   ['l','Tudo. Férias, décimo terceiro, a multa. Cobrei três vezes, dizem que estão sem caixa. E não consegui o seguro-desemprego porque não deram baixa na carteira.'],
+   ['a','Então desde janeiro você está sem esses valores e sem o seguro. Como isso tem pesado no seu mês?','I','Implicação','A pergunta que faltou na ligação real. Depois dela, silêncio.'],
+   ['l','Pesa muito. Estou fazendo bico, atrasei o aluguel dois meses, minha mãe está me ajudando.'],
+   ['a','E se isso ficar mais uns meses como está?','I','Implicação','Uma a mais, para o peso ficar claro.'],
+   ['l','Não dá. Eu ia ter que sair do apartamento.'],
+   ['a','Entendi. Agora me diz: se esses valores entrassem nos próximos meses, o que você resolveria primeiro?','N','Necessidade','A resposta vira o gatilho de toda retomada.'],
+   ['l','O aluguel. E devolveria o que minha mãe me emprestou. Só de tirar isso das costas já mudava tudo.'],
+   ['a','Faz sentido. Deixa eu te explicar em duas partes como a gente trabalha. Primeiro, o que dá para pedir: as verbas, a multa, a baixa na carteira para liberar o seguro, e a multa por atraso do acerto. Até aqui ficou claro?','X','Caminho','Em duas partes, com checagem. Dizer também o que não dá.'],
+   ['l','Ficou.'],
+   ['a','Segundo, o custo: você não paga nada agora. Só pagamos se o caso pagar, um percentual do que vier. Pode me interromper se tiver dúvida.','X','Honorários','Resolvido antes dos documentos.'],
+   ['l','E demora quanto?'],
+   ['a','Não consigo te prometer prazo, cada processo tem o seu ritmo. O que eu sei é que cada mês parado é um mês a mais de aluguel atrasado, e a Justiça só alcança até certo ponto para trás. Por isso quero abrir o seu caso hoje. Fechamos?','X','Fechamento','Sem promessa. Usa o que ela disse na implicação.'],
+   ['l','Fechamos.'],
+   ['a','Estou te mandando o contrato agora por e-mail. Abre aí que eu te explico cláusula por cláusula enquanto você assina.','X','Contrato','Na chamada, com a minuta pronta.'],
+   ['s','assinatura acompanhada'],
+   ['a','Pronto. Agora, o que você já tem aí: carteira, o aviso que assinou, os últimos holerites?','X','Documentos','O que está em mãos vai agora.'],
+   ['l','Tenho a carteira e o aviso aqui em casa. Os holerites estão no e-mail.'],
+   ['a','Então me manda foto da carteira e do aviso agora, eu espero. Os holerites, consegue me encaminhar até amanhã ao meio-dia? Assim de tarde o time já começa a andar com o seu caso, e você tira esse aluguel das costas mais cedo.','X','Prazo','Compromisso dela, com o gatilho dela.'],
+   ['l','Consigo.'],
+   ['a','Combinado. Amanhã às 14h eu te chamo aqui para conferir o que faltou.','X','Próximo passo','Data, hora e tarefa antes de desligar.'],
+   ['s','tarefa criada · 14h']];
+  $('#convo').innerHTML=C.map(function(m){if(m[0]==='s')return '<span class="sys">'+esc(m[1])+'</span>';
+    var tag=m[2]?'<span class="tag"><span class="chip '+m[2]+'">'+(m[2]==='X'?'':m[2]+' · ')+esc(m[3])+'</span></span>':'';
+    var why=m[4]?'<span class="why">'+esc(m[4])+'</span>':'';
+    return '<div class="msg '+m[0]+'">'+tag+'<span class="b">'+esc(m[1])+'</span>'+why+'</div>'}).join('');
+  $('#tagbtn').addEventListener('click',function(){var on=$('#convo').classList.toggle('tags');$('#tagbtn').textContent=on?'Ocultar etiquetas':'Mostrar etiquetas';$('#tagbtn').setAttribute('aria-pressed',on?'true':'false')});
+
+  /* self check */
+  var MSG=['Comece pela pergunta de implicação na próxima ligação. Uma só já muda a conversa.','Um passo dado. Qual dos quatro que faltaram você consegue fazer amanhã?','Metade do caminho. O que ficou de fora costuma ser o fechamento com tarefa.','Três de cinco é uma ligação boa. Veja qual das duas faltou e repita a que deu certo.','Quase lá. Falta um item: é ele que separa uma ligação boa de um contrato assinado.','Ligação completa. Guarde a gravação: é o exemplo para a próxima simulação em dupla.'];
+  $$('#chk input').forEach(function(i){i.addEventListener('change',function(){var n=$$('#chk input:checked').length;$('#cn').innerHTML=n+'<span style="font-size:28px;color:var(--fg3)">/5</span>';$('#cm').textContent=MSG[n]})});
+})();
+</script>
+
+</body>
+</html>
