@@ -181,6 +181,31 @@ header .who{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-tra
 .meter .n{font-family:var(--disp);font-size:72px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
 .meter .msg2{font-size:14.5px;color:var(--fg2);margin-top:10px;min-height:3em}
 
+
+/* selector */
+.sel{padding-block:56px 0}
+.sel .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.svc{position:relative;text-align:left;background:var(--s2);border:1px solid var(--b1);border-radius:14px;padding:22px 20px 20px;color:inherit;font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:10px;min-height:170px;transition:border-color .2s,background .2s,transform .2s cubic-bezier(.2,.8,.2,1)}
+.svc:hover{background:var(--s3);border-color:var(--b3);transform:translateY(-2px)}
+.svc .num{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)}
+.svc .nm{font-family:var(--disp);font-size:24px;font-weight:500;letter-spacing:-.015em;line-height:1.15}
+.svc .ds{font-size:13.5px;color:var(--fg2);line-height:1.45}
+.svc .st{margin-top:auto;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg4)}
+.svc[aria-pressed="true"]{background:linear-gradient(135deg,#072183 0%,#0D0A32 100%);border-color:rgba(48,112,217,.55);box-shadow:0 0 0 1px #3070D959,0 0 24px #3070D959}
+.svc[aria-pressed="true"] .nm{color:#fff}.svc[aria-pressed="true"] .st{color:var(--acc)}
+.svc[aria-pressed="true"]::after{content:"";position:absolute;top:18px;right:18px;width:10px;height:10px;border-radius:50%;background:var(--pri);box-shadow:0 0 12px var(--pri)}
+.sel .note{margin-top:14px;font-size:14px;color:var(--fg3)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:28px -20px 0;padding:10px 20px;background:rgba(13,10,50,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.bar .lb{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-right:4px}
+.bar .pill{font-family:var(--body);font-size:13px;font-weight:500;padding:7px 14px;border-radius:999px;border:1px solid var(--b2);background:var(--s3);color:var(--fg2);cursor:pointer}
+.bar .pill[aria-pressed="true"]{background:var(--pri);border-color:transparent;color:#fff}
+.ctx{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);background:var(--pri-soft);border:1px solid var(--pri-border);border-radius:999px;padding:5px 12px;width:max-content;max-width:100%}
+.ctx b{font-weight:600;color:#fff;letter-spacing:.06em;text-transform:none;font-family:var(--body);font-size:13px}
+.swap{animation:swap .45s cubic-bezier(.16,1,.3,1)}
+@keyframes swap{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (max-width:900px){.sel .grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.sel .grid{grid-template-columns:1fr}.svc{min-height:0}}
+
 footer{margin-top:96px;padding-top:28px;border-top:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 footer .sig{font-family:var(--disp);font-size:22px;font-weight:500}
 footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3)}
@@ -217,7 +242,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
     <p class="eyebrow">01 · SPIN na prática</p>
     <h1>Pressão de fora é fraca. <span class="grad">Urgência</span> de dentro fecha contrato.</h1>
     <p class="lead">O lead só age quando ele mesmo diz o que a demora custa e o que muda quando o caso resolve. Este material é para praticar as perguntas que fazem isso acontecer, com os casos que vocês atendem todo dia.</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn pri" href="#letras">Começar pelas quatro letras</a><a class="btn" href="#quiz">Ir direto para o jogo</a></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn pri" href="#servico">Escolher o serviço e começar</a><a class="btn" href="#quiz">Ir direto para o jogo</a></div>
   </div>
   <div class="gauge" aria-live="polite">
     <div class="row"><span class="lbl">Temperatura do lead</span><span class="val" id="gv">12°</span></div>
@@ -230,28 +255,40 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   </div>
 </section>
 
+
+<section class="sel" id="servico">
+  <div class="sec-head">
+    <p class="eyebrow">Passo 1 · Escolha o serviço</p>
+    <h2>Que caso você quer praticar?</h2>
+    <p class="lead">Tudo o que vem abaixo muda com a sua escolha: os exemplos das quatro letras, as falas do mapa, o banco de perguntas, o jogo, as objeções e a conversa inteira.</p>
+  </div>
+  <div class="grid" id="svcgrid" role="group" aria-label="Serviço"></div>
+  <p class="note">Dá para trocar a qualquer momento pela barra que acompanha a página.</p>
+</section>
+<div class="bar" id="bar"><span class="lb">Exemplos de</span></div>
+
 <section id="letras">
   <div class="sec-head">
     <p class="eyebrow">02 · O método</p>
     <h2>Quatro tipos de pergunta, nessa ordem</h2>
     <p class="lead">Toque em cada letra para ver o que a pergunta faz, o erro mais comum nas ligações que ouvimos e um exemplo pronto.</p>
-  </div>
+  <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="letters">
     <button class="flip S" aria-pressed="false" aria-label="Situação: virar o cartão"><div class="inner">
       <div class="face front"><span class="big">S</span><span class="name">Situação</span><p class="one">Entender os fatos e criar vínculo. Poucas perguntas, abertas.</p><span class="tap">toque para virar</span></div>
-      <div class="face back"><span class="k">O que faz</span><p>Levanta só o que o assistente ainda não colheu. Três ou quatro perguntas bastam.</p><span class="k">Erro comum</span><p>Virar interrogatório, e perguntar de novo o que o lead já contou ao assistente.</p><span class="k">Exemplo</span><q>Me conta como foi a sua saída da empresa. Quanto tempo você ficou lá?</q></div>
+      <div class="face back"><span class="k">O que faz</span><p>Levanta só o que o assistente ainda não colheu. Três ou quatro perguntas bastam.</p><span class="k">Erro comum</span><p>Virar interrogatório, e perguntar de novo o que o lead já contou ao assistente.</p><span class="k">Exemplo</span><q data-ex="S"></q></div>
     </div></button>
     <button class="flip P" aria-pressed="false" aria-label="Problema: virar o cartão"><div class="inner">
       <div class="face front"><span class="big">P</span><span class="name">Problema</span><p class="one">O lead nomeia, com as palavras dele, o que está errado hoje.</p><span class="tap">toque para virar</span></div>
-      <div class="face back"><span class="k">O que faz</span><p>Faz o lead dizer o problema em voz alta. O que ele diz vale mais do que o que a gente conclui.</p><span class="k">Erro comum</span><p>Nomear o problema pelo lead: "então eles não te pagaram". Deixa ele dizer.</p><span class="k">Exemplo</span><q>O que ficou sem ser pago? Você chegou a cobrar? O que responderam?</q></div>
+      <div class="face back"><span class="k">O que faz</span><p>Faz o lead dizer o problema em voz alta. O que ele diz vale mais do que o que a gente conclui.</p><span class="k">Erro comum</span><p>Nomear o problema pelo lead: "então eles não te pagaram". Deixa ele dizer.</p><span class="k">Exemplo</span><q data-ex="P"></q></div>
     </div></button>
     <button class="flip I" aria-pressed="false" aria-label="Implicação: virar o cartão"><div class="inner">
       <div class="face front"><span class="big">I</span><span class="name">Implicação</span><p class="one">O custo de continuar como está: dinheiro, tempo, família, saúde.</p><span class="tap">toque para virar</span></div>
-      <div class="face back"><span class="k">O que faz</span><p>Coloca o dedo na ferida. É a pergunta que quase não aparece nas gravações, e a que mais move o lead.</p><span class="k">Erro comum</span><p>Pular para a solução, ou insinuar sem perguntar: "eles vão só ganhar tempo com a senhora".</p><span class="k">Exemplo</span><q>Desde janeiro você está sem essas verbas. Como isso tem pesado no seu mês?</q></div>
+      <div class="face back"><span class="k">O que faz</span><p>Coloca o dedo na ferida. É a pergunta que quase não aparece nas gravações, e a que mais move o lead.</p><span class="k">Erro comum</span><p>Pular para a solução, ou insinuar sem perguntar: "eles vão só ganhar tempo com a senhora".</p><span class="k">Exemplo</span><q data-ex="I"></q></div>
     </div></button>
     <button class="flip N" aria-pressed="false" aria-label="Necessidade: virar o cartão"><div class="inner">
       <div class="face front"><span class="big">N</span><span class="name">Necessidade</span><p class="one">O lead visualiza o caso resolvido e diz que quer isso.</p><span class="tap">toque para virar</span></div>
-      <div class="face back"><span class="k">O que faz</span><p>Traz o alívio depois do peso. A resposta vira o gatilho de toda retomada.</p><span class="k">Erro comum</span><p>Apresentar o serviço antes de o lead dizer o que ganha com ele.</p><span class="k">Exemplo</span><q>Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?</q></div>
+      <div class="face back"><span class="k">O que faz</span><p>Traz o alívio depois do peso. A resposta vira o gatilho de toda retomada.</p><span class="k">Erro comum</span><p>Apresentar o serviço antes de o lead dizer o que ganha com ele.</p><span class="k">Exemplo</span><q data-ex="N"></q></div>
     </div></button>
   </div>
   <p class="bank-note">Regra de ouro: depois de uma pergunta de implicação ou de necessidade, silêncio. Deixe o lead responder inteiro. A resposta dele é o material mais valioso da conversa.</p>
@@ -262,7 +299,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
     <p class="eyebrow">03 · O mapa da conversa</p>
     <h2>Uma ligação boa cabe em <span class="mono" style="font-family:var(--disp)">12 a 15</span> minutos</h2>
     <p class="lead">As ligações de 28 minutos que ouvimos não tinham conteúdo demais. Tinham falta de mapa. Toque em cada etapa.</p>
-  </div>
+  <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="tl" role="tablist" aria-label="Etapas da ligação" id="tl"></div>
   <div class="tl-detail" id="tld"></div>
 </section>
@@ -271,10 +308,9 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">04 · Banco de perguntas</p>
     <h2>Uma pergunta por letra já faz a conversa andar</h2>
-    <p class="lead">Escolha o tipo de caso. As demais perguntas são reserva para quando o lead responde curto.</p>
-  </div>
-  <div class="tabs" role="tablist" id="tabs"></div>
-  <div class="bank" id="bank"></div>
+    <p class="lead">Uma pergunta por letra basta para a conversa andar. As demais são reserva para quando o lead responde curto. Copie e cole na sua cola.</p>
+  <span class="ctx">Serviço · <b data-ctx></b></span></div>
+    <div class="bank" id="bank"></div>
   <p class="bank-note">Lead mais velho ou embarcado, longe de casa: as perguntas de situação costumam revelar uma segunda oportunidade, como aposentadoria especial. Perguntar onde mora, idade, tempo de embarque e adicionais foi o que encontrou 56 PPPs em um caso da amostra.</p>
 </section>
 
@@ -282,11 +318,11 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">05 · O jogo</p>
     <h2>Que letra é essa pergunta?</h2>
-    <p class="lead">Dez perguntas reais de atendimento. Diga se é Situação, Problema, Implicação ou Necessidade. Vale jogar em dupla, com a mão na campainha.</p>
-  </div>
+    <p class="lead">Oito perguntas do serviço escolhido. Diga se é Situação, Problema, Implicação ou Necessidade. Vale jogar em dupla, com a mão na campainha.</p>
+  <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="quiz">
     <div class="card">
-      <p class="mono muted" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase" id="qn">Pergunta 1 de 10</p>
+      <p class="mono muted" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase" id="qn">Pergunta 1 de 8</p>
       <p class="q" id="qq"></p>
       <div class="opts" id="qo">
         <button class="opt" data-a="S">S</button><button class="opt" data-a="P">P</button><button class="opt" data-a="I">I</button><button class="opt" data-a="N">N</button>
@@ -295,7 +331,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
       <div class="nav"><button class="btn" id="qnext" hidden>Próxima</button><button class="btn ghost" id="qreset">Recomeçar</button></div>
     </div>
     <div class="side">
-      <div class="card"><span class="eyebrow" style="margin-bottom:10px">Placar</span><div class="score"><span class="n" id="qs">0</span><span class="d">/ 10</span></div><p class="muted" style="font-size:13.5px;margin-top:8px" id="qmsg">Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.</p></div>
+      <div class="card"><span class="eyebrow" style="margin-bottom:10px">Placar</span><div class="score"><span class="n" id="qs">0</span><span class="d">/ 8</span></div><p class="muted" style="font-size:13.5px;margin-top:8px" id="qmsg">Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.</p></div>
       <div class="card"><span class="eyebrow" style="margin-bottom:10px">Dica de leitura</span><p style="font-size:14px;color:var(--fg2)">Se a pergunta olha para trás, é Situação ou Problema. Se olha para o custo de ficar parado, é Implicação. Se olha para depois de resolver, é Necessidade.</p></div>
     </div>
   </div>
@@ -306,7 +342,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
     <p class="eyebrow">06 · O lead responde</p>
     <h2>Quase toda objeção é uma pergunta sem resposta</h2>
     <p class="lead">Devolva com uma pergunta antes de argumentar. Quem argumenta cedo demais discute com um fantasma. Abra cada fala para ver o que fazer.</p>
-  </div>
+  <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="obj" id="obj"></div>
 </section>
 
@@ -314,8 +350,8 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">07 · Uma conversa inteira</p>
     <h2>Da abertura ao contrato, com duas perguntas a mais</h2>
-    <p class="lead">Inspirada em uma ligação real da amostra: dispensa em janeiro, sem verbas e sem seguro-desemprego. A original teve 13 minutos de boa investigação e terminou sem prazo. Aqui, o que mudou.</p>
-  </div>
+    <p class="lead" id="convlead"></p>
+  <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="convo-ctl"><button class="btn" id="tagbtn" aria-pressed="true">Ocultar etiquetas</button><span class="muted" style="font-size:13px">Cada balão da atendente leva a letra da pergunta e o motivo dela.</span></div>
   <div class="convo tags" id="convo"></div>
 </section>
@@ -325,13 +361,8 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
     <p class="eyebrow">08 · Depois da ligação</p>
     <h2>A resposta do lead vira a próxima mensagem</h2>
     <p class="lead">O que ele disse na implicação e na necessidade vai para a nota, em uma linha. Não é registro pró-forma: é o gatilho da retomada.</p>
-  </div>
-  <div class="after">
-    <div class="card"><span class="eyebrow">A nota no CRM</span><div class="note"><span class="k">gatilho:</span> aluguel atrasado 2 meses, mãe ajudando · quer quitar o aluguel primeiro<br><span class="k">combinado:</span> holerites até amanhã 12h · retorno 14h</div><p class="muted" style="font-size:13.5px">Uma linha. Quem pegar o caso amanhã sabe o que dizer.</p></div>
-    <div class="card"><span class="eyebrow">Cobrança genérica × cobrança com gatilho</span><p class="bad-ex">Conseguiu separar os documentos?</p><q>Márcia, quanto antes os holerites chegarem, antes a gente corre atrás desse aluguel. Consegue me mandar até as 18h?</q></div>
-    <div class="card"><span class="eyebrow">Prazo que é dele, não nosso</span><q>Você me disse que queria resolver logo. Consigo contar com você até amanhã ao meio-dia?</q><p class="muted" style="font-size:13.5px">Se passou: "Você tinha combinado até ontem e ainda não chegou. Fiquei preocupada, porque o que te falei que dá para buscar pode não dar mais se demorar. Precisa de ajuda com algum item?"</p></div>
-    <div class="card"><span class="eyebrow">Lead avançado que sumiu</span><q>Casos parecidos têm trazido resultados relevantes, cada um com seu curso. Como não tive seu retorno, fiquei preocupada: com o tempo passando, parte do que você tem direito pode ficar para trás. Me confirma até as 18h se seguimos?</q><p class="muted" style="font-size:13.5px">Terceiro dia: "Sem o seu retorno, vamos precisar encerrar o seu caso por aqui. Seria uma pena perder esse direito." Nunca prometer valor, prazo ou êxito.</p></div>
-  </div>
+  <span class="ctx">Serviço · <b data-ctx></b></span></div>
+  <div class="after" id="after"></div>
 </section>
 
 <section id="auto">
@@ -363,14 +394,89 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   var $=function(s,r){return (r||document).querySelector(s)};
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var NAMES={S:'Situação',P:'Problema',I:'Implicação',N:'Necessidade'};
+
+  /* ===== dados por serviço ===== */
+  var SV={
+  verbas:{n:'Verbas rescisórias',short:'Verbas',ds:'Dispensa sem acerto: aviso, férias, 13º, multa do FGTS, seguro-desemprego.',
+    pay:'Você não paga nada agora. Só pagamos se o caso pagar, um percentual do que vier.',
+    provas:'mensagens, colegas que viram, holerites, o aviso que você assinou',
+    docs:'carteira, o aviso assinado, os últimos holerites e o extrato do FGTS',
+    gauge:{press:'Subiu pouco. "Manda a carteira e os holerites" é urgência da atendente. Amanhã ela diz "depois eu te chamo".',spin:'A lead acabou de dizer que atrasou o aluguel dois meses. Agora a urgência é dela. Contrato e documentos saem na mesma ligação.'},
+    ex:{S:'Me conta como foi a sua saída. Você pediu ou foi dispensada? Assinou alguma coisa na hora?',P:'O que ficou sem ser pago? Você deu entrada no seguro-desemprego? Conseguiu?',I:'Desde janeiro você está sem essas verbas e sem o seguro. Como isso tem pesado no seu mês?',N:'Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?'},
+    steps:['Vi que você falou com nosso assistente sobre a dispensa em janeiro e as verbas que não foram pagas. Vou te fazer perguntas por uns 10 minutos para entender o caso. Depois te explico o que dá para pedir. Pode ser?','Me conta como foi a saída. Você foi dispensada ou pediu? Assinou alguma coisa na hora?','O que ficou sem ser pago? Você deu entrada no seguro-desemprego? Conseguiu?','Então desde janeiro você está sem isso e sem o seguro. Como você está fechando o mês?','Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?','Vou te explicar em duas partes. Primeiro, o que dá para pedir: as verbas, a multa do FGTS, a baixa na carteira para liberar o seguro e a multa pelo atraso do acerto. Até aqui ficou claro? Segundo: você não paga nada agora, só pagamos se o caso pagar.','Então fechamos? Estou te mandando o contrato agora no seu e-mail. Abre aí que eu te explico enquanto você assina, assim já abrimos o seu caso hoje.','O que você já tem aí: carteira, o aviso, os holerites? Me manda agora, eu espero. O resto consegue até amanhã ao meio-dia? Amanhã às 14h eu te chamo aqui.'],
+    bank:{S:['Como foi a sua saída? Você pediu ou foi dispensada?','Chegou a assinar alguma coisa na hora?','Deram baixa na carteira?'],P:['O que ficou sem ser pago?','Você deu entrada no seguro-desemprego? Conseguiu?','Chegou a cobrar? O que responderam?'],I:['Desde [mês] você está sem isso e sem o seguro. Como você está fechando o mês?','O que ficou para trás nesses meses?','Se isso ficar mais uns meses como está, o que acontece?'],N:['Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?','O que tira das suas costas quando isso se resolve?']},
+    quiz:[{q:'Você chegou a assinar alguma coisa na hora da demissão?',a:'S',e:'Olha para trás e levanta um fato. Situação.'},{q:'Como isso tem pesado no seu mês?',a:'I',e:'Pergunta pelo custo de continuar como está. Implicação, a mais rara nas gravações.'},{q:'O que ficou sem ser pago?',a:'P',e:'Faz o lead nomear o que está errado hoje. Problema.'},{q:'Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?',a:'N',e:'Olha para depois de resolver. Necessidade.'},{q:'Deram baixa na sua carteira?',a:'S',e:'Fato sobre a saída. Situação.'},{q:'Se isso ficar mais uns meses como está, o que acontece?',a:'I',e:'Projeta o custo de ficar parado. Implicação.'},{q:'Você conseguiu o seguro-desemprego?',a:'P',e:'Revela o que está errado hoje. Problema. Parece Situação, mas já aponta a falha.'},{q:'O que tira das suas costas quando isso se resolve?',a:'N',e:'Faz visualizar o alívio. Necessidade.'}],
+    convlead:'Inspirada em uma ligação real da amostra: dispensa em janeiro, sem verbas e sem seguro-desemprego. A original teve 13 minutos de boa investigação e terminou sem prazo. Aqui, o que mudou.',
+    conv:[['a','Boa tarde, Márcia! Aqui é Ana, do escritório Gabriel Habib. Vi que você falou com nosso assistente sobre a dispensa em janeiro e as verbas que não foram pagas. Está podendo falar uns 10 minutos? Vou te fazer algumas perguntas e depois te explico o que dá para fazer.','X','Abertura','Contexto do assistente, tempo e mapa. A lead não repete a história.'],['l','Posso sim.'],['a','Me conta como foi a saída. Você foi dispensada ou pediu? Assinou alguma coisa na hora?','S','Situação','Só o que o assistente não colheu.'],['l','Me mandaram embora, disseram que o acerto sairia em dez dias. Assinei o aviso e só.'],['a','E o que ficou sem ser pago? Você chegou a cobrar?','P','Problema','A lead nomeia o que está errado.'],['l','Tudo. Férias, décimo terceiro, a multa. Cobrei três vezes, dizem que estão sem caixa. E não consegui o seguro-desemprego porque não deram baixa na carteira.'],['a','Então desde janeiro você está sem esses valores e sem o seguro. Como isso tem pesado no seu mês?','I','Implicação','A pergunta que faltou na ligação real. Depois dela, silêncio.'],['l','Pesa muito. Estou fazendo bico, atrasei o aluguel dois meses, minha mãe está me ajudando.'],['a','E se isso ficar mais uns meses como está?','I','Implicação','Uma a mais, para o peso ficar claro.'],['l','Não dá. Eu ia ter que sair do apartamento.'],['a','Entendi. Agora me diz: se esses valores entrassem nos próximos meses, o que você resolveria primeiro?','N','Necessidade','A resposta vira o gatilho de toda retomada.'],['l','O aluguel. E devolveria o que minha mãe me emprestou. Só de tirar isso das costas já mudava tudo.'],['a','Faz sentido. Deixa eu te explicar em duas partes como a gente trabalha. Primeiro, o que dá para pedir: as verbas, a multa do FGTS, a baixa na carteira para liberar o seguro, e a multa por atraso do acerto. Até aqui ficou claro?','X','Caminho','Em duas partes, com checagem. Dizer também o que não dá.'],['l','Ficou.'],['a','Segundo, o custo: você não paga nada agora. Só pagamos se o caso pagar, um percentual do que vier. Pode me interromper se tiver dúvida.','X','Honorários','Resolvido antes dos documentos.'],['l','E demora quanto?'],['a','Não consigo te prometer prazo, cada processo tem o seu ritmo. O que eu sei é que cada mês parado é um mês a mais de aluguel atrasado, e a Justiça só alcança até certo ponto para trás. Por isso quero abrir o seu caso hoje. Fechamos?','X','Fechamento','Sem promessa. Usa o que ela disse na implicação.'],['l','Fechamos.'],['a','Estou te mandando o contrato agora por e-mail. Abre aí que eu te explico cláusula por cláusula enquanto você assina.','X','Contrato','Na chamada, com a minuta pronta.'],['s','assinatura acompanhada'],['a','Pronto. Agora, o que você já tem aí: carteira, o aviso que assinou, os últimos holerites?','X','Documentos','O que está em mãos vai agora.'],['l','Tenho a carteira e o aviso aqui em casa. Os holerites estão no e-mail.'],['a','Então me manda foto da carteira e do aviso agora, eu espero. Os holerites, consegue me encaminhar até amanhã ao meio-dia? Assim de tarde o time já começa a andar com o seu caso, e você tira esse aluguel das costas mais cedo.','X','Prazo','Compromisso dela, com o gatilho dela.'],['l','Consigo.'],['a','Combinado. Amanhã às 14h eu te chamo aqui para conferir o que faltou.','X','Próximo passo','Data, hora e tarefa antes de desligar.'],['s','tarefa criada · 14h']],
+    after:{nota:'<span class="k">gatilho:</span> aluguel atrasado 2 meses, mãe ajudando · quer quitar o aluguel primeiro<br><span class="k">combinado:</span> holerites até amanhã 12h · retorno 14h',bad:'Conseguiu separar os documentos?',good:'Márcia, quanto antes os holerites chegarem, antes a gente corre atrás desse aluguel. Consegue me mandar até as 18h?',adv:'Casos parecidos de verbas não pagas têm trazido resultados relevantes, cada um com seu curso. Como não tive seu retorno, fiquei preocupada: com o tempo passando, parte do que você tem direito pode ficar para trás. Me confirma até as 18h se seguimos?'}},
+
+  horas:{n:'Horas extras',short:'Horas extras',ds:'Jornada além do ponto, intervalo que não existia, banco de horas que nunca fechou.',
+    pay:'Você não paga nada agora. Só pagamos se o caso pagar, um percentual do que vier.',
+    provas:'mensagens do chefe, escalas, fotos do ponto, colegas que faziam o mesmo horário',
+    docs:'carteira, contracheques, mensagens do chefe, nome de dois colegas',
+    gauge:{press:'Subiu pouco. "Manda os contracheques" não muda nada para quem não sabe quanto perdeu. Amanhã ele diz "depois eu vejo".',spin:'O lead acabou de dizer que fazia corrida à noite para fechar o mês e não via os filhos acordados. Agora a urgência é dele.'},
+    ex:{S:'Que horas você entrava e saía de verdade? Tinha ponto? Batia no horário certo ou depois?',P:'Quantas horas por semana ficavam de fora? Você chegou a reclamar? O que disseram?',I:'Em três anos, quanto você acha que deixou de receber? O que essas horas tiraram de você?',N:'Se esse valor voltasse para o seu bolso, o que muda? O que você faria com ele?'},
+    steps:['Vi que você falou com nosso assistente sobre horas extras não pagas, com carteira assinada há mais de três anos. Vou te fazer perguntas por uns 10 minutos para entender o caso. Depois te explico o que dá para pedir. Pode ser?','Que horas você entrava e saía de verdade? Tinha ponto? Batia no horário certo ou depois?','Quantas horas por semana ficavam de fora? Você chegou a reclamar? O que disseram?','Em três anos, quanto você acha que deixou de receber? O que essas horas tiraram de você: família, saúde, outro trabalho?','Se esse valor voltasse para o seu bolso, o que muda? O que você faria com ele?','Vou te explicar em duas partes. Primeiro, o que dá para pedir: as horas além da jornada com o adicional, o intervalo que não existia e os reflexos disso nas férias, no 13º e no FGTS. Até aqui ficou claro? Segundo: você não paga nada agora, só pagamos se o caso pagar.','Então fechamos? Estou te mandando o contrato agora no seu e-mail. Abre aí que eu te explico enquanto você assina, assim já abrimos o seu caso hoje.','O que você já tem aí: carteira, contracheques, mensagens do chefe? Me manda agora, eu espero. O nome de dois colegas consegue até amanhã ao meio-dia? Amanhã às 14h eu te chamo aqui.'],
+    bank:{S:['Que horas você entrava e saía de verdade?','Tinha ponto? Batia no horário certo ou depois?','Como era o almoço? Quanto tempo de verdade?'],P:['Quantas horas por semana ficavam de fora?','Você chegou a reclamar? O que disseram?','Alguém mais da equipe vivia isso?'],I:['Em [tempo de casa], quanto você acha que deixou de receber?','O que essas horas tiraram de você: família, saúde, outro trabalho?','Se continuar assim, o que acontece?'],N:['Se esse valor voltasse para o seu bolso, o que muda?','O que você faria com ele primeiro?']},
+    quiz:[{q:'Que horas você saía de verdade?',a:'S',e:'Fato sobre a jornada. Situação.'},{q:'Quantas horas por semana ficavam de fora do ponto?',a:'P',e:'Dimensiona o que está errado. Problema. Parece Situação, mas já aponta a falha.'},{q:'O que essas horas tiraram de você: família, saúde, outro trabalho?',a:'I',e:'Custo humano da situação. Implicação.'},{q:'Se esse valor voltasse para o seu bolso, o que você faria com ele?',a:'N',e:'Faz visualizar a solução. Necessidade.'},{q:'Tinha ponto? Batia no horário certo ou depois?',a:'S',e:'Levanta como o controle funcionava. Situação.'},{q:'Em três anos, quanto você acha que deixou de receber?',a:'I',e:'Faz o lead sentir o tamanho do que perdeu. Implicação.'},{q:'Você chegou a reclamar? O que disseram?',a:'P',e:'O problema na voz do lead, com a resposta da empresa. Problema.'},{q:'Se isso se resolvesse até o fim do ano, o que muda na sua rotina?',a:'N',e:'Olha para depois de resolver. Necessidade.'}],
+    convlead:'Caso composto a partir de dois leads da amostra: carteira assinada, mais de três anos de empresa, ponto batido antes do fim da jornada. Nas ligações reais, a investigação foi boa e o caminho só apareceu no fim.',
+    conv:[['a','Boa tarde, Rodrigo! Aqui é Ana, do escritório Gabriel Habib. Vi que você falou com nosso assistente sobre horas extras não pagas, com carteira assinada há mais de três anos. Está podendo falar uns 10 minutos? Vou te fazer algumas perguntas e depois te explico o que dá para fazer.','X','Abertura','O cadastro já tinha carteira, tempo de casa e horas extras. Confirmar, não perguntar de novo.'],['l','Posso.'],['a','Que horas você entrava e saía de verdade? E o ponto, batia no horário certo ou depois?','S','Situação','Só o que falta: a jornada real e o controle.'],['l','Entrava às 7h e saía às 19h, 19h30. O ponto eu batia às 17h, o encarregado mandava bater e continuar.'],['a','E o almoço, quanto tempo de verdade?','S','Situação','Uma a mais, porque o intervalo é pedido à parte.'],['l','Uns vinte minutos, comendo no estoque.'],['a','Então quantas horas por semana ficavam de fora? Você chegou a reclamar?','P','Problema','O lead dimensiona o problema com as palavras dele.'],['l','Umas duas horas por dia, dez por semana. Reclamei uma vez e disseram que era assim para todo mundo.'],['a','Em três anos, quanto você acha que deixou de receber? E o que essas horas tiraram de você?','I','Implicação','A pergunta que faltou nas ligações reais. Depois dela, silêncio.'],['l','Nunca fiz a conta. Muito. E eu não via meus filhos acordados, chegava e eles já estavam dormindo. Ainda fazia corrida de aplicativo no fim de semana para fechar o mês.'],['a','Se esse valor voltasse para o seu bolso nos próximos meses, o que muda? O que você faria primeiro?','N','Necessidade','A resposta vira o gatilho de toda retomada.'],['l','Quitava o carro e parava com a corrida no fim de semana. Ficava com as crianças.'],['a','Faz sentido. Deixa eu te explicar em duas partes. Primeiro, o que dá para pedir: as horas além da jornada com o adicional, o intervalo de almoço que não existia, e o reflexo disso nas férias, no 13º e no FGTS. Até aqui ficou claro?','X','Caminho','Em duas partes, com checagem.'],['l','Ficou. Mas eu não tenho prova, o ponto era batido às 17h.'],['a','O que você tem aí: mensagens do encarregado, escala, foto de alguma coisa, colegas que faziam o mesmo horário?','X','Objeção devolvida','Pergunta antes de argumentar.'],['l','Tenho mensagem dele mandando ficar até fechar o caminhão. E dois colegas que saíam comigo.'],['a','Isso é prova. Muita coisa se prova por testemunha e por documento que a empresa é obrigada a apresentar. Esse trabalho é nosso. Segundo ponto, o custo: você não paga nada agora. Só pagamos se o caso pagar, um percentual do que vier.','X','Honorários','Resolvido antes dos documentos.'],['l','Beleza. Quanto tempo isso leva?'],['a','Não consigo te prometer prazo, cada processo tem o seu ritmo. O que eu sei é que a Justiça só alcança até certo ponto para trás: cada mês que passa é um mês daquelas horas que fica de fora. Por isso quero abrir o seu caso hoje. Fechamos?','X','Fechamento','Sem promessa. Usa o que ele disse na implicação.'],['l','Fechamos.'],['a','Estou te mandando o contrato agora por e-mail. Abre aí que eu te explico cláusula por cláusula enquanto você assina.','X','Contrato','Na chamada, com a minuta pronta.'],['s','assinatura acompanhada'],['a','Agora, o que você já tem aí: carteira, contracheques, as mensagens do encarregado?','X','Documentos','O que está em mãos vai agora.'],['l','Carteira e as mensagens estão no celular. Contracheque eu tenho no e-mail.'],['a','Então me manda foto da carteira e print das mensagens agora, eu espero. Os contracheques e o nome dos dois colegas, consegue até amanhã ao meio-dia? Assim de tarde o time já começa a andar, e você para com a corrida de fim de semana mais cedo.','X','Prazo','Compromisso dele, com o gatilho dele.'],['l','Consigo.'],['a','Combinado. Amanhã às 14h eu te chamo aqui para conferir o que faltou.','X','Próximo passo','Data, hora e tarefa antes de desligar.'],['s','tarefa criada · 14h']],
+    after:{nota:'<span class="k">gatilho:</span> não via os filhos acordados, corrida de app no fim de semana · quer quitar o carro<br><span class="k">combinado:</span> contracheques + 2 colegas até amanhã 12h · retorno 14h',bad:'Conseguiu separar os contracheques?',good:'Rodrigo, quanto antes os contracheques e o nome dos colegas chegarem, antes a gente corre atrás dessas horas. Consegue me mandar até as 18h?',adv:'Casos parecidos de jornada além do ponto têm trazido resultados relevantes, cada um com seu curso. Como não tive seu retorno, fiquei preocupada: a cada mês, uma parte daquelas horas fica de fora do que a Justiça alcança. Me confirma até as 18h se seguimos?'}},
+
+  vinculo:{n:'Reconhecimento de vínculo',short:'Vínculo',ds:'Trabalhou como PJ, MEI ou "autônomo" com chefe, horário e meta. Sem carteira, sem FGTS, sem férias.',
+    pay:'Você não paga nada agora. Só pagamos se o caso pagar, um percentual do que vier.',
+    provas:'e-mails, escalas, crachá, mensagens com cobrança de horário, colegas',
+    docs:'contrato de prestação de serviço, notas emitidas, comprovantes de pagamento, escalas e mensagens',
+    gauge:{press:'Subiu pouco. "Manda o contrato PJ e as notas" não conversa com quem passou quatro anos achando que era normal. Amanhã ela diz "vou ver".',spin:'A lead acabou de dizer que ficou doente e não teve um dia pago. Agora a urgência é dela.'},
+    ex:{S:'Como você era paga? Quem definia o seu horário e as suas tarefas? Você podia mandar outra pessoa no seu lugar?',P:'O que você ficou sem por não ter a carteira assinada: FGTS, férias, 13º, INSS?',I:'São quatro anos sem recolhimento. Como isso pesa quando você pensa em aposentadoria ou em ficar doente?',N:'Se esse período fosse reconhecido, o que isso destrava para você?'},
+    steps:['Vi que você falou com nosso assistente sobre os quatro anos como PJ na loja, com horário e meta. Vou te fazer perguntas por uns 10 minutos para entender o caso. Depois te explico o que dá para pedir. Pode ser?','Como você era paga? Quem definia o seu horário e as suas tarefas? Você podia mandar outra pessoa no seu lugar?','O que você ficou sem por não ter a carteira assinada: FGTS, férias, 13º, INSS?','São quatro anos sem recolhimento. Como isso pesa quando você pensa em aposentadoria ou em ficar doente?','Se esse período fosse reconhecido, o que isso destrava para você?','Vou te explicar em duas partes. Primeiro, o que dá para pedir: o reconhecimento do vínculo, a anotação na carteira e as verbas de todo o período, FGTS, férias, 13º. Até aqui ficou claro? Segundo: você não paga nada agora, só pagamos se o caso pagar.','Então fechamos? Estou te mandando o contrato agora no seu e-mail. Abre aí que eu te explico enquanto você assina, assim já abrimos o seu caso hoje.','O que você já tem aí: contrato PJ, notas, comprovantes de pagamento? Me manda agora, eu espero. As escalas e as mensagens consegue até amanhã ao meio-dia? Amanhã às 14h eu te chamo aqui.'],
+    bank:{S:['Como você era paga? Todo mês, mesmo valor?','Quem definia horário, folga e tarefas?','Você podia mandar outra pessoa no seu lugar?','Quem pediu para você abrir o MEI?'],P:['O que você ficou sem por não ter carteira: FGTS, férias, 13º, INSS?','Quando saiu, recebeu alguma coisa?','Chegou a pedir a carteira? O que responderam?'],I:['São [anos] sem recolhimento. Como isso pesa quando você pensa em aposentadoria ou em ficar doente?','Quando você ficou doente, como foi?','O que você deixou de fazer por não ter esses direitos?'],N:['Se esse período fosse reconhecido, o que isso destrava para você?','O que você faria com o FGTS de todo esse tempo?']},
+    quiz:[{q:'Quem definia o seu horário e as suas tarefas?',a:'S',e:'Fato sobre como o trabalho funcionava. Situação.'},{q:'O que você ficou sem por não ter a carteira assinada?',a:'P',e:'Faz a lead nomear o que está errado hoje. Problema.'},{q:'Como isso pesa quando você pensa em aposentadoria ou em ficar doente?',a:'I',e:'Custo de continuar como está. Implicação.'},{q:'Se esse período fosse reconhecido, o que isso destrava para você?',a:'N',e:'Olha para depois de resolver. Necessidade.'},{q:'Você podia mandar outra pessoa no seu lugar?',a:'S',e:'Levanta a pessoalidade, um fato. Situação.'},{q:'Quando você ficou doente, como foi?',a:'I',e:'Faz sentir na prática o que a falta de direitos custou. Implicação.'},{q:'Chegou a pedir a carteira? O que responderam?',a:'P',e:'O problema na voz da lead, com a resposta da empresa. Problema.'},{q:'O que você faria com o FGTS de todo esse tempo?',a:'N',e:'Faz visualizar a solução. Necessidade.'}],
+    convlead:'Caso composto: vendedora de loja, quatro anos como MEI por exigência da empresa, com horário, meta e chefe. É o tipo de conversa em que o lead ainda não sabe que tem um caso, e por isso a implicação pesa mais.',
+    conv:[['a','Boa tarde, Cláudia! Aqui é Ana, do escritório Gabriel Habib. Vi que você falou com nosso assistente sobre os quatro anos como PJ na loja, com horário e meta. Está podendo falar uns 10 minutos? Vou te fazer algumas perguntas e depois te explico o que dá para fazer.','X','Abertura','Contexto do assistente, tempo e mapa.'],['l','Posso sim.'],['a','Me conta: como você era paga? Quem definia o seu horário, as folgas e as tarefas?','S','Situação','Subordinação e habitualidade, sem usar essas palavras.'],['l','Fixo todo mês, mais comissão. A gerente montava a escala, marcava folga e cobrava meta no grupo. Eles pediram para eu abrir o MEI quando entrei.'],['a','Você podia mandar outra pessoa no seu lugar num dia que não pudesse ir?','S','Situação','Pessoalidade, em uma pergunta.'],['l','Imagina. Se eu faltasse, descontavam.'],['a','E o que você ficou sem por não ter a carteira assinada: FGTS, férias, 13º, INSS?','P','Problema','A lead nomeia o que está errado.'],['l','Tudo isso. Férias eu tirava sem receber. Quando saí, não recebi nada.'],['a','São quatro anos sem recolhimento. Como isso pesa quando você pensa em aposentadoria ou em ficar doente?','I','Implicação','A pergunta que muda a conversa. Depois dela, silêncio.'],['l','Ano passado fiquei um mês de cama e não recebi um dia. Meu marido segurou tudo. E aposentadoria eu nem penso, sei que não tenho nada lá.'],['a','Se esse período fosse reconhecido, com o FGTS de quatro anos e o tempo contando no INSS, o que isso destrava para você?','N','Necessidade','A resposta vira o gatilho de toda retomada.'],['l','A entrada da casa. A gente está juntando faz tempo e não sai.'],['a','Faz sentido. Deixa eu te explicar em duas partes. Primeiro, o que dá para pedir: o reconhecimento do vínculo de todo o período, a anotação na carteira, e as verbas desses quatro anos, FGTS, férias, 13º e o acerto da saída. Até aqui ficou claro?','X','Caminho','Em duas partes, com checagem.'],['l','Ficou. Mas eu assinei o contrato de PJ, isso não me prejudica?'],['a','O que vale é como o trabalho acontecia de verdade, não o nome do contrato. Escala, meta, desconto por falta: tudo isso conta a nosso favor. Segundo ponto, o custo: você não paga nada agora. Só pagamos se o caso pagar, um percentual do que vier.','X','Honorários','Objeção respondida e honorários resolvidos antes dos documentos.'],['l','Entendi. E se eles disserem que eu era autônoma?'],['a','Vão dizer, e a gente prova o contrário com o que você tem. Cada mês que passa é um mês daquele período que fica mais longe do que a Justiça alcança. Por isso quero abrir o seu caso hoje. Fechamos?','X','Fechamento','Sem promessa. Urgência real, não inventada.'],['l','Fechamos.'],['a','Estou te mandando o contrato agora por e-mail. Abre aí que eu te explico cláusula por cláusula enquanto você assina.','X','Contrato','Na chamada, com a minuta pronta.'],['s','assinatura acompanhada'],['a','Agora, o que você já tem aí: o contrato de PJ, as notas que emitia, comprovantes de pagamento, o grupo da loja?','X','Documentos','O que está em mãos vai agora.'],['l','Contrato e notas estão no e-mail. O grupo eu ainda tenho no celular.'],['a','Então me manda print da escala e das cobranças de meta do grupo agora, eu espero. Contrato, notas e comprovantes, consegue até amanhã ao meio-dia? Assim de tarde o time já começa a andar, e a entrada da casa fica mais perto.','X','Prazo','Compromisso dela, com o gatilho dela.'],['l','Consigo.'],['a','Combinado. Amanhã às 14h eu te chamo aqui para conferir o que faltou.','X','Próximo passo','Data, hora e tarefa antes de desligar.'],['s','tarefa criada · 14h']],
+    after:{nota:'<span class="k">gatilho:</span> 1 mês de cama sem receber, marido segurou · quer a entrada da casa<br><span class="k">combinado:</span> contrato PJ + notas + comprovantes até amanhã 12h · retorno 14h',bad:'Conseguiu separar o contrato e as notas?',good:'Cláudia, quanto antes o contrato e as notas chegarem, antes a gente corre atrás desses quatro anos e da entrada da casa. Consegue me mandar até as 18h?',adv:'Casos parecidos de vínculo com PJ têm trazido resultados relevantes, cada um com seu curso. Como não tive seu retorno, fiquei preocupada: parte daquele período vai ficando fora do que a Justiça alcança. Me confirma até as 18h se seguimos?'}},
+
+  acidente:{n:'Acidente e auxílio-acidente',short:'Acidente',ds:'CAT, afastamento, alta do INSS com dor, sequela que reduz a capacidade. Trabalhista e previdenciário juntos.',
+    pay:'O senhor não paga nada agora. Só pagamos se o INSS pagar.',
+    provas:'CAT, laudos, exames, a carta do INSS, receitas, fotos',
+    docs:'CAT, laudos e exames, a carta de alta do INSS, carteira e, se tiver, o PPP',
+    gauge:{press:'Subiu pouco. "Manda os laudos e a CAT" para quem está trabalhando com dor e medo é só mais uma cobrança. Amanhã ele diz "quando eu puder".',spin:'O lead acabou de dizer que esconde a dor para não ser demitido. Agora a urgência é dele.'},
+    ex:{S:'Como aconteceu o acidente? Abriram CAT? O senhor ficou afastado quanto tempo? O que o INSS decidiu?',P:'O senhor voltou a trabalhar por escolha ou por necessidade? Ficou alguma sequela? O benefício foi cortado quando?',I:'Sem o benefício e trabalhando com dor, como o senhor está se mantendo? E se demorar mais três meses?',N:'Se o benefício voltasse a entrar todo mês, o que muda na sua rotina?'},
+    steps:['Vi que o senhor falou com nosso assistente sobre o acidente na empresa e a alta do INSS. Vou te fazer perguntas por uns 10 minutos para entender o caso. Depois te explico o que dá para pedir. Pode ser?','Como aconteceu o acidente? Abriram CAT? O senhor ficou afastado quanto tempo? O que o INSS decidiu?','O senhor voltou a trabalhar por escolha ou por necessidade? Ficou alguma sequela? O benefício foi cortado quando?','Sem o benefício e trabalhando com dor, como o senhor está se mantendo? E se demorar mais três meses, o que acontece?','Se o benefício voltasse a entrar todo mês, o que muda na sua rotina?','Vou te explicar em duas partes. Primeiro, o que dá para pedir: rever a alta junto ao INSS, o auxílio-acidente pela sequela que ficou, e a estabilidade de doze meses na empresa depois do retorno. Até aqui ficou claro? Segundo: o senhor não paga nada agora, só pagamos se o INSS pagar.','Então fechamos? Estou te mandando o contrato agora no seu e-mail. Abre aí que eu te explico enquanto o senhor assina, assim já abrimos o seu caso hoje.','O que o senhor já tem aí: a CAT, os laudos, a carta do INSS? Me manda agora, eu espero. Os exames consegue até amanhã ao meio-dia? Amanhã às 14h eu te chamo aqui.'],
+    bank:{S:['Como aconteceu? Abriram CAT?','O senhor ficou afastado quanto tempo? O que o INSS decidiu?','Que médico acompanha? Tem laudo recente?','Onde mora? Trabalha embarcado ou longe de casa?'],P:['O senhor voltou a trabalhar por escolha ou por necessidade?','Ficou alguma sequela? O que não consegue mais fazer?','O benefício foi cortado quando? Tentou recorrer?'],I:['Sem o benefício, como o senhor está se mantendo?','Trabalhando com dor, o que acontece com a sua saúde daqui a um ano?','E se demorar mais três meses, o que acontece?'],N:['Se o benefício voltasse a entrar todo mês, o que muda na sua rotina?','Se pudesse tratar direito, o que faria primeiro?']},
+    quiz:[{q:'Abriram CAT quando aconteceu?',a:'S',e:'Fato sobre o acidente. Situação.'},{q:'O senhor voltou a trabalhar por escolha ou por necessidade?',a:'P',e:'Revela o que está errado hoje, na voz do lead. Problema.'},{q:'E se demorar mais três meses, o que acontece?',a:'I',e:'Projeta o custo de ficar parado. Implicação.'},{q:'Se o benefício voltasse a entrar todo mês, o que muda na sua rotina?',a:'N',e:'Faz visualizar a solução. Necessidade.'},{q:'O que o INSS decidiu na última perícia?',a:'S',e:'Levanta um fato. Situação.'},{q:'Trabalhando com dor, o que acontece com a sua saúde daqui a um ano?',a:'I',e:'Custo de continuar como está. Implicação.'},{q:'Ficou alguma sequela? O que não consegue mais fazer?',a:'P',e:'Dimensiona o problema. Problema.'},{q:'Se pudesse tratar direito, o que faria primeiro?',a:'N',e:'Olha para depois de resolver. Necessidade.'}],
+    convlead:'Inspirada em uma ligação real da amostra: lead mais velho, acidente na empresa, alta do INSS e volta ao trabalho com dor. Na original a atendente encontrou uma segunda oportunidade perguntando sobre embarque e adicionais; aqui, o que mudou no fechamento.',
+    conv:[['a','Boa tarde, seu José! Aqui é Ana, do escritório Gabriel Habib. Vi que o senhor falou com nosso assistente sobre o acidente na empresa e a alta do INSS. Está podendo falar uns 10 minutos? Vou te fazer algumas perguntas e depois te explico o que dá para fazer.','X','Abertura','Contexto do assistente, tempo e mapa.'],['l','Posso, minha filha.'],['a','Me conta como aconteceu. Abriram CAT? O senhor ficou afastado quanto tempo?','S','Situação','Fatos que o assistente não colheu.'],['l','A máquina prendeu minha mão em março. Abriram a CAT sim. Fiquei quatro meses pelo INSS, aí deram alta.'],['a','E o que o INSS decidiu na última perícia? O senhor tentou recorrer?','S','Situação','Uma a mais, para saber onde o caso está.'],['l','Disseram que eu estava apto. Entrei com recurso e negaram.'],['a','O senhor voltou a trabalhar por escolha ou por necessidade? Ficou alguma sequela?','P','Problema','O lead nomeia o que está errado.'],['l','Por necessidade, não tinha como ficar sem salário. A mão não fecha direito, não seguro peso. Estou na mesma máquina.'],['a','Sem o benefício e trabalhando com dor, como o senhor está se mantendo? E se ficar assim mais uns meses?','I','Implicação','A pergunta que faltou. Depois dela, silêncio.'],['l','Escondo a dor para não ser mandado embora. Tenho 58 anos, quem vai me contratar? A fisioterapia eu parei porque não dava para pagar.'],['a','Se o benefício voltasse a entrar todo mês e o senhor pudesse tratar direito, o que muda na sua rotina?','N','Necessidade','A resposta vira o gatilho de toda retomada.'],['l','Voltava para a fisioterapia e parava de fingir que está tudo bem. Dormia, que eu não durmo de dor.'],['a','Entendi. Deixa eu te explicar em duas partes. Primeiro, o que dá para pedir: rever essa alta junto ao INSS, o auxílio-acidente pela sequela que ficou na mão, e a estabilidade de doze meses na empresa depois do retorno, que protege o senhor de demissão nesse período. Até aqui ficou claro?','X','Caminho','Em duas partes, com checagem. O que protege ele hoje vem primeiro.'],['l','Ficou. E quanto o senhor vai me cobrar?'],['a','O senhor não paga nada agora. Só pagamos se o INSS pagar. Vou te explicar isso em duas partes e depois mando por escrito. Primeiro: só pagamos se o INSS pagar. Segundo: quanto. Pode me interromper à vontade.','X','Honorários','A objeção que trava os documentos, resolvida antes deles. Ritmo devagar.'],['l','Assim está bom.'],['a','Cada mês que passa é um mês de benefício que fica para trás e um mês a mais de dor sem tratamento. Por isso quero abrir o seu caso hoje. Fechamos?','X','Fechamento','Sem promessa. Usa o que ele disse na implicação.'],['l','Fechamos.'],['a','Estou te mandando o contrato agora no seu e-mail. Se preferir, sua filha pode abrir com o senhor. Eu explico cláusula por cláusula enquanto assina.','X','Contrato','Na chamada, com quem ajuda o lead do lado.'],['s','assinatura acompanhada'],['a','Agora, o que o senhor já tem aí: a CAT, os laudos, a carta de alta do INSS?','X','Documentos','O que está em mãos vai agora.'],['l','A CAT e a carta estão numa pasta aqui. Os exames estão no celular da minha filha.'],['a','Então me manda foto da CAT e da carta agora, eu espero. Os exames e a carteira, consegue até amanhã ao meio-dia? Assim de tarde o time já começa a andar, e a fisioterapia volta mais cedo.','X','Prazo','Compromisso dele, com o gatilho dele.'],['l','Consigo.'],['a','Combinado. Amanhã às 14h eu te chamo aqui para conferir o que faltou.','X','Próximo passo','Data, hora e tarefa antes de desligar.'],['s','tarefa criada · 14h']],
+    after:{nota:'<span class="k">gatilho:</span> esconde a dor por medo de demissão, parou a fisioterapia, 58 anos · quer voltar a tratar<br><span class="k">combinado:</span> exames + carteira até amanhã 12h · retorno 14h',bad:'Conseguiu separar os exames?',good:'Seu José, quanto antes os exames chegarem, antes a gente corre atrás do benefício e o senhor volta para a fisioterapia. Consegue me mandar até as 18h?',adv:'Casos parecidos de sequela depois de acidente têm trazido resultados relevantes, cada um com seu curso. Como não tive seu retorno, fiquei preocupada: cada mês é um mês de benefício que fica para trás. Me confirma até as 18h se seguimos?'}}
+  };
+  var ORDER=['verbas','horas','vinculo','acidente'];
+  var cur='verbas';
+
+  /* ===== seletor ===== */
+  var grid=$('#svcgrid'),bar=$('#bar');
+  ORDER.forEach(function(k,i){var v=SV[k];var b=document.createElement('button');b.className='svc';b.dataset.k=k;b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span class="num">0'+(i+1)+' · Serviço</span><span class="nm">'+esc(v.n)+'</span><span class="ds">'+esc(v.ds)+'</span><span class="st">ver exemplos</span>';
+    b.addEventListener('click',function(){select(k,true)});grid.appendChild(b);
+    var p=document.createElement('button');p.className='pill';p.dataset.k=k;p.textContent=v.short;p.setAttribute('aria-pressed','false');p.addEventListener('click',function(){select(k,false)});bar.appendChild(p)});
+  function select(k,scroll){cur=k;var v=SV[k];
+    $$('.svc').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===k?'true':'false');$('.st',b).textContent=b.dataset.k===k?'selecionado':'ver exemplos'});
+    $$('.pill').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===k?'true':'false')});
+    $$('[data-ctx]').forEach(function(e){e.textContent=v.n});
+    $$('[data-ex]').forEach(function(e){e.textContent=v.ex[e.dataset.ex]});
+    showStep(curStep);showBank();qReset();renderObj();renderConv();renderAfter();
+    var g=$('.gauge .toggle .btn[aria-pressed="true"]');if(g){$('#ghint').textContent=v.gauge[g.dataset.g]}
+    ['letras','mapa','banco','quiz','objecoes','conversa','depois'].forEach(function(id){var el=$('#'+id);el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
+    try{localStorage.setItem('spin-svc',k)}catch(e){}
+    if(scroll){var t=$('#letras');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}
+  }
 
   /* gauge */
-  var G={press:{v:22,h:'Subiu pouco. Cobrar funciona por um dia; a urgência é da atendente, não do lead. Amanhã ele diz "depois eu te chamo".'},
-         spin:{v:84,h:'O lead acabou de dizer que atrasou o aluguel dois meses. Agora a urgência é dele. Contrato e documentos saem na mesma ligação.'}};
+  var GP={press:22,spin:84};
   $$('.gauge .toggle .btn').forEach(function(b){b.addEventListener('click',function(){
     $$('.gauge .toggle .btn').forEach(function(x){x.setAttribute('aria-pressed','false')});
-    b.setAttribute('aria-pressed','true');var g=G[b.dataset.g];
-    $('#gbar').style.width=g.v+'%';$('#gv').textContent=g.v+'°';$('#ghint').textContent=g.h;
+    b.setAttribute('aria-pressed','true');var v=GP[b.dataset.g];
+    $('#gbar').style.width=v+'%';$('#gv').textContent=v+'°';$('#ghint').textContent=SV[cur].gauge[b.dataset.g];
   })});
 
   /* flip */
@@ -378,110 +484,76 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
 
   /* timeline */
   var STEPS=[
-   {n:'Abertura',m:'0–1 min',t:'Quem fala, o que o lead já contou ao assistente, quanto tempo leva e o que acontece no fim.',q:'Vi que você falou com nosso assistente sobre horas extras não pagas. Vou te fazer perguntas por uns 10 minutos para entender o caso. Depois te explico o que dá para pedir e como funciona aqui. Pode ser?',w:'Sem mapa, a ligação vira interrogatório sem fim. Com mapa, o lead sabe que vai ouvir uma resposta.'},
-   {n:'Situação',m:'1–4 min',t:'Três ou quatro perguntas abertas sobre o que falta. Confirmar o que já se sabe em vez de perguntar de novo.',q:'Me conta como foi a sua saída. Você pediu ou foi dispensado? Assinou alguma coisa na hora?',w:'O CRM já tinha carteira assinada, 3 anos de casa e horas extras. Perguntar de novo faz o lead sentir desorganização.'},
-   {n:'Problema',m:'4–6 min',t:'O que está errado hoje, dito pelo lead.',q:'O que ficou sem ser pago? Você deu entrada no seguro-desemprego? Conseguiu?',w:'A resposta define o enquadramento. Até o minuto 10 a atendente já sabe se o escritório assume e por qual caminho.'},
-   {n:'Implicação',m:'6–8 min',t:'O que a demora está custando. Uma ou duas perguntas e silêncio.',q:'Desde janeiro você está sem isso e sem o seguro. Como você está fechando o mês?',w:'É a pergunta que faltou em 3 das 5 ligações longas. Sem ela, o lead ouve a solução sem sentir o problema.'},
-   {n:'Necessidade',m:'8–10 min',t:'O que muda quando resolver. Anotar a resposta: ela volta nas retomadas.',q:'Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?',w:'"O aluguel, e devolver o que minha mãe emprestou." Isso é o gatilho de toda mensagem daqui para frente.'},
-   {n:'Caminho',m:'10–13 min',t:'O que dá para pedir, como o escritório trabalha, como são os honorários. Em duas partes, checando o entendimento. Dizer também o que não dá.',q:'Vou te explicar em duas partes. Primeiro, o que dá para pedir. Até aqui ficou claro? Segundo: você não paga nada agora, só pagamos se o caso pagar.',w:'Em uma ligação de 28 minutos o caminho só apareceu aos 23:53. Aqui ele chega aos 10.'},
-   {n:'Contrato',m:'13–14 min',t:'Minuta pronta, link enviado na hora, assinatura acompanhada.',q:'Então fechamos? Estou te mandando o contrato agora no seu e-mail. Abre aí que eu te explico enquanto você assina, assim já abrimos o seu caso hoje.',w:'A pessoa acabou de dizer o que quer. Para não assinar, precisaria se contradizer. Enviado depois, esfria.'},
-   {n:'Documentos',m:'14–15 min',t:'O que o lead já tem em mãos vai agora, na linha. O resto com prazo assumido por ele. Tarefa criada antes de desligar.',q:'O que você já tem aí? Me manda agora, eu espero. O resto consegue até amanhã ao meio-dia? Amanhã às 14h eu te chamo aqui.',w:'É onde os leads param. Dois leads da amostra tinham os documentos na mão durante a ligação e ninguém pediu.'}];
-  var tl=$('#tl'),tld=$('#tld');
+   {n:'Abertura',m:'0–1 min',t:'Quem fala, o que o lead já contou ao assistente, quanto tempo leva e o que acontece no fim.',w:'Sem mapa, a ligação vira interrogatório sem fim. Com mapa, o lead sabe que vai ouvir uma resposta.'},
+   {n:'Situação',m:'1–4 min',t:'Três ou quatro perguntas abertas sobre o que falta. Confirmar o que já se sabe em vez de perguntar de novo.',w:'Perguntar de novo o que o assistente já colheu faz o lead sentir desorganização. Foi assim em uma ligação da amostra.'},
+   {n:'Problema',m:'4–6 min',t:'O que está errado hoje, dito pelo lead.',w:'A resposta define o enquadramento. Até o minuto 10 a atendente já sabe se o escritório assume e por qual caminho.'},
+   {n:'Implicação',m:'6–8 min',t:'O que a demora está custando. Uma ou duas perguntas e silêncio.',w:'É a pergunta que faltou em 3 das 5 ligações longas. Sem ela, o lead ouve a solução sem sentir o problema.'},
+   {n:'Necessidade',m:'8–10 min',t:'O que muda quando resolver. Anotar a resposta: ela volta nas retomadas.',w:'A resposta aqui é o gatilho de toda mensagem daqui para frente.'},
+   {n:'Caminho',m:'10–13 min',t:'O que dá para pedir, como o escritório trabalha, como são os honorários. Em duas partes, checando o entendimento. Dizer também o que não dá.',w:'Em uma ligação de 28 minutos o caminho só apareceu aos 23:53. Aqui ele chega aos 10.'},
+   {n:'Contrato',m:'13–14 min',t:'Minuta pronta, link enviado na hora, assinatura acompanhada.',w:'A pessoa acabou de dizer o que quer. Para não assinar, precisaria se contradizer. Enviado depois, esfria.'},
+   {n:'Documentos',m:'14–15 min',t:'O que o lead já tem em mãos vai agora, na linha. O resto com prazo assumido por ele. Tarefa criada antes de desligar.',w:'É onde os leads param. Dois leads da amostra tinham os documentos na mão durante a ligação e ninguém pediu.'}];
+  var tl=$('#tl'),tld=$('#tld'),curStep=0;
   STEPS.forEach(function(s,i){var b=document.createElement('button');b.className='step';b.setAttribute('role','tab');b.setAttribute('aria-selected',i===0?'true':'false');
     b.innerHTML='<span class="dot">'+(i+1)+'</span><span class="min">'+esc(s.m)+'</span><span class="nm">'+esc(s.n)+'</span>';
-    b.addEventListener('click',function(){$$('.step',tl).forEach(function(x){x.setAttribute('aria-selected','false')});b.setAttribute('aria-selected','true');showStep(i)});tl.appendChild(b)});
-  function showStep(i){var s=STEPS[i];tld.innerHTML='<div class="card"><div class="k">'+esc(s.n)+' · '+esc(s.m)+'</div><p>'+esc(s.t)+'</p><div class="k" style="margin-top:14px">Fala</div><q>'+esc(s.q)+'</q></div><div class="card"><div class="k">Por que importa</div><p>'+esc(s.w)+'</p></div>'}
-  showStep(0);
+    b.addEventListener('click',function(){$$('.step',tl).forEach(function(x){x.setAttribute('aria-selected','false')});b.setAttribute('aria-selected','true');curStep=i;showStep(i)});tl.appendChild(b)});
+  function showStep(i){var s=STEPS[i];var q=SV[cur].steps[i];tld.innerHTML='<div class="card"><div class="k">'+esc(s.n)+' · '+esc(s.m)+'</div><p>'+esc(s.t)+'</p><div class="k" style="margin-top:14px">Fala · '+esc(SV[cur].n)+'</div><q>'+esc(q)+'</q></div><div class="card"><div class="k">Por que importa</div><p>'+esc(s.w)+'</p></div>'}
 
   /* bank */
-  var BANK=[
-   {n:'Verbas rescisórias',S:['Como foi a sua saída? Você pediu ou foi dispensado?','Chegou a assinar alguma coisa na hora?'],P:['O que ficou sem ser pago?','Você deu entrada no seguro-desemprego? Conseguiu?'],I:['Desde [mês] você está sem isso e sem o seguro. Como você está fechando o mês?','O que ficou para trás nesses meses?'],N:['Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?']},
-   {n:'Horas extras e jornada',S:['Que horas você entrava e saía de verdade?','Tinha ponto? Batia no horário certo ou depois?'],P:['Quantas horas por semana ficavam de fora?','Alguém mais da equipe vivia isso?'],I:['Em [tempo de casa], quanto você acha que deixou de receber?','O que essas horas tiraram de você: família, saúde, outro trabalho?'],N:['Se esse valor voltasse para o seu bolso, o que muda? O que você faria com ele?']},
-   {n:'Reconhecimento de vínculo',S:['Como você era pago? Quem definia horário e tarefas?','Você podia mandar outra pessoa no seu lugar?'],P:['O que você ficou sem por não ter carteira assinada: FGTS, férias, décimo terceiro, INSS?'],I:['São [anos] sem recolhimento. Como isso pesa quando você pensa em aposentadoria ou em ficar doente?'],N:['Se esse período fosse reconhecido, o que isso destrava para você?']},
-   {n:'Acidente e auxílio-acidente',S:['Como aconteceu? Abriram CAT?','Você ficou afastado quanto tempo? O que o INSS decidiu?'],P:['Você voltou a trabalhar por escolha ou por necessidade?','Ficou alguma sequela? O benefício foi cortado quando?'],I:['Sem o benefício, como você está se mantendo?','E se demorar mais três meses, o que acontece?'],N:['Se o benefício voltasse a entrar todo mês, o que muda na sua rotina?']}];
-  var NAMES={S:'Situação',P:'Problema',I:'Implicação',N:'Necessidade'};
-  var tabs=$('#tabs'),bank=$('#bank');
-  BANK.forEach(function(c,i){var b=document.createElement('button');b.className='tab';b.setAttribute('role','tab');b.textContent=c.n;b.setAttribute('aria-selected',i===0?'true':'false');
-    b.addEventListener('click',function(){$$('.tab',tabs).forEach(function(x){x.setAttribute('aria-selected','false')});b.setAttribute('aria-selected','true');showBank(i)});tabs.appendChild(b)});
-  function showBank(i){var c=BANK[i];bank.innerHTML=['S','P','I','N'].map(function(k){return '<div class="card qcard"><div class="hd"><span class="chip '+k+'">'+k+' · '+NAMES[k]+'</span><button class="copy" data-t="'+esc(c[k].join('\n'))+'">copiar</button></div><ul>'+c[k].map(function(q){return '<li>'+esc(q)+'</li>'}).join('')+'</ul></div>'}).join('');
+  var bank=$('#bank');
+  function showBank(){var c=SV[cur].bank;bank.innerHTML=['S','P','I','N'].map(function(k){return '<div class="card qcard"><div class="hd"><span class="chip '+k+'">'+k+' · '+NAMES[k]+'</span><button class="copy" data-t="'+esc(c[k].join('\n'))+'">copiar</button></div><ul>'+c[k].map(function(q){return '<li>'+esc(q)+'</li>'}).join('')+'</ul></div>'}).join('');
     $$('.copy',bank).forEach(function(b){b.addEventListener('click',function(){var t=b.dataset.t;var done=function(){b.textContent='copiado';setTimeout(function(){b.textContent='copiar'},1400)};
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){fallback(t,done)})}else{fallback(t,done)}})})}
   function fallback(t,done){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);done()}
-  showBank(0);
 
   /* quiz */
-  var QUIZ=[
-   {q:'Você chegou a assinar alguma coisa na hora da demissão?',a:'S',e:'Olha para trás e levanta um fato. É Situação.'},
-   {q:'Como isso tem pesado no seu mês?',a:'I',e:'Pergunta pelo custo de continuar como está. É Implicação, a mais rara nas gravações.'},
-   {q:'O que ficou sem ser pago?',a:'P',e:'Faz o lead nomear o que está errado hoje. É Problema.'},
-   {q:'Se esses valores entrassem nos próximos meses, o que você resolveria primeiro?',a:'N',e:'Olha para depois de resolver. É Necessidade.'},
-   {q:'Quem definia o seu horário e as suas tarefas?',a:'S',e:'Fato sobre como o trabalho funcionava. Situação.'},
-   {q:'E se demorar mais três meses, o que acontece?',a:'I',e:'Projeta o custo de ficar parado. Implicação.'},
-   {q:'Você voltou a trabalhar por escolha ou por necessidade?',a:'P',e:'Revela o que está errado hoje, na voz do lead. Problema.'},
-   {q:'Se o benefício voltasse a entrar todo mês, o que muda na sua rotina?',a:'N',e:'Faz visualizar a solução. Necessidade.'},
-   {q:'O que essas horas tiraram de você: família, saúde, outro trabalho?',a:'I',e:'Custo humano da situação. Implicação.'},
-   {q:'Quantas horas por semana ficavam de fora do ponto?',a:'P',e:'Dimensiona o que está errado. Problema. Parece Situação, mas já aponta a falha.'}];
   var qi=0,qs=0,qlock=false;
-  function qShow(){var q=QUIZ[qi];$('#qn').textContent='Pergunta '+(qi+1)+' de '+QUIZ.length;$('#qq').textContent='"'+q.q+'"';$('#qf').textContent='';$('#qnext').hidden=true;qlock=false;
+  function QUIZ(){return SV[cur].quiz}
+  function qShow(){var q=QUIZ()[qi];$('#qn').textContent='Pergunta '+(qi+1)+' de '+QUIZ().length;$('#qq').textContent='"'+q.q+'"';$('#qf').textContent='';$('#qnext').hidden=true;qlock=false;
     $$('.opt').forEach(function(o){o.className='opt';o.disabled=false})}
-  $$('.opt').forEach(function(o){o.addEventListener('click',function(){if(qlock)return;qlock=true;var q=QUIZ[qi];var ok=o.dataset.a===q.a;if(ok)qs++;
+  function qReset(){qi=0;qs=0;$('#qs').textContent='0';$('#qmsg').textContent='Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.';qShow()}
+  $$('.opt').forEach(function(o){o.addEventListener('click',function(){if(qlock)return;qlock=true;var q=QUIZ()[qi];var ok=o.dataset.a===q.a;if(ok)qs++;
     $$('.opt').forEach(function(x){x.disabled=true;if(x.dataset.a===q.a)x.classList.add('right')});if(!ok)o.classList.add('wrong');
     $('#qf').innerHTML=(ok?'<b>Isso.</b> ':'<b>Era '+NAMES[q.a]+'.</b> ')+esc(q.e);$('#qs').textContent=qs;
-    if(qi<QUIZ.length-1){$('#qnext').hidden=false}else{$('#qmsg').textContent=qs>=9?'Placar de quem já conduz a conversa. Agora é fazer a pergunta de implicação na próxima ligação.':qs>=6?'Bom. As que erraram costumam ser Problema × Implicação: uma olha o que está errado, a outra o que isso custa.':'Vale reler as quatro letras e jogar de novo em dupla.'}
+    if(qi<QUIZ().length-1){$('#qnext').hidden=false}else{$('#qmsg').textContent=qs>=7?'Placar de quem já conduz a conversa. Agora é fazer a pergunta de implicação na próxima ligação.':qs>=5?'Bom. As que erraram costumam ser Problema × Implicação: uma olha o que está errado, a outra o que isso custa.':'Vale reler as quatro letras e jogar de novo em dupla. Ou trocar de serviço e tentar outro.'}
   })});
   $('#qnext').addEventListener('click',function(){qi++;qShow()});
-  $('#qreset').addEventListener('click',function(){qi=0;qs=0;$('#qs').textContent='0';$('#qmsg').textContent='Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.';qShow()});
-  qShow();
+  $('#qreset').addEventListener('click',qReset);
 
   /* objections */
-  var OBJ=[
-   {l:'Não tenho prova nenhuma.',b:'Acha que sem papel não há caso.',a:'O que você tem aí: mensagens, colegas que viram, holerites, fotos?',d:'Muita coisa se prova por testemunha e por documento que a empresa é obrigada a apresentar. Isso é trabalho nosso, não seu.'},
-   {l:'Quanto você vai me cobrar?  (no meio do pedido de documentos)',b:'Honorários não foram fechados; acha que há custo agora. É a objeção que trava os documentos.',a:'Você ficou com a impressão de que paga alguma coisa antes?',d:'O senhor não paga nada agora. Só pagamos se o caso pagar. Quer que eu repita como funciona? E voltar ao contrato antes dos documentos.'},
+  function OBJ(){var v=SV[cur];return [
+   {l:'Não tenho prova nenhuma.',b:'Acha que sem papel não há caso.',a:'O que você tem aí: '+v.provas+'?',d:'Muita coisa se prova por testemunha e por documento que a empresa é obrigada a apresentar. Isso é trabalho nosso, não seu.'},
+   {l:'Quanto você vai me cobrar?  (no meio do pedido de documentos)',b:'Honorários não foram fechados; acha que há custo agora. É a objeção que trava os documentos.',a:'Você ficou com a impressão de que paga alguma coisa antes?',d:v.pay+' Quer que eu repita como funciona? E voltar ao contrato antes dos documentos.'},
    {l:'Depois eu te chamo. Vou pensar.',b:'Falta urgência: a conversa não chegou à implicação.',a:'Claro. Só me diz: o que você precisa saber para decidir?',d:'Se nada: "Hoje às 14h ou amanhã às 9h?" Propor dois horários, criar a tarefa na hora e lembrar de manhã com contexto.'},
-   {l:'Já tenho advogado para isso.',b:'Pode ser outro assunto (INSS) ou o mesmo.',a:'Ele está cuidando de quê exatamente?',d:'Outro assunto: enquadrar na hora o que o escritório assume. O mesmo: encerrar com a porta aberta. Decidir até o minuto 10, não aos 24.'},
+   {l:'Já tenho advogado para isso.',b:'Pode ser outro assunto ou o mesmo.',a:'Ele está cuidando de quê exatamente?',d:'Outro assunto: enquadrar na hora o que o escritório assume. O mesmo: encerrar com a porta aberta. Decidir até o minuto 10, não aos 24.'},
    {l:'Isso demora anos.',b:'Medo de gastar energia por nada.',a:'O que muda para você se demorar um ano? E se ficar como está?',d:'Prazo realista, sem promessa, e o que se perde a cada mês parado.'},
    {l:'Não quero processar, só queria receber.',b:'Medo de conflito ou de retaliação.',a:'O que te preocupa em entrar com a ação?',d:'Acordo é um desfecho comum, e a empresa não pode retaliar por isso.'},
-   {l:'Vou juntar os documentos e te mando.',b:'Vai esfriar. É onde os leads param.',a:'O que você já tem aí agora? Onde está?',d:'Me manda esse agora que eu espero. O resto, consegue até amanhã ao meio-dia?'},
-   {l:'Fala mais devagar.',b:'Explicação rápida demais, sem checagem.',a:'Deixa eu ir por partes. Até aqui ficou claro?',d:'Duas partes, uma pergunta de checagem, resumo por escrito depois.'}];
-  $('#obj').innerHTML=OBJ.map(function(o){return '<details class="ob"><summary><span class="bubble">'+esc(o.l)+'</span><span class="arr">o que fazer</span></summary><div class="body"><div class="cell"><div class="k">O que está por trás</div><p>'+esc(o.b)+'</p></div><div class="cell ask"><div class="k">Devolver com</div><p>'+esc(o.a)+'</p></div><div class="cell"><div class="k">Depois, dizer</div><p>'+esc(o.d)+'</p></div></div></details>'}).join('');
+   {l:'Vou juntar os documentos e te mando.',b:'Vai esfriar. É onde os leads param.',a:'O que você já tem aí agora? Onde está?',d:'"Me manda esse agora que eu espero." Neste caso: '+v.docs+'. O resto, até amanhã ao meio-dia.'},
+   {l:'Fala mais devagar.',b:'Explicação rápida demais, sem checagem.',a:'Deixa eu ir por partes. Até aqui ficou claro?',d:'Duas partes, uma pergunta de checagem, resumo por escrito depois.'}]}
+  function renderObj(){var open=$$('#obj details').map(function(d){return d.open});
+    $('#obj').innerHTML=OBJ().map(function(o,i){return '<details class="ob"'+(open[i]?' open':'')+'><summary><span class="bubble">'+esc(o.l)+'</span><span class="arr">o que fazer</span></summary><div class="body"><div class="cell"><div class="k">O que está por trás</div><p>'+esc(o.b)+'</p></div><div class="cell ask"><div class="k">Devolver com</div><p>'+esc(o.a)+'</p></div><div class="cell"><div class="k">Depois, dizer</div><p>'+esc(o.d)+'</p></div></div></details>'}).join('')}
 
   /* conversation */
-  var C=[
-   ['a','Boa tarde, Márcia! Aqui é Ana, do escritório Gabriel Habib. Vi que você falou com nosso assistente sobre a dispensa em janeiro e as verbas que não foram pagas. Está podendo falar uns 10 minutos? Vou te fazer algumas perguntas e depois te explico o que dá para fazer.','X','Abertura','Contexto do assistente, tempo e mapa. O lead não repete a história.'],
-   ['l','Posso sim.'],
-   ['a','Me conta como foi a saída. Você foi dispensada ou pediu? Assinou alguma coisa na hora?','S','Situação','Só o que o assistente não colheu.'],
-   ['l','Me mandaram embora, disseram que o acerto sairia em dez dias. Assinei o aviso e só.'],
-   ['a','E o que ficou sem ser pago? Você chegou a cobrar?','P','Problema','O lead nomeia o que está errado.'],
-   ['l','Tudo. Férias, décimo terceiro, a multa. Cobrei três vezes, dizem que estão sem caixa. E não consegui o seguro-desemprego porque não deram baixa na carteira.'],
-   ['a','Então desde janeiro você está sem esses valores e sem o seguro. Como isso tem pesado no seu mês?','I','Implicação','A pergunta que faltou na ligação real. Depois dela, silêncio.'],
-   ['l','Pesa muito. Estou fazendo bico, atrasei o aluguel dois meses, minha mãe está me ajudando.'],
-   ['a','E se isso ficar mais uns meses como está?','I','Implicação','Uma a mais, para o peso ficar claro.'],
-   ['l','Não dá. Eu ia ter que sair do apartamento.'],
-   ['a','Entendi. Agora me diz: se esses valores entrassem nos próximos meses, o que você resolveria primeiro?','N','Necessidade','A resposta vira o gatilho de toda retomada.'],
-   ['l','O aluguel. E devolveria o que minha mãe me emprestou. Só de tirar isso das costas já mudava tudo.'],
-   ['a','Faz sentido. Deixa eu te explicar em duas partes como a gente trabalha. Primeiro, o que dá para pedir: as verbas, a multa, a baixa na carteira para liberar o seguro, e a multa por atraso do acerto. Até aqui ficou claro?','X','Caminho','Em duas partes, com checagem. Dizer também o que não dá.'],
-   ['l','Ficou.'],
-   ['a','Segundo, o custo: você não paga nada agora. Só pagamos se o caso pagar, um percentual do que vier. Pode me interromper se tiver dúvida.','X','Honorários','Resolvido antes dos documentos.'],
-   ['l','E demora quanto?'],
-   ['a','Não consigo te prometer prazo, cada processo tem o seu ritmo. O que eu sei é que cada mês parado é um mês a mais de aluguel atrasado, e a Justiça só alcança até certo ponto para trás. Por isso quero abrir o seu caso hoje. Fechamos?','X','Fechamento','Sem promessa. Usa o que ela disse na implicação.'],
-   ['l','Fechamos.'],
-   ['a','Estou te mandando o contrato agora por e-mail. Abre aí que eu te explico cláusula por cláusula enquanto você assina.','X','Contrato','Na chamada, com a minuta pronta.'],
-   ['s','assinatura acompanhada'],
-   ['a','Pronto. Agora, o que você já tem aí: carteira, o aviso que assinou, os últimos holerites?','X','Documentos','O que está em mãos vai agora.'],
-   ['l','Tenho a carteira e o aviso aqui em casa. Os holerites estão no e-mail.'],
-   ['a','Então me manda foto da carteira e do aviso agora, eu espero. Os holerites, consegue me encaminhar até amanhã ao meio-dia? Assim de tarde o time já começa a andar com o seu caso, e você tira esse aluguel das costas mais cedo.','X','Prazo','Compromisso dela, com o gatilho dela.'],
-   ['l','Consigo.'],
-   ['a','Combinado. Amanhã às 14h eu te chamo aqui para conferir o que faltou.','X','Próximo passo','Data, hora e tarefa antes de desligar.'],
-   ['s','tarefa criada · 14h']];
-  $('#convo').innerHTML=C.map(function(m){if(m[0]==='s')return '<span class="sys">'+esc(m[1])+'</span>';
-    var tag=m[2]?'<span class="tag"><span class="chip '+m[2]+'">'+(m[2]==='X'?'':m[2]+' · ')+esc(m[3])+'</span></span>':'';
-    var why=m[4]?'<span class="why">'+esc(m[4])+'</span>':'';
-    return '<div class="msg '+m[0]+'">'+tag+'<span class="b">'+esc(m[1])+'</span>'+why+'</div>'}).join('');
+  function renderConv(){var v=SV[cur];$('#convlead').textContent=v.convlead;
+    $('#convo').innerHTML=v.conv.map(function(m){if(m[0]==='s')return '<span class="sys">'+esc(m[1])+'</span>';
+      var tag=m[2]?'<span class="tag"><span class="chip '+m[2]+'">'+(m[2]==='X'?'':m[2]+' · ')+esc(m[3])+'</span></span>':'';
+      var why=m[4]?'<span class="why">'+esc(m[4])+'</span>':'';
+      return '<div class="msg '+m[0]+'">'+tag+'<span class="b">'+esc(m[1])+'</span>'+why+'</div>'}).join('')}
   $('#tagbtn').addEventListener('click',function(){var on=$('#convo').classList.toggle('tags');$('#tagbtn').textContent=on?'Ocultar etiquetas':'Mostrar etiquetas';$('#tagbtn').setAttribute('aria-pressed',on?'true':'false')});
+
+  /* after */
+  function renderAfter(){var a=SV[cur].after;$('#after').innerHTML=
+    '<div class="card"><span class="eyebrow">A nota no CRM</span><div class="note">'+a.nota+'</div><p class="muted" style="font-size:13.5px">Uma linha. Quem pegar o caso amanhã sabe o que dizer.</p></div>'+
+    '<div class="card"><span class="eyebrow">Cobrança genérica × cobrança com gatilho</span><p class="bad-ex">'+esc(a.bad)+'</p><q>'+esc(a.good)+'</q></div>'+
+    '<div class="card"><span class="eyebrow">Prazo que é dele, não nosso</span><q>Você me disse que queria resolver logo. Consigo contar com você até amanhã ao meio-dia?</q><p class="muted" style="font-size:13.5px">Se passou: "Você tinha combinado até ontem e ainda não chegou. Fiquei preocupada, porque o que te falei que dá para buscar pode não dar mais se demorar. Precisa de ajuda com algum item?"</p></div>'+
+    '<div class="card"><span class="eyebrow">Lead avançado que sumiu</span><q>'+esc(a.adv)+'</q><p class="muted" style="font-size:13.5px">Terceiro dia: "Sem o seu retorno, vamos precisar encerrar o seu caso por aqui. Seria uma pena perder esse direito." Nunca prometer valor, prazo ou êxito.</p></div>'}
 
   /* self check */
   var MSG=['Comece pela pergunta de implicação na próxima ligação. Uma só já muda a conversa.','Um passo dado. Qual dos quatro que faltaram você consegue fazer amanhã?','Metade do caminho. O que ficou de fora costuma ser o fechamento com tarefa.','Três de cinco é uma ligação boa. Veja qual das duas faltou e repita a que deu certo.','Quase lá. Falta um item: é ele que separa uma ligação boa de um contrato assinado.','Ligação completa. Guarde a gravação: é o exemplo para a próxima simulação em dupla.'];
   $$('#chk input').forEach(function(i){i.addEventListener('change',function(){var n=$$('#chk input:checked').length;$('#cn').innerHTML=n+'<span style="font-size:28px;color:var(--fg3)">/5</span>';$('#cm').textContent=MSG[n]})});
+
+  /* init */
+  var start='verbas';try{var h=(location.hash||'').replace('#','');if(SV[h])start=h;else{var ls=localStorage.getItem('spin-svc');if(SV[ls])start=ls}}catch(e){}
+  select(start,false);
 })();
 </script>
 
