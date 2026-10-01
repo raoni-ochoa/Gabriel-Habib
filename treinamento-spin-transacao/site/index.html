@@ -273,6 +273,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
 </section>
 <div class="bar" id="bar"><span class="lb">Exemplos de</span></div>
 
+
 <section id="regras">
   <div class="sec-head">
     <p class="eyebrow">02 · Regras que não mudam</p>
@@ -426,7 +427,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
     var g=$('.gauge .toggle .btn[aria-pressed="true"]');if(g){$('#ghint').textContent=v.gauge[g.dataset.g]}
     ['letras','mapa','banco','quiz','objecoes','conversa','depois'].forEach(function(id){var el=$('#'+id);el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
     try{localStorage.setItem('spin-cen',k)}catch(e){}
-    if(scroll){var t=$('#regras');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}
+    if(scroll){var t=$('#regras')||$('#letras');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}
   }
   var GP={press:22,spin:84};
   $$('.gauge .toggle .btn').forEach(function(b){b.addEventListener('click',function(){
