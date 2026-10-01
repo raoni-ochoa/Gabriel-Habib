@@ -242,7 +242,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
     <p class="eyebrow">01 · SPIN na prática</p>
     <h1>Pressão de fora é fraca. <span class="grad">Urgência</span> de dentro fecha contrato.</h1>
     <p class="lead">O lead só age quando ele mesmo diz o que a demora custa e o que muda quando o caso resolve. Este material é para praticar as perguntas que fazem isso acontecer, com os casos que vocês atendem todo dia.</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn pri" href="#servico">Escolher o serviço e começar</a><a class="btn" href="#quiz">Ir direto para o jogo</a></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn pri" href="#servico">Escolher o serviço e começar</a><a class="btn" href="#conversa">Ver uma conversa inteira</a></div>
   </div>
   <div class="gauge" aria-live="polite">
     <div class="row"><span class="lbl">Temperatura do lead</span><span class="val" id="gv">12°</span></div>
@@ -314,32 +314,10 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <p class="bank-note">Lead mais velho ou embarcado, longe de casa: as perguntas de situação costumam revelar uma segunda oportunidade, como aposentadoria especial. Perguntar onde mora, idade, tempo de embarque e adicionais foi o que encontrou 56 PPPs em um caso da amostra.</p>
 </section>
 
-<section id="quiz">
-  <div class="sec-head">
-    <p class="eyebrow">05 · O jogo</p>
-    <h2>Que letra é essa pergunta?</h2>
-    <p class="lead">Oito perguntas do serviço escolhido. Diga se é Situação, Problema, Implicação ou Necessidade. Vale jogar em dupla, com a mão na campainha.</p>
-  <span class="ctx">Serviço · <b data-ctx></b></span></div>
-  <div class="quiz">
-    <div class="card">
-      <p class="mono muted" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase" id="qn">Pergunta 1 de 8</p>
-      <p class="q" id="qq"></p>
-      <div class="opts" id="qo">
-        <button class="opt" data-a="S">S</button><button class="opt" data-a="P">P</button><button class="opt" data-a="I">I</button><button class="opt" data-a="N">N</button>
-      </div>
-      <p class="fb" id="qf"></p>
-      <div class="nav"><button class="btn" id="qnext" hidden>Próxima</button><button class="btn ghost" id="qreset">Recomeçar</button></div>
-    </div>
-    <div class="side">
-      <div class="card"><span class="eyebrow" style="margin-bottom:10px">Placar</span><div class="score"><span class="n" id="qs">0</span><span class="d">/ 8</span></div><p class="muted" style="font-size:13.5px;margin-top:8px" id="qmsg">Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.</p></div>
-      <div class="card"><span class="eyebrow" style="margin-bottom:10px">Dica de leitura</span><p style="font-size:14px;color:var(--fg2)">Se a pergunta olha para trás, é Situação ou Problema. Se olha para o custo de ficar parado, é Implicação. Se olha para depois de resolver, é Necessidade.</p></div>
-    </div>
-  </div>
-</section>
 
 <section id="objecoes">
   <div class="sec-head">
-    <p class="eyebrow">06 · O lead responde</p>
+    <p class="eyebrow">05 · O lead responde</p>
     <h2>Quase toda objeção é uma pergunta sem resposta</h2>
     <p class="lead">Devolva com uma pergunta antes de argumentar. Quem argumenta cedo demais discute com um fantasma. Abra cada fala para ver o que fazer.</p>
   <span class="ctx">Serviço · <b data-ctx></b></span></div>
@@ -348,7 +326,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
 
 <section id="conversa">
   <div class="sec-head">
-    <p class="eyebrow">07 · Uma conversa inteira</p>
+    <p class="eyebrow">06 · Uma conversa inteira</p>
     <h2>Da abertura ao contrato, com duas perguntas a mais</h2>
     <p class="lead" id="convlead"></p>
   <span class="ctx">Serviço · <b data-ctx></b></span></div>
@@ -358,7 +336,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
 
 <section id="depois">
   <div class="sec-head">
-    <p class="eyebrow">08 · Depois da ligação</p>
+    <p class="eyebrow">07 · Depois da ligação</p>
     <h2>A resposta do lead vira a próxima mensagem</h2>
     <p class="lead">O que ele disse na implicação e na necessidade vai para a nota, em uma linha. Não é registro pró-forma: é o gatilho da retomada.</p>
   <span class="ctx">Serviço · <b data-ctx></b></span></div>
@@ -367,7 +345,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
 
 <section id="auto">
   <div class="sec-head">
-    <p class="eyebrow">09 · Autoavaliação</p>
+    <p class="eyebrow">08 · Autoavaliação</p>
     <h2>Um minuto depois de desligar</h2>
     <p class="lead">Antes de olhar a avaliação automática do CRM, responda sozinha. Marque o que aconteceu na ligação.</p>
   </div>
@@ -466,7 +444,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
     $$('[data-ex]').forEach(function(e){e.textContent=v.ex[e.dataset.ex]});
     showStep(curStep);showBank();qReset();renderObj();renderConv();renderAfter();
     var g=$('.gauge .toggle .btn[aria-pressed="true"]');if(g){$('#ghint').textContent=v.gauge[g.dataset.g]}
-    ['letras','mapa','banco','quiz','objecoes','conversa','depois'].forEach(function(id){var el=$('#'+id);el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
+    ['letras','mapa','banco','objecoes','conversa','depois'].forEach(function(id){var el=$('#'+id);el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
     try{localStorage.setItem('spin-svc',k)}catch(e){}
     if(scroll){var t=$('#letras');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}
   }
@@ -508,16 +486,15 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   /* quiz */
   var qi=0,qs=0,qlock=false;
   function QUIZ(){return SV[cur].quiz}
-  function qShow(){var q=QUIZ()[qi];$('#qn').textContent='Pergunta '+(qi+1)+' de '+QUIZ().length;$('#qq').textContent='"'+q.q+'"';$('#qf').textContent='';$('#qnext').hidden=true;qlock=false;
+  function qShow(){if(!$('#qq'))return;var q=QUIZ()[qi];$('#qn').textContent='Pergunta '+(qi+1)+' de '+QUIZ().length;$('#qq').textContent='"'+q.q+'"';$('#qf').textContent='';$('#qnext').hidden=true;qlock=false;
     $$('.opt').forEach(function(o){o.className='opt';o.disabled=false})}
-  function qReset(){qi=0;qs=0;$('#qs').textContent='0';$('#qmsg').textContent='Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.';qShow()}
+  function qReset(){if(!$('#qq'))return;qi=0;qs=0;$('#qs').textContent='0';$('#qmsg').textContent='Acertar a letra é o primeiro passo. O segundo é fazer a pergunta na próxima ligação.';qShow()}
   $$('.opt').forEach(function(o){o.addEventListener('click',function(){if(qlock)return;qlock=true;var q=QUIZ()[qi];var ok=o.dataset.a===q.a;if(ok)qs++;
     $$('.opt').forEach(function(x){x.disabled=true;if(x.dataset.a===q.a)x.classList.add('right')});if(!ok)o.classList.add('wrong');
     $('#qf').innerHTML=(ok?'<b>Isso.</b> ':'<b>Era '+NAMES[q.a]+'.</b> ')+esc(q.e);$('#qs').textContent=qs;
     if(qi<QUIZ().length-1){$('#qnext').hidden=false}else{$('#qmsg').textContent=qs>=7?'Placar de quem já conduz a conversa. Agora é fazer a pergunta de implicação na próxima ligação.':qs>=5?'Bom. As que erraram costumam ser Problema × Implicação: uma olha o que está errado, a outra o que isso custa.':'Vale reler as quatro letras e jogar de novo em dupla. Ou trocar de serviço e tentar outro.'}
   })});
-  $('#qnext').addEventListener('click',function(){qi++;qShow()});
-  $('#qreset').addEventListener('click',qReset);
+  if($('#qnext')){$('#qnext').addEventListener('click',function(){qi++;qShow()});$('#qreset').addEventListener('click',qReset);}
 
   /* objections */
   function OBJ(){var v=SV[cur];return [
