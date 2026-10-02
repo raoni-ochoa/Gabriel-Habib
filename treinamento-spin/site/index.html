@@ -143,7 +143,7 @@ header .who{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-tra
 .bubble{background:var(--s4);border-radius:14px 14px 14px 4px;padding:10px 14px;font-size:15px;max-width:60ch;color:var(--fg)}
 .ob summary .arr{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--fg3);text-transform:uppercase;white-space:nowrap}
 .ob[open] summary .arr{color:var(--acc)}
-.ob .body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--b1);border-top:1px solid var(--b1)}
+.ob .body{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b1);border-top:1px solid var(--b1)}
 .ob .cell{background:var(--s2);padding:16px 20px;min-width:0}
 .ob .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3);margin-bottom:6px}
 .ob .cell p{font-size:14px;color:var(--fg2)}
@@ -260,10 +260,9 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">Passo 1 · Escolha o serviço</p>
     <h2>Que caso você quer praticar?</h2>
-    <p class="lead">Tudo o que vem abaixo muda com a sua escolha: os exemplos das quatro letras, as falas do mapa, o banco de perguntas, o jogo, as objeções e a conversa inteira.</p>
+    <p class="lead">Tudo abaixo muda com a sua escolha: perguntas, objeções e a conversa inteira.</p>
   </div>
   <div class="grid" id="svcgrid" role="group" aria-label="Serviço"></div>
-  <p class="note">Dá para trocar a qualquer momento pela barra que acompanha a página.</p>
 </section>
 <div class="bar" id="bar"><span class="lb">Exemplos de</span></div>
 
@@ -271,34 +270,33 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">02 · O método</p>
     <h2>Quatro tipos de pergunta, nessa ordem</h2>
-    <p class="lead">Toque em cada letra para ver o que a pergunta faz, o erro mais comum nas ligações que ouvimos e um exemplo pronto.</p>
+    <p class="lead">Toque em cada letra para ver o que a pergunta faz e o erro mais comum.</p>
   <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="letters">
     <button class="flip S" aria-pressed="false" aria-label="Situação: virar o cartão"><div class="inner">
       <div class="face front"><span class="big">S</span><span class="name">Situação</span><p class="one">Entender os fatos e criar vínculo. Poucas perguntas, abertas.</p><span class="tap">toque para virar</span></div>
-      <div class="face back"><span class="k">O que faz</span><p>Levanta só o que o assistente ainda não colheu. Três ou quatro perguntas bastam.</p><span class="k">Erro comum</span><p>Virar interrogatório, e perguntar de novo o que o lead já contou ao assistente.</p><span class="k">Exemplo</span><q data-ex="S"></q></div>
+      <div class="face back"><span class="k">O que faz</span><p>Levanta só o que o assistente ainda não colheu. Três ou quatro perguntas bastam.</p><span class="k">Erro comum</span><p>Virar interrogatório, e perguntar de novo o que o lead já contou ao assistente.</p></div>
     </div></button>
     <button class="flip P" aria-pressed="false" aria-label="Problema: virar o cartão"><div class="inner">
       <div class="face front"><span class="big">P</span><span class="name">Problema</span><p class="one">O lead nomeia, com as palavras dele, o que está errado hoje.</p><span class="tap">toque para virar</span></div>
-      <div class="face back"><span class="k">O que faz</span><p>Faz o lead dizer o problema em voz alta. O que ele diz vale mais do que o que a gente conclui.</p><span class="k">Erro comum</span><p>Nomear o problema pelo lead: "então eles não te pagaram". Deixa ele dizer.</p><span class="k">Exemplo</span><q data-ex="P"></q></div>
+      <div class="face back"><span class="k">O que faz</span><p>Faz o lead dizer o problema em voz alta. O que ele diz vale mais do que o que a gente conclui.</p><span class="k">Erro comum</span><p>Nomear o problema pelo lead: "então eles não te pagaram". Deixa ele dizer.</p></div>
     </div></button>
     <button class="flip I" aria-pressed="false" aria-label="Implicação: virar o cartão"><div class="inner">
       <div class="face front"><span class="big">I</span><span class="name">Implicação</span><p class="one">O custo de continuar como está: dinheiro, tempo, família, saúde.</p><span class="tap">toque para virar</span></div>
-      <div class="face back"><span class="k">O que faz</span><p>Coloca o dedo na ferida. É a pergunta que quase não aparece nas gravações, e a que mais move o lead.</p><span class="k">Erro comum</span><p>Pular para a solução, ou insinuar sem perguntar: "eles vão só ganhar tempo com a senhora".</p><span class="k">Exemplo</span><q data-ex="I"></q></div>
+      <div class="face back"><span class="k">O que faz</span><p>Coloca o dedo na ferida. É a pergunta que quase não aparece nas gravações, e a que mais move o lead.</p><span class="k">Erro comum</span><p>Pular para a solução, ou insinuar sem perguntar: "eles vão só ganhar tempo com a senhora".</p></div>
     </div></button>
     <button class="flip N" aria-pressed="false" aria-label="Necessidade: virar o cartão"><div class="inner">
       <div class="face front"><span class="big">N</span><span class="name">Necessidade</span><p class="one">O lead visualiza o caso resolvido e diz que quer isso.</p><span class="tap">toque para virar</span></div>
-      <div class="face back"><span class="k">O que faz</span><p>Traz o alívio depois do peso. A resposta vira o gatilho de toda retomada.</p><span class="k">Erro comum</span><p>Apresentar o serviço antes de o lead dizer o que ganha com ele.</p><span class="k">Exemplo</span><q data-ex="N"></q></div>
+      <div class="face back"><span class="k">O que faz</span><p>Traz o alívio depois do peso. A resposta vira o gatilho de toda retomada.</p><span class="k">Erro comum</span><p>Apresentar o serviço antes de o lead dizer o que ganha com ele.</p></div>
     </div></button>
   </div>
-  <p class="bank-note">Regra de ouro: depois de uma pergunta de implicação ou de necessidade, silêncio. Deixe o lead responder inteiro. A resposta dele é o material mais valioso da conversa.</p>
 </section>
 
 <section id="mapa">
   <div class="sec-head">
     <p class="eyebrow">03 · O mapa da conversa</p>
     <h2>Uma ligação boa cabe em <span class="mono" style="font-family:var(--disp)">12 a 15</span> minutos</h2>
-    <p class="lead">As ligações de 28 minutos que ouvimos não tinham conteúdo demais. Tinham falta de mapa. Toque em cada etapa.</p>
+    <p class="lead">As ligações de 28 minutos que ouvimos não tinham mapa. Toque em cada etapa.</p>
   <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="tl" role="tablist" aria-label="Etapas da ligação" id="tl"></div>
   <div class="tl-detail" id="tld"></div>
@@ -308,7 +306,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">04 · Banco de perguntas</p>
     <h2>Uma pergunta por letra já faz a conversa andar</h2>
-    <p class="lead">Uma pergunta por letra basta para a conversa andar. As demais são reserva para quando o lead responde curto. Copie e cole na sua cola.</p>
+    <p class="lead">As demais são reserva para respostas curtas. Copie e cole na sua cola.</p>
   <span class="ctx">Serviço · <b data-ctx></b></span></div>
     <div class="bank" id="bank"></div>
   <p class="bank-note">Lead mais velho ou embarcado, longe de casa: as perguntas de situação costumam revelar uma segunda oportunidade, como aposentadoria especial. Perguntar onde mora, idade, tempo de embarque e adicionais foi o que encontrou 56 PPPs em um caso da amostra.</p>
@@ -319,7 +317,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">05 · O lead responde</p>
     <h2>Quase toda objeção é uma pergunta sem resposta</h2>
-    <p class="lead">Devolva com uma pergunta antes de argumentar. Quem argumenta cedo demais discute com um fantasma. Abra cada fala para ver o que fazer.</p>
+    <p class="lead">Devolva com uma pergunta antes de argumentar. Abra cada fala para ver o que fazer.</p>
   <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="obj" id="obj"></div>
 </section>
@@ -338,7 +336,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">07 · Depois da ligação</p>
     <h2>A resposta do lead vira a próxima mensagem</h2>
-    <p class="lead">O que ele disse na implicação e na necessidade vai para a nota, em uma linha. Não é registro pró-forma: é o gatilho da retomada.</p>
+    <p class="lead">O que o lead disse na implicação vai para a nota e vira o gatilho da retomada.</p>
   <span class="ctx">Serviço · <b data-ctx></b></span></div>
   <div class="after" id="after"></div>
 </section>
@@ -347,7 +345,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   <div class="sec-head">
     <p class="eyebrow">08 · Autoavaliação</p>
     <h2>Um minuto depois de desligar</h2>
-    <p class="lead">Antes de olhar a avaliação automática do CRM, responda sozinha. Marque o que aconteceu na ligação.</p>
+    <p class="lead">Antes de olhar a avaliação do CRM, marque o que aconteceu na ligação.</p>
   </div>
   <div class="check">
     <ul id="chk">
@@ -474,7 +472,7 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
   STEPS.forEach(function(s,i){var b=document.createElement('button');b.className='step';b.setAttribute('role','tab');b.setAttribute('aria-selected',i===0?'true':'false');
     b.innerHTML='<span class="dot">'+(i+1)+'</span><span class="min">'+esc(s.m)+'</span><span class="nm">'+esc(s.n)+'</span>';
     b.addEventListener('click',function(){$$('.step',tl).forEach(function(x){x.setAttribute('aria-selected','false')});b.setAttribute('aria-selected','true');curStep=i;showStep(i)});tl.appendChild(b)});
-  function showStep(i){var s=STEPS[i];var q=SV[cur].steps[i];tld.innerHTML='<div class="card"><div class="k">'+esc(s.n)+' · '+esc(s.m)+'</div><p>'+esc(s.t)+'</p><div class="k" style="margin-top:14px">Fala · '+esc(SV[cur].n)+'</div><q>'+esc(q)+'</q></div><div class="card"><div class="k">Por que importa</div><p>'+esc(s.w)+'</p></div>'}
+  function showStep(i){var s=STEPS[i];var q=SV[cur].steps[i];tld.innerHTML='<div class="card"><div class="k">'+esc(s.n)+' · '+esc(s.m)+'</div><p>'+esc(s.t)+'</p></div><div class="card"><div class="k">Por que importa</div><p>'+esc(s.w)+'</p></div>'}
 
   /* bank */
   var bank=$('#bank');
@@ -507,22 +505,22 @@ footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-tr
    {l:'Vou juntar os documentos e te mando.',b:'Vai esfriar. É onde os leads param.',a:'O que você já tem aí agora? Onde está?',d:'"Me manda esse agora que eu espero." Neste caso: '+v.docs+'. O resto, até amanhã ao meio-dia.'},
    {l:'Fala mais devagar.',b:'Explicação rápida demais, sem checagem.',a:'Deixa eu ir por partes. Até aqui ficou claro?',d:'Duas partes, uma pergunta de checagem, resumo por escrito depois.'}]}
   function renderObj(){var open=$$('#obj details').map(function(d){return d.open});
-    $('#obj').innerHTML=OBJ().map(function(o,i){return '<details class="ob"'+(open[i]?' open':'')+'><summary><span class="bubble">'+esc(o.l)+'</span><span class="arr">o que fazer</span></summary><div class="body"><div class="cell"><div class="k">O que está por trás</div><p>'+esc(o.b)+'</p></div><div class="cell ask"><div class="k">Devolver com</div><p>'+esc(o.a)+'</p></div><div class="cell"><div class="k">Depois, dizer</div><p>'+esc(o.d)+'</p></div></div></details>'}).join('')}
+    $('#obj').innerHTML=OBJ().filter(function(o){return !/^(Isso demora anos|Não quero processar)/.test(o.l)}).map(function(o,i){return '<details class="ob"'+(open[i]?' open':'')+'><summary><span class="bubble">'+esc(o.l)+'</span><span class="arr">o que fazer</span></summary><div class="body"><div class="cell ask"><div class="k">Devolver com</div><p>'+esc(o.a)+'</p></div><div class="cell"><div class="k">Depois, dizer</div><p>'+esc(trimD(o.d))+'</p></div></div></details>'}).join('')}
 
   /* conversation */
   function renderConv(){var v=SV[cur];$('#convlead').textContent=v.convlead;
-    $('#convo').innerHTML=v.conv.map(function(m){if(m[0]==='s')return '<span class="sys">'+esc(m[1])+'</span>';
+    $('#convo').innerHTML=compact(v.conv).map(function(m){if(m[0]==='s')return '<span class="sys">'+esc(m[1])+'</span>';
       var tag=m[2]?'<span class="tag"><span class="chip '+m[2]+'">'+(m[2]==='X'?'':m[2]+' · ')+esc(m[3])+'</span></span>':'';
-      var why=m[4]?'<span class="why">'+esc(m[4])+'</span>':'';
+      var why=(m[4]&&'SPIN'.indexOf(m[2])>=0)?'<span class="why">'+esc(m[4])+'</span>':'';
       return '<div class="msg '+m[0]+'">'+tag+'<span class="b">'+esc(m[1])+'</span>'+why+'</div>'}).join('')}
+  function compact(c){var out=[];for(var i=0;i<c.length;i++){var m=c[i];if(m[0]==='l'&&m[1].split(/\s+/).length<=4&&out.length&&out[out.length-1][0]==='a'&&!out[out.length-1].merged&&c[i+1]&&c[i+1][0]==='a'&&!/^(S|P|I|N)$/.test(c[i+1][2])){var prev=out[out.length-1].slice();var nx=c[i+1];prev[1]=prev[1]+' … '+nx[1];prev.merged=true;out[out.length-1]=prev;i++;continue}out.push(m)}return out}
+  function trimD(d){if(d.charAt(0)!=='"')return d;var j=d.lastIndexOf('"');return j>0?d.slice(0,j+1):d}
   $('#tagbtn').addEventListener('click',function(){var on=$('#convo').classList.toggle('tags');$('#tagbtn').textContent=on?'Ocultar etiquetas':'Mostrar etiquetas';$('#tagbtn').setAttribute('aria-pressed',on?'true':'false')});
 
   /* after */
   function renderAfter(){var a=SV[cur].after;$('#after').innerHTML=
     '<div class="card"><span class="eyebrow">A nota no CRM</span><div class="note">'+a.nota+'</div><p class="muted" style="font-size:13.5px">Uma linha. Quem pegar o caso amanhã sabe o que dizer.</p></div>'+
-    '<div class="card"><span class="eyebrow">Cobrança genérica × cobrança com gatilho</span><p class="bad-ex">'+esc(a.bad)+'</p><q>'+esc(a.good)+'</q></div>'+
-    '<div class="card"><span class="eyebrow">Prazo que é dele, não nosso</span><q>Você me disse que queria resolver logo. Consigo contar com você até amanhã ao meio-dia?</q><p class="muted" style="font-size:13.5px">Se passou: "Você tinha combinado até ontem e ainda não chegou. Fiquei preocupada, porque o que te falei que dá para buscar pode não dar mais se demorar. Precisa de ajuda com algum item?"</p></div>'+
-    '<div class="card"><span class="eyebrow">Lead avançado que sumiu</span><q>'+esc(a.adv)+'</q><p class="muted" style="font-size:13.5px">Terceiro dia: "Sem o seu retorno, vamos precisar encerrar o seu caso por aqui. Seria uma pena perder esse direito." Nunca prometer valor, prazo ou êxito.</p></div>'}
+    '<div class="card"><span class="eyebrow">Cobrança genérica × cobrança com gatilho</span><p class="bad-ex">'+esc(a.bad)+'</p><q>'+esc(a.good)+'</q></div>'}
 
   /* self check */
   var MSG=['Comece pela pergunta de implicação na próxima ligação. Uma só já muda a conversa.','Um passo dado. Qual dos quatro que faltaram você consegue fazer amanhã?','Metade do caminho. O que ficou de fora costuma ser o fechamento com tarefa.','Três de cinco é uma ligação boa. Veja qual das duas faltou e repita a que deu certo.','Quase lá. Falta um item: é ele que separa uma ligação boa de um contrato assinado.','Ligação completa. Guarde a gravação: é o exemplo para a próxima simulação em dupla.'];
